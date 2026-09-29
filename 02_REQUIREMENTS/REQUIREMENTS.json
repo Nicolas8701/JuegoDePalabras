@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "status": "APPROVED",
+      "text": "No daily play limit; allow immediate repeated rounds."
+    },
+    {
+      "id": "REQ-002",
+      "status": "APPROVED",
+      "text": "Spanish and English game languages."
+    },
+    {
+      "id": "REQ-003",
+      "status": "APPROVED",
+      "text": "Create and join public rooms."
+    },
+    {
+      "id": "REQ-004",
+      "status": "APPROVED",
+      "text": "Create and join private rooms using a shareable code."
+    },
+    {
+      "id": "REQ-005",
+      "status": "APPROVED",
+      "text": "Room host can choose word length or Random."
+    },
+    {
+      "id": "REQ-006",
+      "status": "APPROVED",
+      "text": "Interaction and reveal feedback must feel highly responsive and satisfying."
+    },
+    {
+      "id": "REQ-007",
+      "status": "APPROVED",
+      "text": "Deployable frontend on Netlify."
+    },
+    {
+      "id": "REQ-008",
+      "status": "APPROVED",
+      "text": "Mobile-first controls; no critical hover-only interaction."
+    },
+    {
+      "id": "REQ-009",
+      "status": "APPROVED",
+      "text": "Target word remains server-side until reveal/end-of-round."
+    }
+  ]
+}

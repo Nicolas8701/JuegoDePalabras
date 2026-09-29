@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "project": "PALABRA_ARENA",
+  "version": "0.1.0-dev",
+  "phase": "PROTOTYPE",
+  "subphase": "VERTICAL_SLICE_CANDIDATE",
+  "active_task": "First playable vertical slice implemented and packaged for human playtest.",
+  "blockers": [
+    "QA_FRONTEND_BUNDLE_ENV: npm registry was unreachable from the execution container, so npm dependency install and Vite production bundle could not be verified here. Server tests and TS/TSX syntax parsing passed."
+  ],
+  "next_action": "Human playtest of 0.1.0-dev on desktop/mobile and two tabs; then fix reported game-feel/runtime issues before Realtime transport hardening.",
+  "stable_build": null,
+  "candidate_build": "11_PRODUCTION/web",
+  "authorities": "00_CONTROL/AUTHORITIES.json",
+  "last_verified_artifact": "11_PRODUCTION/web/tests"
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "status": "CANDIDATE",
+  "profiles": [
+    {
+      "id": "LOW_END_MOBILE",
+      "viewport": "360x640",
+      "target_fps": 60,
+      "frame_budget_ms": 16.67,
+      "memory_target_mb": 180,
+      "notes": "Android-class low-end browser; reduced particles automatically if long frames persist."
+    },
+    {
+      "id": "REFERENCE_MOBILE",
+      "viewport": "390x844",
+      "target_fps": 60,
+      "frame_budget_ms": 16.67,
+      "memory_target_mb": 220,
+      "notes": "Primary touch reference."
+    },
+    {
+      "id": "DESKTOP",
+      "viewport": "1366x768",
+      "target_fps": 60,
+      "frame_budget_ms": 16.67,
+      "memory_target_mb": 300,
+      "notes": "Keyboard/mouse; responsive board centered with room panel."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "project_design": "00_CONTROL/PROJECT_SPEC.md + 01_GDD/",
+  "project_state": "00_CONTROL/PROJECT_STATE.json",
+  "requirements": "02_REQUIREMENTS/REQUIREMENTS.json",
+  "decisions": "03_DECISIONS/",
+  "ideas": "04_IDEAS/",
+  "experiments": "05_EXPERIMENTS/EXPERIMENT_LEDGER.json",
+  "bugs": "06_BUGS/BUG_LEDGER.json",
+  "visual": "07_ASSETS/ART_BIBLE.md + 07_ASSETS/ASSET_LEDGER.json + approved assets",
+  "roadmap": "08_ROADMAP/",
+  "history": "09_HISTORY/",
+  "qa": "10_QA/",
+  "production": "11_PRODUCTION/",
+  "handoff": "12_HANDOFF/"
+}

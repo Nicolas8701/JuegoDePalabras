@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "version": "0.1.0-dev",
+  "build_id": "palabra-arena-0.1.0-dev-20260928",
+  "parent": "0.0.2-preproduction",
+  "channel": "DEV_CANDIDATE",
+  "runtime_root": "11_PRODUCTION/web",
+  "tests": {
+    "node_domain_api": "PASS 6/6",
+    "server_mjs_syntax": "PASS",
+    "tsx_syntax_parse": "PASS 0 diagnostics",
+    "local_http_smoke": "PASS",
+    "vite_bundle": "BLOCKED_ENVIRONMENT_NPM_REGISTRY_TIMEOUT",
+    "visual_human": "PENDING",
+    "game_feel_human": "PENDING",
+    "supabase_deploy": "PENDING"
+  },
+  "known_issues": [
+    "Dictionary coverage is intentionally small in this vertical slice and may reject valid words not yet curated.",
+    "Active room sync uses polling; approved Supabase Realtime transport is not wired yet.",
+    "Frontend production bundle was not generated in the creation environment because npm registry access timed out."
+  ],
+  "candidate_rules": {
+    "word_lengths": "4-8 + random",
+    "room_cap": 8,
+    "attempts": 6,
+    "first_solve_grace_seconds": 15
+  }
+}

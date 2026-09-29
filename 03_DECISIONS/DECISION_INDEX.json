@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "decisions": [
+    {
+      "id": "ADR-0001",
+      "status": "APPROVED",
+      "path": "approved/ADR-0001_MULTIPLAYER_AND_BACKEND.md",
+      "approved_on": "2026-09-28"
+    }
+  ]
+}

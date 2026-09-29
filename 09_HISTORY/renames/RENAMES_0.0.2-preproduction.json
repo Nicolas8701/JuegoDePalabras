@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "version": "0.0.2-preproduction",
+  "moves": [
+    {
+      "from": "03_DECISIONS/pending/ADR-0001_MULTIPLAYER_AND_BACKEND.md",
+      "to": "03_DECISIONS/approved/ADR-0001_MULTIPLAYER_AND_BACKEND.md",
+      "reason": "User selected APROBAR for recommended option A / M1."
+    }
+  ]
+}
