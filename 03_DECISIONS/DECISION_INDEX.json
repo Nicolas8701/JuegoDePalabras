@@ -6,6 +6,11 @@
       "status": "APPROVED",
       "path": "approved/ADR-0001_MULTIPLAYER_AND_BACKEND.md",
       "approved_on": "2026-09-28"
+    },
+    {
+      "id": "ADR-0002",
+      "status": "CANDIDATE",
+      "path": "candidates/ADR-0002_SUPABASE_ATOMIC_RPC.md"
     }
   ]
 }

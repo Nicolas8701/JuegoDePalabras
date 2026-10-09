@@ -33,3 +33,6 @@ Status: APPROVED — ADR-0001
 
 ## Network event model
 Room events are low frequency. Do not bind gameplay timing to render FPS. UI timers derive from monotonic local time synchronized against authoritative round timestamps.
+
+## 0.2.0 DEV NOTE — CANDIDATE
+State POST moves session token from URL into body; client serialises/pause polling and rejects stale session replies; Supabase reads batched/parallel. Realtime remains APPROVED intended backend transport but still NOT IMPLEMENTED. Hosted deployment requires actual Supabase configuration and migration.

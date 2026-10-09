@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "version": "0.2.0-dev",
+  "parent_zip_sha256": "d8333197f838c8a7c5fda025d83516af555df7e626c88c2c7f217f86efb9c111",
+  "changes": {
+    "README.md": {
+      "status": "modified",
+      "before": "8c9613eeb425344e36d8bbb1978451675634bb975d3e496f59c08dc1b419400d",
+      "after": "60aa249b8f6ba9158244a6fd5007d4cb84f37d657da456939d7c8022b67c80c5"
+    },
+    "09_HISTORY/EVENT_LOG.jsonl": {
+      "status": "modified",
+      "before": "656a5d5ce783f86e32fe201d889ff66e13075f915a1cc5530aa58efa8d983fc6",
+      "after": "19478d13807ffde8e430e3e5492cc9b953f0a2065c520582ca312a43a8b25bfc"
+    },
+    "09_HISTORY/CHANGELOG_HUMAN.md": {
+      "status": "modified",
+      "before": "106231f608938746a7d261ae1fe7ef14f75a7ee6e15b32884705d5046be9d073",
+      "after": "51b2f9ea0fbadc8585252240cf9145f14f91988147d6729efa5487a99ff8c4cb"
+    },
+    "08_ROADMAP/NOW.md": {
+      "status": "modified",
+      "before": "b01645f8550a3532ea13c941037539159ef06190c8fe0786a63e21a961abbe9d",
+      "after": "e1f65ce61f7d51a7fa11ed7cc3a7e5dd39fca1ae83872ea37901c86520455cc0"
+    },
+    "08_ROADMAP/NEXT.md": {
+      "status": "modified",
+      "before": "4776d6cfd80a0ac2ea415e921eb3402a93e131720fc3fba7f5d9265ab3cb5574",
+      "after": "abd185dfcc3182aa0a624d85ec12ebdaca5ba80f1c66c89a91ecb9d4c47d6fe4"
+    },
+    "10_QA/QA_0.2.0.md": {
+      "status": "added",
+      "before": null,
+      "after": "9be7584420e9f6b4c80859ec115efabbfed31e854fd146f7f94d6972e5aed6c5"
+    },
+    "00_CONTROL/PROJECT_STATE.json": {
+      "status": "modified",
+      "before": "3b0bdf22afa8da24716a1e58208cc2b3bc8626ecfa50cdeb8411a379db9dfa87",
+      "after": "3ee3454796dfd45dce929c56558b5dbf8bf200bf200566e17b8edd3b87a46626"
+    },
+    "11_PRODUCTION/web/README.md": {
+      "status": "modified",
+      "before": "5da3994443892991dafcb9fa91112db0ac2a3251c05026258b4f2bc50b2aa8ed",
+      "after": "3af1d69b62b545ac7e4f4c33a502e3e9417a0dc19b3668f37db7033613938179"
+    },
+    "11_PRODUCTION/web/package.json": {
+      "status": "modified",
+      "before": "7afdb7f0bc3ba0be3af607778c361f7513cb28b8e58f365d4635a69bae2f6a70",
+      "after": "2dad95bda8ec3ff9d35c799237540f43ffe2af25d3851a5be021dcee12dc4182"
+    },
+    "11_PRODUCTION/web/src/App.tsx": {
+      "status": "modified",
+      "before": "63ba4854dbf0b493699d44d2fad0ad96b3a5de06f6eaeb12b3a14769da92db0d",
+      "after": "eb1aeb6c2a02a986c84d70c06a4f064f30925132d7e88651b04607def18eb3de"
+    },
+    "11_PRODUCTION/web/supabase/0.2.0_modes.sql": {
+      "status": "added",
+      "before": null,
+      "after": "634fa6f1a6a5c13375395eff02ca9ef36d57a68502618dde3feb20d0e92c9173"
+    },
+    "11_PRODUCTION/web/tests/modes.test.mjs": {
+      "status": "added",
+      "before": null,
+      "after": "e31d008ceba35a49a6cdb9c1c9dca5aeeb54cd5a830a92fc5deaeb63952d57cd"
+    },
+    "11_PRODUCTION/web/tests/word-game.test.mjs": {
+      "status": "modified",
+      "before": "614bb34d46241d0b17d7fa13a17943167cd569a941c68e0abb730ee30f0ec7b5",
+      "after": "4e36efcbc168057475592cd1df68601abaefde82e213bae7a7471995260cca13"
+    },
+    "11_PRODUCTION/web/tests/reliability.test.mjs": {
+      "status": "added",
+      "before": null,
+      "after": "faaa6028bd634103fe72ccb78de0312c41cfb542dcc9483f5df50d0d416ae663"
+    },
+    "11_PRODUCTION/web/tests/memory-flow.test.mjs": {
+      "status": "modified",
+      "before": "c22334aa9e154953cd0117369191ce979fb0993adc831ed3cf51ca4c50002e0a",
+      "after": "d83589275592d578321bf39a3d6291c0acb10303a01abc9b24c41d4b0528c569"
+    },
+    "11_PRODUCTION/web/src/styles/app.css": {
+      "status": "modified",
+      "before": "4555727d0d1ad90490883a06e8f82bb84f91a648c5ecd0fb2c876c87a1a83522",
+      "after": "f1d7c63cece03affa84789757a3600d1e97ff539906ec879e4159bb3f81d7873"
+    },
+    "11_PRODUCTION/web/src/components/Result.tsx": {
+      "status": "modified",
+      "before": "e7310433ee1116ff8dd4a0b29e4076b57ac0ce1c02c36ba207910496fe59577a",
+      "after": "23c5c31fac6a1d65f8bfb6ed462d36415bbeb76e88bf65075db5d9f23a2a4602"
+    },
+    "11_PRODUCTION/web/src/components/Lobby.tsx": {
+      "status": "modified",
+      "before": "f07ec7f4a4af558ebb3da7fbe3427e70aae33667bbaf0338920667c2e531ed72",
+      "after": "9d3242249b98a2639c429318e07496069b4599a3b1f0271668613a79324b8d6b"
+    },
+    "11_PRODUCTION/web/src/components/Home.tsx": {
+      "status": "modified",
+      "before": "e67c4f068b9e799bef582750e0730003371f5b0a8dede08c5bfb2e594195e42b",
+      "after": "ba96227c505e676733007f7c561c88ad7f2472b29ac361838c7c7ffc81e69296"
+    },
+    "11_PRODUCTION/web/src/components/GameBoard.tsx": {
+      "status": "modified",
+      "before": "d6800413a7f98fb184ed32997a8b6a2f13c2637019d2403bd2908bb6105eb613",
+      "after": "034b5e6cb731b35015f950648f3e4d660c02dbd517333a06f6dfee4f1d3266be"
+    },
+    "11_PRODUCTION/web/src/game/modes.ts": {
+      "status": "added",
+      "before": null,
+      "after": "2be02c7753d381bfc32486c5b69352b616489c21fa11e3e444595fc86bf915b7"
+    },
+    "11_PRODUCTION/web/src/types/api.ts": {
+      "status": "modified",
+      "before": "353598fb292e401572c969e120e2884b1d98bb67ecbfd9022f26375f55bf8b41",
+      "after": "d9dd8b1bedf776da6118bc075055e2dbdc7803facc84b8b5498c6025ebe40cd2"
+    },
+    "11_PRODUCTION/web/src/api/client.ts": {
+      "status": "modified",
+      "before": "9dddeb8500d9ca4fc389fa0e6e3f142572866688b2351b4c016807637dcc70ec",
+      "after": "ea1cc9715bdfc59e01f24ce70c358f1412a3d3babd31fe380ad363480120ce01"
+    },
+    "11_PRODUCTION/web/server/data/words.mjs": {
+      "status": "modified",
+      "before": "85b7d533ff49a571eac127b766f838025aad9e530d7c82e329ff320f36100c84",
+      "after": "05dfb34e85815b6789ca0938b7de1aefe0c25354f137d7302ced562dc4456473"
+    },
+    "11_PRODUCTION/web/server/data/modes.mjs": {
+      "status": "added",
+      "before": null,
+      "after": "5e396bff8ca7da85f2e5fdacdb078b92b36ddc45158d6f1ab7c0151a8a01a869"
+    },
+    "11_PRODUCTION/web/server/domain/word-game.mjs": {
+      "status": "modified",
+      "before": "11af5ac5c3efaf924b79eecd9c4a1b0b846f1e08b74902fad8bed80173b18650",
+      "after": "03815f5666b3167bc3097cf88d43b7c13590109cb17b2228ae1d5033da839c30"
+    },
+    "11_PRODUCTION/web/server/domain/api-handler.mjs": {
+      "status": "modified",
+      "before": "222d67e02758d9cc7bde1d3b437e2501ee150666268e0a767bcdbd547feb2a84",
+      "after": "c5dbdd0721de8483b09c89c9e3f05515677bc5a154b3b92433b95ffece7ad16d"
+    },
+    "11_PRODUCTION/web/server/store/memory-store.mjs": {
+      "status": "modified",
+      "before": "b1dbdf0477ff52150b9247714638ab62af2ffe528a335c07cdf2141ba7ed47f1",
+      "after": "2c65c555a09991519219d7669c76b09921774052f1d1a007aba100cbbc08f154"
+    },
+    "11_PRODUCTION/web/server/store/supabase-store.mjs": {
+      "status": "modified",
+      "before": "63468425122adc2dda56d59cf8165b3f09af1278c7bb143e5ac5f266350cbc5e",
+      "after": "835a5ff8662446b19f41ade5313aa5c8b7f349344e11f73fd5542b7f01a80fc5"
+    },
+    "11_PRODUCTION/web/server/store/index.mjs": {
+      "status": "modified",
+      "before": "934cfef115f8436c42d8638363fabe11dee51efd1c9bd802d12e80b5e22086b4",
+      "after": "9c279ae2c568a96a3a8a0d5352f1048b6b40bf7d874390feed7d3ce306c916c6"
+    },
+    "01_GDD/gameplay/CONTENT.md": {
+      "status": "modified",
+      "before": "3f1d1e6af00cf7d744a697ce04592e326120fbd710ddab503993c2e497eea5ba",
+      "after": "992f26e6662c529da4ad474522bce86f50dac1d4849a3cb0554da77e3ac59549"
+    },
+    "01_GDD/systems/ONLINE.md": {
+      "status": "modified",
+      "before": "e57f37bd48a0cfb6bc7f3fa975fa5e358704dcb2ceb0414c526033db0a22ec26",
+      "after": "c5758d1aaea0645d42df46dade05adeb34892b62b0a4d4bab236a9fd5f79dfba"
+    },
+    "09_HISTORY/checkpoints/PALABRA_ARENA_0.1.0_GITHUB_SOURCE.zip": {
+      "status": "added",
+      "before": null,
+      "after": "d8333197f838c8a7c5fda025d83516af555df7e626c88c2c7f217f86efb9c111"
+    }
+  },
+  "removed": {},
+  "added_count": 7,
+  "modified_count": 26,
+  "deleted_count": 0
+}

@@ -1,4 +1,6 @@
 export type Language = 'es' | 'en';
+export type GameMode = 'classic' | 'culture' | 'insults' | 'blitz' | 'duel';
+export type Country = 'random' | 'ar' | 'es' | 'us' | 'mx' | 'gb' | 'cl';
 export type LengthMode = 4 | 5 | 6 | 7 | 8 | 'random';
 export type Visibility = 'public' | 'private' | 'solo';
 export type Mark = 'correct' | 'present' | 'absent';
@@ -8,6 +10,9 @@ export interface RoomSummary {
   code: string;
   visibility: Visibility;
   language: Language;
+  mode: GameMode;
+  country: Country;
+  languageMode: 'fixed' | 'random';
   lengthMode: LengthMode | string | number;
   status: 'lobby' | 'active' | 'result' | 'closed';
   hostPlayerId: string;
@@ -41,6 +46,9 @@ export interface RoundState {
   status: 'active' | 'result';
   startedAt: string;
   finishDeadline: string | null;
+  deadlineAt: string | null;
+  selectedCountry: Country;
+  hint: string;
   winnerPlayerId: string | null;
   answer?: string;
 }

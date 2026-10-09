@@ -12,6 +12,7 @@ import { MemoryStore } from '../server/store/memory-store.mjs';
   assert.equal('answer' in state.round && state.round.answer !== undefined, false);
 
   const target = store.currentRound(host.room.id).targetWord;
+  store.currentRound(host.room.id).startedAt = new Date(Date.now() - 1).toISOString();
   state = await store.submitGuess({ roomId: host.room.id, playerId: host.player.id, token: host.player.token, guess: target });
   assert.equal(state.players.find((p) => p.id === host.player.id).solved, true);
   const guestState = await store.getRoomState({ roomId: host.room.id, playerId: guest.player.id, token: guest.player.token });

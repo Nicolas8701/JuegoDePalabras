@@ -1,4 +1,5 @@
-import { chooseTarget, evaluateGuess, resolveWordLength, validateGuess } from '../domain/word-game.mjs';
+import { resolveRoundConfig, evaluateGuess, resolveWordLength, validateGuess } from '../domain/word-game.mjs';
+import { modeId, countryId } from '../data/modes.mjs';
 import { hashToken, newId, newRoomCode, newToken, safePlayerName } from '../domain/security.mjs';
 
 const FINISH_GRACE_MS = 15_000;
@@ -14,6 +15,7 @@ function publicRoom(room, playerCount = 0) {
     code: room.code,
     visibility: room.visibility,
     language: room.language,
+    mode: room.mode || 'classic', country: room.country || 'random', languageMode:room.languageMode || 'fixed',
     lengthMode: room.lengthMode,
     status: room.status,
     hostPlayerId: room.hostPlayerId,
@@ -46,7 +48,7 @@ export class MemoryStore {
       .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
   }
 
-  async createRoom({ visibility, language, lengthMode, playerName }) {
+  async createRoom({ visibility, language, lengthMode, playerName, mode, country, languageMode }) {
     const roomId = newId();
     const playerId = newId();
     const token = newToken();
@@ -58,13 +60,14 @@ export class MemoryStore {
       code,
       visibility: visibility === 'private' ? 'private' : visibility === 'solo' ? 'solo' : 'public',
       language: language === 'en' ? 'en' : 'es',
+      mode: modeId(mode), country: countryId(country), languageMode:languageMode==='random'?'random':'fixed',
       lengthMode: lengthMode === 'random' ? 'random' : Number(lengthMode),
       status: 'lobby',
       hostPlayerId: playerId,
       createdAt: nowIso(),
       updatedAt: nowIso()
     };
-    resolveWordLength(room.lengthMode, () => 0);
+    for(const lang of (room.languageMode==='random'?['es','en']:[room.language])) resolveRoundConfig(lang,room.lengthMode,room.mode,room.country,()=>0);
     const player = {
       id: playerId,
       roomId,
@@ -87,7 +90,7 @@ export class MemoryStore {
     const room = [...this.rooms.values()].find((r) => r.code === normalizedCode && r.status !== 'closed');
     if (!room) throw this.error('ROOM_NOT_FOUND', 404);
     if (room.status !== 'lobby') throw this.error('ROUND_ALREADY_STARTED', 409);
-    if (this.playersInRoom(room.id).length >= 8) throw this.error('ROOM_FULL', 409);
+    if (this.playersInRoom(room.id).length >= (room.mode === 'duel' ? 2 : 8)) throw this.error('ROOM_FULL', 409);
 
     const id = newId();
     const token = newToken();
@@ -130,21 +133,26 @@ export class MemoryStore {
     if (room.status === 'active') throw this.error('ROUND_ALREADY_ACTIVE', 409);
 
     const players = this.playersInRoom(roomId);
+    if (room.mode === 'duel' && players.length !== 2) throw this.error('NEED_TWO_PLAYERS',409);
     if (room.visibility !== 'solo' && players.some((p) => p.id !== player.id && !p.ready)) {
       throw this.error('PLAYERS_NOT_READY', 409);
     }
     const prev = this.currentRound(roomId);
-    const wordLength = resolveWordLength(room.lengthMode);
+    const roundLanguage=room.languageMode==='random'?(Math.random()<.5?'es':'en'):room.language;
+    const config = resolveRoundConfig(roundLanguage, room.lengthMode, room.mode, room.country);
+    const wordLength = config.wordLength;
     const round = {
       id: newId(),
       roomId,
       roundNumber: (prev?.roundNumber ?? 0) + 1,
-      language: room.language,
+      language: roundLanguage,
       wordLength,
-      targetWord: chooseTarget(room.language, wordLength),
+      targetWord: config.targetWord,
+      selectedCountry: config.selectedCountry, hint: config.hint,
+      mode: room.mode, deadlineAt: room.mode === 'blitz' ? new Date(Date.now()+93000).toISOString() : null,
       status: 'active',
-      maxAttempts: MAX_ATTEMPTS,
-      startedAt: nowIso(),
+      maxAttempts: room.mode === 'duel' ? 5 : MAX_ATTEMPTS,
+      startedAt: new Date(Date.now()+3000).toISOString(),
       firstSolvedAt: null,
       finishDeadline: null,
       endedAt: null,
@@ -170,7 +178,8 @@ export class MemoryStore {
     const players = this.playersInRoom(roomId);
     const allCompleted = players.length > 0 && players.every((p) => p.completed);
     const graceExpired = round.finishDeadline && Date.now() >= Date.parse(round.finishDeadline);
-    if (allCompleted || graceExpired) {
+    const timedOut = round.deadlineAt && Date.now() >= Date.parse(round.deadlineAt);
+    if (allCompleted || graceExpired || timedOut) {
       round.status = 'result';
       round.endedAt = nowIso();
       room.status = 'result';
@@ -183,6 +192,7 @@ export class MemoryStore {
     this.maybeFinalize(roomId);
     const round = this.currentRound(roomId);
     if (!round || round.status !== 'active' || room.status !== 'active') throw this.error('NO_ACTIVE_ROUND', 409);
+    if (Date.now() < Date.parse(round.startedAt)) throw this.error('COUNTDOWN_ACTIVE',409);
     if (player.completed) throw this.error('PLAYER_FINISHED', 409);
 
     const validation = validateGuess(round.language, round.wordLength, guess);
@@ -244,6 +254,7 @@ export class MemoryStore {
       status: round.status,
       startedAt: round.startedAt,
       finishDeadline: round.finishDeadline,
+      deadlineAt: round.deadlineAt, selectedCountry: round.selectedCountry, hint: round.hint,
       winnerPlayerId: round.winnerPlayerId,
       answer: round.status === 'result' ? round.targetWord : undefined
     } : null;
@@ -260,6 +271,29 @@ export class MemoryStore {
     return this.getRoomState(args);
   }
 
+  async forfeit(args) {
+    const {player} = this.auth(args.roomId,args.playerId,args.token);
+    player.completed=true;
+    this.maybeFinalize(args.roomId);
+    return this.getRoomState(args);
+  }
+  async leaveRoom(args) {
+    const {room,player} = this.auth(args.roomId,args.playerId,args.token);
+    this.players.delete(player.id);
+    const rest=this.playersInRoom(room.id);
+    if(!rest.length) room.status='closed';
+    else if(room.hostPlayerId===player.id) room.hostPlayerId=rest[0].id;
+    this.maybeFinalize(room.id);
+    return {ok:true};
+  }
+  async finishRound(args) {
+    const {room,player}=this.auth(args.roomId,args.playerId,args.token);
+    if(room.hostPlayerId!==player.id) throw this.error('HOST_ONLY',403);
+    const round=this.currentRound(room.id);
+    if(!round||round.status!=='active') throw this.error('NO_ACTIVE_ROUND',409);
+    round.status='result'; round.endedAt=nowIso();room.status='result';room.updatedAt=nowIso();
+    return this.getRoomState(args);
+  }
   error(code, status = 400) {
     const err = new Error(code);
     err.code = code;

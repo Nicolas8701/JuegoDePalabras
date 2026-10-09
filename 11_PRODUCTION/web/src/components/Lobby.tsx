@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { Language, RoomState } from '../types/api';
 import { t } from '../game/i18n';
+import { modeLabel,countryLabel } from '../game/modes';
 
 interface Props { state: RoomState; language: Language; busy: boolean; onReady: (ready: boolean) => void; onStart: () => void; onLeave: () => void; }
 
@@ -19,7 +20,7 @@ export function Lobby({ state, language, busy, onReady, onStart, onLeave }: Prop
   return <main className="game-shell">
     <header className="game-header"><button className="icon-button" onClick={onLeave}>←</button><div><span className="eyebrow">{copy.lobby}</span><strong>{state.room.code}</strong></div><button className="icon-button" onClick={copyCode}>{copied ? '✓' : '⧉'}</button></header>
     <section className="panel lobby-panel">
-      <div className="room-meta"><span>{state.room.visibility === 'private' ? '🔒 ' + copy.privateRoom : '◉ ' + copy.publicRoom}</span><span>{state.room.language.toUpperCase()}</span><span>{String(state.room.lengthMode).toUpperCase()} {copy.length.toLowerCase()}</span></div>
+      <div className="room-meta"><span>{state.room.visibility === 'private' ? '🔒 ' + copy.privateRoom : '◉ ' + copy.publicRoom}</span><span>{modeLabel(state.room.mode||'classic',language)}</span><span>{state.room.languageMode==='random'?'ES / EN 🎲':(state.room.language==='es'?'Español (Latinoamérica)':'English')}</span><span>{countryLabel(state.room.country||'random',language)}</span><span>{String(state.room.lengthMode).toUpperCase()} {copy.length.toLowerCase()}</span></div>
       <div className="lobby-code"><small>{copy.code}</small><strong>{state.room.code}</strong></div>
       <div className="player-roster">
         {state.players.map((player) => <div className="player-row" key={player.id}>
@@ -29,7 +30,7 @@ export function Lobby({ state, language, busy, onReady, onStart, onLeave }: Prop
         </div>)}
       </div>
       {!isHost && <button className={`primary massive ${me?.ready ? 'ready-button' : ''}`} disabled={busy} onClick={() => onReady(!me?.ready)}>{me?.ready ? '✓ ' + copy.ready : copy.ready}</button>}
-      {isHost && <button className="primary massive" disabled={busy || !othersReady} onClick={onStart}>{copy.start}<span>3…2…1</span></button>}
+      {isHost && <button className="primary massive" disabled={busy || !othersReady} onClick={onStart}>{copy.start}<span>→</span></button>}
       {isHost && !othersReady && <p className="hint">{copy.playersNotReady}</p>}
       {!isHost && <p className="hint">{copy.waiting}</p>}
     </section>

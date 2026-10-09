@@ -1,4 +1,4 @@
-import type { Language, LengthMode, RoomState, RoomSummary, Session, Visibility } from '../types/api';
+import type { Language, LengthMode, RoomState, RoomSummary, Session, Visibility, GameMode, Country } from '../types/api';
 
 export class ApiError extends Error {
   code: string;
@@ -33,6 +33,7 @@ export async function createRoom(input: {
   language: Language;
   lengthMode: LengthMode;
   playerName: string;
+  mode: GameMode; country: Country; languageMode: 'fixed' | 'random';
 }): Promise<Session> {
   const data = await request<{ room: RoomSummary; player: { id: string; token: string; name: string } }>('/api/rooms', {
     method: 'POST', body: JSON.stringify(input)
@@ -48,8 +49,7 @@ export async function joinRoom(code: string, playerName: string): Promise<Sessio
 }
 
 export function getState(session: Session): Promise<RoomState> {
-  const q = new URLSearchParams({ playerId: session.playerId, token: session.token });
-  return request(`/api/rooms/${session.roomId}/state?${q}`);
+  return request(`/api/rooms/${session.roomId}/state`,{method:'POST',body:authBody(session)});
 }
 
 export function setReady(session: Session, ready: boolean): Promise<RoomState> {
@@ -61,9 +61,18 @@ export function startRound(session: Session): Promise<RoomState> {
 }
 
 export function submitGuess(session: Session, guess: string): Promise<RoomState> {
-  return request(`/api/rooms/${session.roomId}/guess`, { method: 'POST', body: authBody(session, { guess }) });
+  return request(`/api/rooms/${session.roomId}/guess`, { method: 'POST', body: authBody(session, { guess, requestId: crypto.randomUUID() }) });
 }
 
+export function forfeit(session: Session): Promise<RoomState> {
+  return request(`/api/rooms/${session.roomId}/forfeit`, {method:'POST',body:authBody(session)});
+}
+export function finishRound(session: Session): Promise<RoomState> {
+  return request(`/api/rooms/${session.roomId}/finish`, {method:'POST',body:authBody(session)});
+}
+export function leaveRoom(session: Session): Promise<{ok:boolean}> {
+  return request(`/api/rooms/${session.roomId}/leave`, {method:'POST',body:authBody(session)});
+}
 export function rematch(session: Session): Promise<RoomState> {
   return request(`/api/rooms/${session.roomId}/rematch`, { method: 'POST', body: authBody(session) });
 }

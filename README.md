@@ -1,29 +1,22 @@
-# PALABRA_ARENA
+# PALABRA ARENA — 0.2.0 DEV CANDIDATE
 
-Estado: **0.1.0-dev — PROTOTYPE / VERTICAL_SLICE_CANDIDATE**
+Proyecto de juego web de palabras ES/EN con salas públicas/privadas, modos regionales y partida infinita. Consulta `11_PRODUCTION/web/README.md` para instalación, Netlify, migración, QA y limitaciones.
 
-Juego web bilingüe de adivinar palabras, sin límite diario, con solo y Race/Same Word en salas públicas o privadas. La referencia visual original se conserva sólo como referencia temporal; la UI implementada usa identidad propia.
+**Fuente de este paquete:** ZIP `JuegoDePalabras-main.zip` del repositorio `Nicolas8701/JuegoDePalabras` (0.1.0-dev); 0.1.5 no estaba disponible como fuente en el repositorio. Esta candidate restaura funcionalidades críticas conocidas de 0.1.5 sin afirmar equivalencia exacta. La rama remota main no ha sido modificada.
 
-## Probar localmente
+Ejecutá `START_LOCAL.bat` o `START_LOCAL.sh` en la raíz.
 
-Windows: doble clic en `START_LOCAL.bat`.
+## Cambios críticos 0.2.1
 
-macOS/Linux:
+- **Aplicar migración en staging ANTES del deploy:** `11_PRODUCTION/web/supabase/0.2.1_atomic_state.sql`. Suprime actualizaciones de intentos no atómicas, agrega `client_request_id` nullable e índice único, y funciones de estado/guesses/health exclusivas de service_role. No borra partidas existentes.
+- Verificar `/api/health?deep=1`: `schema.schema` debe ser `0.2.1`. Si falta la migración, el juego devuelve `DB_MIGRATION_REQUIRED` (503) en vez de actuar con una implementación incorrecta.
+- Para hacer rollback, redeploy 0.2.0; las columnas y funciones aditivas permanecen sin uso. No ejecutar `DROP` en producción sin revisión DBA.
+- `npm run smoke:local` no requiere npm install, prueba el servidor MemoryStore por HTTP y mide RTT **localhost únicamente**. No acredita performance de Supabase.
+- La respuesta final conserva el tablero evaluado durante 1,75 s antes de abrir la pantalla de captura PNG.
+- Nuevos tests: `tests/supabase-rpc.test.mjs` y `tests/api-telemetry.test.mjs`. No equivalen a un test PostgreSQL real.
 
-```bash
-./START_LOCAL.sh
-```
+## Pendientes imprescindibles antes de producción
 
-El launcher instala dependencias si faltan y levanta cliente + API autoritativa local. Abre `http://localhost:5173`. Para multijugador local, usa dos pestañas/ventanas.
-
-Código runtime: `11_PRODUCTION/web/`.
-
-## Netlify
-
-El `netlify.toml` de la raíz usa `11_PRODUCTION/web` como base. Para persistencia online real, ejecutar `11_PRODUCTION/web/supabase/schema.sql` y configurar `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` en Netlify.
-
-## Estado de QA
-
-Automated server/domain/API checks pasan. La build de Vite no pudo ejecutarse en el contenedor de creación porque el registro npm no respondió; por lo tanto esta entrega NO es STABLE ni tiene PASS_VISUAL_HUMAN/GAME_FEEL_HUMAN todavía.
-
-Los rangos 4–8 letras, máximo 8 jugadores, 6 intentos y ventana final de 15 s son CANDIDATE de playtest, no canon irreversible.
+- `npm run build`, responsive visual / game-feel PC-móvil, validación de las funciones PL/pgSQL y pruebas simultáneas hospedadas.
+- Concurrencia de crear/iniciar/unirse/salir sala aún depende de varias escrituras REST; no se anuncia como corregida.
+- Realtime/Broadcast y latencia real Netlify siguen pendientes; lo que se implementó es la reducción estructural de requests, no un WebSocket.

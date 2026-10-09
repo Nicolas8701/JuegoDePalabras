@@ -22,3 +22,19 @@
 - Added original responsive UI, touch/physical keyboard, accessible state symbols, reduced-motion handling, lightweight audio/haptics.
 - Added 6 automated tests; all pass. Server syntax and TS/TSX syntax parsing pass.
 - Production frontend bundle remains unverified in the creation container because npm registry access timed out; human visual/game-feel QA remains pending.
+
+## 0.2.0-dev candidate — 2026-10-09
+- GitHub snapshot audit found only 0.1.0 source, despite 0.1.5 being the latest discussed build; no silent reinstatement of old versions as STABLE.
+- Added independently selected game mode, answer language/fixed or random, country/fixed or random, thematic hints, curated culture/insult packs, and longer general answer pools.
+- Added quick-duel (exactly 2 players / 5 guesses) and one-word 90-second speed mode. Multi-word survival stays unimplemented candidate.
+- Reimplemented clean letter tiles, authoritative 3-second countdown, forfeit/leave/finish, host transfer, 1.75s result delay and downloadable PNG.
+- Optimized Supabase read batching and no-N+1 room list, serialised polling, protected session identity, moved session credentials out of URL.
+- Added migration and QA regressions. No Vite visual bundle, production P95 latency, or live Supabase pass claimed.
+
+
+## 0.2.1-dev — CANDIDATE (2026-10-09)
+- Authenticated Supabase state RPC (single database request) and transactional guess RPC with request-id deduplication.
+- Endpoint `GET /api/health?deep=1` checks 0.2.1 DB RPC; response includes `Server-Timing`.
+- 700ms active match polling, adaptive outage backoff and per-session poll guard.
+- Culture answer packs expanded for six countries in two languages; finale waits on the real marked grid, followed by sharable result.
+- 30/30 tests and localhost HTTP smoke PASS; hosted SQL, build, real-device visual and real Netlify latency still NOT VERIFIED.

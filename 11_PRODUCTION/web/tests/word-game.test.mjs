@@ -15,6 +15,8 @@ test('supported lengths accept fixed or random', () => {
 
 test('dictionary validation normalizes accents but keeps ñ distinct', () => {
   assert.equal(validateGuess('es', 7, 'MONTAÑA').ok, true);
-  assert.equal(validateGuess('es', 7, 'montana').ok, false);
+  assert.equal(validateGuess('es', 7, 'montana').ok, true);
+  assert.equal(validateGuess('es', 7, 'MONTANA').guess, 'montana');
+  assert.notEqual(validateGuess('es', 7, 'MONTANA').guess,validateGuess('es', 7, 'MONTAÑA').guess);
   assert.equal(validateGuess('en', 5, 'APPLE').ok, true);
 });
