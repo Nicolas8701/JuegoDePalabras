@@ -70,3 +70,5 @@
 - 50/50 Node + 6/6 real Chromium e2e + Vite/Wrangler passed in prior CI; expanded viewport pass pending.
 
 - Inspected 8 actual Chromium page screenshots from Actions 38405047135. Board and result fit 320/375/mobile+desktop; follow-up polish: horizontal viewport centering on desktop and shorter compact action labels.
+
+- **FINAL OBJECTIVE QA 0.2.4**: GitHub Actions 38405965139 PASS 50/50 Node + 12/12 real-browser desktop/tablet/mobile/small-mobile + Vite + Wrangler. 8 real browser screenshots captured and inspected. Human usability/game-feel and hosted Supabase online still pending.

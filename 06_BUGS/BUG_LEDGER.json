@@ -9,7 +9,7 @@
       "symptom": "4-letter board tiles oversized, keyboard below fold on desktop and mobile",
       "cause": "board max width independent of word length + 1:1 tiles and six rows",
       "fix": "0.2.4 responsive board width keyed to word length and viewport height; central layout",
-      "verification": "Compiled Chromium e2e at desktop/mobile; 320/tablet expansion pending",
+      "verification": "PASS GitHub Actions 38405965139: Node 50/50; Chromium 12/12 at 320/375/768/1365; screenshots visually inspected, hosted human QA pending.",
       "regression": "e2e/ux.spec.ts"
     },
     {
@@ -20,7 +20,7 @@
       "symptom": "new players may launch without nickname and cannot conveniently rename",
       "cause": "optional input buried below choices",
       "fix": "mandatory first-run profile, Home top-left edit, localStorage and server allowlist",
-      "verification": "Node sanitization tests, Chromium profile persistence tests",
+      "verification": "PASS GitHub Actions 38405965139: Node 50/50; Chromium 12/12 at 320/375/768/1365; screenshots visually inspected, hosted human QA pending.",
       "regression": "tests/ux-0.2.4.test.mjs + e2e/ux.spec.ts"
     },
     {
@@ -31,7 +31,7 @@
       "symptom": "shared PNG excludes attempted guesses and color marks",
       "cause": "result card exported answer and ranking only",
       "fix": "modular canvas exporter includes ordered guess grid and marks; results UI shows same",
-      "verification": "Node contract tests and browser screenshot download",
+      "verification": "PASS GitHub Actions 38405965139: Node 50/50; Chromium 12/12 at 320/375/768/1365; screenshots visually inspected, hosted human QA pending.",
       "regression": "tests/reliability.test.mjs + e2e/ux.spec.ts"
     },
     {
@@ -42,7 +42,7 @@
       "symptom": "Missing Supabase error falsely mentions Netlify on Cloudflare",
       "cause": "hardcoded stale provider text",
       "fix": "Cloudflare-specific, actionable error while local mode remains playable",
-      "verification": "Node source regression and Chromium intercepted 503 test",
+      "verification": "PASS GitHub Actions 38405965139: Node 50/50; Chromium 12/12 at 320/375/768/1365; screenshots visually inspected, hosted human QA pending.",
       "regression": "e2e/ux.spec.ts"
     }
   ]
