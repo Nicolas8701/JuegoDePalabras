@@ -11,9 +11,10 @@
     "CPU_FREE: Workers 10ms CPU/request; HMAC candidate for new passwords, legacy scrypt can exceed the budget.",
     "SECURITY: listed private rooms require durable rate limiting before public launch.",
     "BUILD_VISUAL: npm registry DNS unavailable for Vite/ Wrangler; no compiled visual-human or game-feel pass.",
-    "REALTIME_PERFORMANCE: continues polling; measure Cloudflare/Supabase RTT before optimizations."
+    "REALTIME_PERFORMANCE: continues polling; measure Cloudflare/Supabase RTT before optimizations.",
+    "CLOUDFLARE_BUILD_CONFIG: user screenshot 2026-10-12 root=/ build=None branch=main; corrected Wrangler Worker name palabraarena; dashboard changes/preview still needed."
   ],
-  "next_action": "Connect Cloudflare Workers Builds from GitHub candidate branch, set runtime secrets in dashboard, verify /api/health?deep=1, real Supabase two-client privacy/race, CPU/RTT and visual QA. Keep Netlify unchanged until confirmed URL.",
+  "next_action": "In Cloudflare Worker palabraarena: set Builds root 11_PRODUCTION/web, build npm run build, deploy npx wrangler deploy; enable non-production previews for candidate/cloudflare-0.2.3. Then check preview, Supabase runtime secrets, health and two-browser QA. Keep main unchanged.",
   "stable_build": null,
   "candidate_build": "11_PRODUCTION/web (Cloudflare Worker+Static Assets)",
   "authorities": "00_CONTROL/AUTHORITIES.json",

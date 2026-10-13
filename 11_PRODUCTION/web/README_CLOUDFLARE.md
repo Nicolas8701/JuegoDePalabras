@@ -21,3 +21,19 @@ Fuentes:
 - https://developers.cloudflare.com/workers/ci-cd/builds/configuration/
 - https://developers.cloudflare.com/workers/platform/limits/
 - https://developers.cloudflare.com/agent-setup/codex/
+
+## Diagnóstico Cloudflare: Could not detect a directory containing static files
+
+El build de Cloudflare compartido por el usuario utilizó **Root directory `/`, Build command `None` y branch `main`**. Ahí no están ni `wrangler.jsonc` ni la aplicación React de la candidata.
+
+En el Worker existente **palabraarena**, entrar a **Settings > Build** y configurar:
+
+- Root directory: `11_PRODUCTION/web` (sin barra inicial).
+- Build command: `npm run build` (genera `dist/index.html` y assets Vite).
+- Deploy command: `npx wrangler deploy`.
+- En **Settings > Build > Branch control**, habilitar **builds de ramas no productivas** y probar `candidate/cloudflare-0.2.3`; mantener `main` sin cambios hasta aprobar la candidata. No basta reintentar un build de `main`.
+- El campo `name` de Wrangler ahora coincide con el Worker existente `palabraarena`; no es necesario crear otro Worker.
+- Los secretos de Supabase son **runtime secrets** en **Settings > Variables & Secrets**, no `Build variables`.
+- El subdominio `workers.dev` del panel estaba deshabilitado. Usar preview URL o habilitarlo una vez desplegado y validado.
+
+Fuente oficial: https://developers.cloudflare.com/workers/ci-cd/builds/configuration/

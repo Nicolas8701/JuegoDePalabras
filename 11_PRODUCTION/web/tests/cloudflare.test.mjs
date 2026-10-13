@@ -28,6 +28,7 @@ test('Worker preserves API route, method and secrets in the request body', async
 
 test('Workers config serves API before SPA fallback and ignores secrets',()=>{
   const config=JSON.parse(readFileSync(new URL('../wrangler.jsonc',import.meta.url),'utf8'));
+  assert.equal(config.name,'palabraarena', 'must deploy to existing Cloudflare Worker');
   assert.equal(config.main,'./worker/index.mjs');
   assert.equal(config.assets.not_found_handling,'single-page-application');
   assert.ok(config.assets.run_worker_first.includes('/api/*'));
