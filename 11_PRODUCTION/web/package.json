@@ -1,7 +1,7 @@
 {
   "name": "palabra-arena",
   "private": true,
-  "version": "0.2.3-dev",
+  "version": "0.2.4-dev",
   "type": "module",
   "scripts": {
     "dev": "node server/dev-runner.mjs",
@@ -13,7 +13,8 @@
     "smoke:local": "node scripts/smoke-local-api.mjs",
     "deploy:cloudflare": "npm run build && wrangler deploy",
     "preview:cloudflare": "npm run build && wrangler dev",
-    "test:cloudflare": "node --test tests/cloudflare.test.mjs"
+    "test:cloudflare": "node --test tests/cloudflare.test.mjs",
+    "test:ui": "playwright test"
   },
   "dependencies": {
     "@vitejs/plugin-react": "4.3.4",
@@ -25,6 +26,7 @@
     "@types/react-dom": "19.0.3"
   },
   "devDependencies": {
-    "wrangler": "^4.45.0"
+    "wrangler": "^4.45.0",
+    "@playwright/test": "^1.58.2"
   }
 }
