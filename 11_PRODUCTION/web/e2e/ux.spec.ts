@@ -188,3 +188,25 @@ test('desktop hover on image-backed mode cards responds visually, not with emoji
  await button.focus();await expect(button).toHaveAttribute('aria-pressed','false');
  await button.click();await expect(button).toHaveAttribute('aria-pressed','true');
 });
+
+test('desktop home gives illustrated mode modules full-sized layout, mobile remains bounded',async({page},testInfo)=>{
+ await page.goto('/');await chooseProfile(page);
+ const rects=await page.evaluate(()=>{
+  const b=(s:string)=>document.querySelector(s)!.getBoundingClientRect();
+  const panel=b('.landing-panel'),modes=b('.featured-modes .illustrated-modes'),screen=window.innerWidth;
+  return {panel:panel.width,modes:modes.width,screen,scrollWidth:document.documentElement.scrollWidth,columns:getComputedStyle(document.querySelector('.featured-modes .illustrated-modes')!).gridTemplateColumns.split(' ').length};
+ });
+ expect(rects.scrollWidth).toBeLessThanOrEqual(rects.screen+1);
+ if(testInfo.project.name==='desktop'){
+  expect(rects.panel).toBeGreaterThan(800);
+  expect(rects.modes).toBeGreaterThan(750);
+  expect(rects.columns).toBe(4);
+  const choices=await page.locator('.landing-panel .choice').all();
+  const bounds=await Promise.all(choices.map(c=>c.boundingBox()));
+  expect(Math.abs(bounds[0]!.y-bounds[1]!.y)).toBeLessThan(3);
+ }else if(rects.screen<=700){
+  expect(rects.panel).toBeLessThanOrEqual(rects.screen);
+  expect(rects.columns).toBe(2);
+ }
+ await page.screenshot({path:`test-results/${testInfo.project.name}-approved-modular-home.png`,fullPage:true});
+});
