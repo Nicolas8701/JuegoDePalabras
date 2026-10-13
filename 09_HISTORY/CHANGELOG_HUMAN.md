@@ -61,3 +61,14 @@
 - User approved PR #1 merge into `main`, resulting merge commit `950b5ad292e721e5dcce5c149d934adb056f7c58`.
 - CI on exact candidate head: 46/46 Node PASS, Vite PASS, Wrangler dry-run PASS. Cloudflare Workers Builds success check on merge.
 - **NOT STABLE**: public URL, Supabase runtime, security, performance and browser usability still pending. Netlify retained for later redirect only.
+
+## 2026-10-13 — 0.2.4-dev UX Recovery CANDIDATE
+- First-run nickname required, persistent per browser and editable from Home top-left, with server/client normalization against markup and SQL metacharacters.
+- Game board centered, tiles constrained by height/word length and keyboard visible on mobile+desktop.
+- Result now shows all guess colors and PNG includes attempts+solution+scoreboard.
+- Missing Supabase message correctly references Cloudflare; local mode remains available.
+- 50/50 Node + 6/6 real Chromium e2e + Vite/Wrangler passed in prior CI; expanded viewport pass pending.
+
+- Inspected 8 actual Chromium page screenshots from Actions 38405047135. Board and result fit 320/375/mobile+desktop; follow-up polish: horizontal viewport centering on desktop and shorter compact action labels.
+
+- **FINAL OBJECTIVE QA 0.2.4**: GitHub Actions 38405965139 PASS 50/50 Node + 12/12 real-browser desktop/tablet/mobile/small-mobile + Vite + Wrangler. 8 real browser screenshots captured and inspected. Human usability/game-feel and hosted Supabase online still pending.

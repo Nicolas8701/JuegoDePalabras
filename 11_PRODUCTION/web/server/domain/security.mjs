@@ -21,8 +21,12 @@ export function newRoomCode(random = Math.random) {
 }
 
 export function safePlayerName(input) {
-  const value = String(input ?? '').trim().replace(/\s+/g, ' ').slice(0, 18);
-  return value || `Jugador ${Math.floor(Math.random() * 900 + 100)}`;
+  // Unicode letters (including Ñ/accents) are allowed, but markup, quotes,
+  // SQL metacharacters, bidi controls and control characters are discarded.
+  // All SQL access still uses parameterized Supabase/PostgREST requests.
+  const raw = typeof input === 'string' ? input : '';
+  const value = raw.normalize('NFKC').replace(/[^\p{L}\p{N} ._-]/gu, '').replace(/\s+/g, ' ').trim().slice(0, 18).trim();
+  return value.length >= 2 ? value : `Jugador ${Math.floor(Math.random() * 900 + 100)}`;
 }
 
 // Room passwords never leave the server and are never stored in plain text.

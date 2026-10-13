@@ -21,3 +21,9 @@ No depender sólo de verde/amarillo/gris. Cada estado debe tener también forma/
 
 ## Reference status
 `references/reference_word_guess_game_2026-09-28.png` = TEMPORARY_REFERENCE only; not APPROVED, not canonical.
+
+## 0.2.4 responsive refinement (CANDIDATE)
+- Square tiles capped against viewport height instead of expanding to fill a fixed 520px board at four letters.
+- A calmer hierarchy: centered board, adjacent accessible keyboard, secondary player list; compact result with attempts grid.
+- No glyph overlays on letters; color status with external legend remains the user-approved choice.
+- This does not modify APPROVED imagery (none); review actual browser screenshots before approving visual canon.

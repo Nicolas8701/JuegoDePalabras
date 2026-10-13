@@ -30,7 +30,11 @@ test('tile cells contain no overlays or status glyphs',()=>{
 });
 test('screenshot export exists and includes answer and ranking',()=>{
  const code=fs.readFileSync(new URL('../src/components/Result.tsx',import.meta.url),'utf8');
- assert.ok(code.includes('canvas.toBlob'));
- assert.ok(code.includes('round.answer'));
+ const png=fs.readFileSync(new URL('../src/game/result-export.ts',import.meta.url),'utf8');
+ assert.ok(png.includes('canvas.toBlob'));
+ assert.ok(png.includes('round.answer'));
+ assert.ok(png.includes('state.myAttempts'));
+ assert.ok(png.includes('backgrounds[mark]'));
  assert.ok(code.includes('score-row'));
+ assert.ok(code.includes('result-attempt-cell'));
 });

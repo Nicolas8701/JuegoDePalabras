@@ -1,8 +1,9 @@
-name: Cloudflare candidate CI
+name: Palabra Arena CI - UX and Cloudflare
 on:
   push:
     branches:
       - candidate/cloudflare-0.2.3
+      - candidate/ux-0.2.4
   pull_request:
     branches:
       - main
@@ -25,5 +26,15 @@ jobs:
         run: npm test
       - name: Build React SPA
         run: npm run build
+      - name: Install Chromium for responsive functional checks
+        run: npx playwright install --with-deps chromium
+      - name: Real browser functional and responsive UX
+        run: npm run test:ui
+      - name: Store browser evidence on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: responsive-ux-evidence
+          path: 11_PRODUCTION/web/test-results/
       - name: Package Cloudflare Worker without deploying
         run: npx wrangler deploy --dry-run --outdir .wrangler/qa

@@ -9,6 +9,6 @@ test('HTTP exposes processing time separately from client network RTT',async()=>
   const r=await handleApiRequest(new Request('http://localhost/api/health'),{});
   assert.equal(r.status,200);
   assert.match(r.headers['server-timing'],/^api;dur=\d+\.\d$/);
-  assert.equal(r.headers['x-palabra-arena-build'],'0.2.3-dev');
+  assert.equal(r.headers['x-palabra-arena-build'],'0.2.4-dev');
   assert.equal(JSON.parse(r.body).store,'memory');
 });

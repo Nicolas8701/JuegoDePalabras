@@ -27,3 +27,11 @@ Status: APPROVED BASELINE — ADR-0001 approved; numeric player/word-length rang
 - Keep UI simple, comfortable across desktop/mobile, with explicit functional/usability QA gates.
 
 Implementation details of password storage, discovery status filters and specific UI layout are **0.2.2 CANDIDATE**; no design approval inferred from merely compiling code.
+
+## User-confirmed new requirements — 2026-10-13
+- First contact must ask for a nickname before Local or Online; nickname persists per browser and is editable from top-left of Home.
+- Store only normalized text in localStorage (not an authentication credential). Never execute it as markup or SQL; validate names on server too.
+- Game board and keyboard must stay centered and playable on mobile and desktop; verify actual compiled React in browser.
+- Result screenshot PNG must include personal attempted guesses/letter colors and the revealed answer, not just winner/ranking.
+- Client errors must reference current Cloudflare hosting rather than historical Netlify.
+Implementation styling, limits and exact layout in 0.2.4 are CANDIDATE until visual human review.
