@@ -8,3 +8,6 @@ En backend alojado, el jugador y la ronda comparten estado concurrente. Los camb
 
 ## DNR-007 — No presentar P50/P95 localhost como ping online
 Guardar por separado métricas de red (RTT navegador) y tiempo de procesamiento (`Server-Timing`). No prometer mejora de ping hasta comparar la misma región/condiciones en Netlify.
+
+- DNR-ROOM-PASSWORD: never use short invite code as the password for a private room. List private rooms publicly but require password, hash at rest, do not expose hashes in DTO/RPC output; check host and privacy under DB lock.
+- DNR-ROOM-UX: do not restore five separate create/join paths on the home screen; local/online first, discovery/create next. Test 320px mobile overflow and touch targets before presenting a candidate.

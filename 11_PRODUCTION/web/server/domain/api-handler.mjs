@@ -49,13 +49,14 @@ async function handleApiRequestCore(request, env = process.env) {
       return json(200, await store.joinRoom(body));
     }
 
-    const match = route.match(/^\/api\/rooms\/([^/]+)\/(state|ready|start|guess|rematch|forfeit|leave|finish)$/);
+    const match = route.match(/^\/api\/rooms\/([^/]+)\/(state|ready|start|guess|rematch|forfeit|leave|finish|privacy)$/);
     if (match) {
       const [, roomId, action] = match;
       const body = await bodyOf(request);
       const session = sessionFrom(url, body);
       const args = { roomId, ...session, ...body };
       if (action === 'state' && (request.method === 'GET' || request.method === 'POST')) return json(200, await store.getRoomState(args));
+      if (action === 'privacy' && request.method === 'POST') return json(200, await store.updateRoomPrivacy(args));
       if (action === 'ready' && request.method === 'POST') return json(200, await store.setReady(args));
       if (action === 'start' && request.method === 'POST') return json(200, await store.startRound(args));
       if (action === 'guess' && request.method === 'POST') return json(200, await store.submitGuess(args));
@@ -80,6 +81,6 @@ export async function handleApiRequest(request, env = process.env) {
   const duration = Math.max(0, performance.now() - start).toFixed(1);
   return { ...result, headers: { ...result.headers,
     'server-timing': `api;dur=${duration}`,
-    'x-palabra-arena-build': '0.2.1-dev'
+    'x-palabra-arena-build': '0.2.2-dev'
   } };
 }

@@ -11,6 +11,11 @@
       "id": "ADR-0002",
       "status": "CANDIDATE",
       "path": "candidates/ADR-0002_SUPABASE_ATOMIC_RPC.md"
+    },
+    {
+      "id": "ADR-0003",
+      "status": "CANDIDATE",
+      "path": "candidates/ADR-0003_ROOM_DISCOVERY_AND_LOCAL.md"
     }
   ]
 }

@@ -21,7 +21,7 @@ test('state uses one authenticated RPC, never returns client token in URL', asyn
     const state=await store.getRoomState({roomId:'r',playerId:'p',token:'raw-token'});
     assert.equal(state.room.id,'abc');
     assert.equal(calls.length,1);
-    assert.equal(calls[0].url,'https://example.supabase.co/rest/v1/rpc/pa_get_room_state_v1');
+    assert.equal(calls[0].url,'https://example.supabase.co/rest/v1/rpc/pa_get_room_state_v2');
     const args=JSON.parse(calls[0].options.body);
     assert.equal(args.p_token_hash,hashToken('raw-token'));
     assert.equal(calls[0].url.includes('raw-token'),false);
@@ -41,7 +41,7 @@ test('guess makes one atomic mutation RPC then one state RPC, no direct attempts
     const store=new SupabaseStore('https://example.supabase.co','service-key');
     const next=await store.submitGuess({roomId:'room',playerId:'player',token:'secret',guess:'TÚYO'});
     assert.equal(next.myAttempts[0].guess,'tuyo');
-    assert.deepEqual(calls.map(c=>new URL(c[0]).pathname),['/rest/v1/rpc/pa_submit_guess_v1','/rest/v1/rpc/pa_get_room_state_v1']);
+    assert.deepEqual(calls.map(c=>new URL(c[0]).pathname),['/rest/v1/rpc/pa_submit_guess_v1','/rest/v1/rpc/pa_get_room_state_v2']);
     assert.equal(JSON.parse(calls[0][1].body).p_guess,'tuyo');
     assert.match(JSON.parse(calls[0][1].body).p_request_id,/^[0-9a-f-]{36}$/i);
     assert.equal(calls.filter(c=>c[0].includes('attempts')).length,0);

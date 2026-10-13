@@ -23,3 +23,12 @@ Status: 0.1.0-dev PARTIAL
 | Repeated sessions | 20 rounds | RUNTIME/PERF PENDING |
 | Accessibility | reduced motion / keyboard-only | HUMAN PENDING |
 | Supabase | schema + Netlify Function deployment | DEPLOYMENT PENDING |
+
+
+## 0.2.2 Room Discovery UX gate
+- PASS_SINTAXIS / Node, TS/TSX parser, temporary semantic React stubs.
+- PASS_RUNTIME: MemoryStore and localhost HTTP flow including private room.
+- PASS_LAYOUT_FIXTURE: 320px/375px/768px/1440px without horizontal overflow, minimum 44px main controls. Fixture is not the compiled React page.
+- PENDING DATABASE_RUNTIME: 0.2.2 PL/pgSQL RPC on staging, atomic join/privacy race.
+- PENDING PROD_BUILD: npm EAI_AGAIN.
+- PENDING VISUAL_HUMAN, GAME_FEEL_HUMAN, BROWSER_E2E and hosted performance.

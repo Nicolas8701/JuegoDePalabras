@@ -4,5 +4,5 @@
 - custom word packs;
 - tournaments / seasons if population justifies it;
 - themed modifiers;
-- PWA/offline solo mode;
+- PWA cache / offline reload for the new local-browser solo mode;
 - regional dictionaries and additional languages.

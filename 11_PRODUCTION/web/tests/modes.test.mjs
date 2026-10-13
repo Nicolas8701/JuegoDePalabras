@@ -87,8 +87,8 @@ test('duel cannot begin with one player and never exceeds two players',async()=>
  assert.equal((await s.startRound(auth(room,player))).round.maxAttempts,5);
 });
 test('host leaving is a persistent server action and final exit closes room',async()=>{
- const s=new MemoryStore();const host=await s.createRoom({visibility:'private',language:'en',lengthMode:5,playerName:'a'});
- const guest=await s.joinRoom({code:host.room.code,playerName:'b'});
+ const s=new MemoryStore();const host=await s.createRoom({visibility:'private',language:'en',lengthMode:5,playerName:'a',password:'abcDEF890'});
+ const guest=await s.joinRoom({code:host.room.code,playerName:'b',password:'abcDEF890'});
  await s.leaveRoom(auth(host.room,host.player));
  const state=await s.getRoomState(auth(host.room,guest.player));
  assert.equal(state.room.hostPlayerId,guest.player.id);

@@ -33,6 +33,7 @@ export async function createRoom(input: {
   language: Language;
   lengthMode: LengthMode;
   playerName: string;
+  roomName?: string; password?: string;
   mode: GameMode; country: Country; languageMode: 'fixed' | 'random';
 }): Promise<Session> {
   const data = await request<{ room: RoomSummary; player: { id: string; token: string; name: string } }>('/api/rooms', {
@@ -41,9 +42,9 @@ export async function createRoom(input: {
   return { roomId: data.room.id, playerId: data.player.id, token: data.player.token, playerName: data.player.name };
 }
 
-export async function joinRoom(code: string, playerName: string): Promise<Session> {
+export async function joinRoom(code: string, playerName: string, password?: string): Promise<Session> {
   const data = await request<{ room: RoomSummary; player: { id: string; token: string; name: string } }>('/api/rooms/join', {
-    method: 'POST', body: JSON.stringify({ code, playerName })
+    method: 'POST', body: JSON.stringify({ code, playerName, password })
   });
   return { roomId: data.room.id, playerId: data.player.id, token: data.player.token, playerName: data.player.name };
 }
@@ -75,4 +76,10 @@ export function leaveRoom(session: Session): Promise<{ok:boolean}> {
 }
 export function rematch(session: Session): Promise<RoomState> {
   return request(`/api/rooms/${session.roomId}/rematch`, { method: 'POST', body: authBody(session) });
+}
+
+export function changePrivacy(session: Session, visibility: 'public'|'private', password?:string): Promise<RoomState> {
+  return request(`/api/rooms/${session.roomId}/privacy`, {
+    method:'POST',body:authBody(session,{visibility,password})
+  });
 }

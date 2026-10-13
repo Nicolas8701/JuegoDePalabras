@@ -38,3 +38,11 @@
 - 700ms active match polling, adaptive outage backoff and per-session poll guard.
 - Culture answer packs expanded for six countries in two languages; finale waits on the real marked grid, followed by sharable result.
 - 30/30 tests and localhost HTTP smoke PASS; hosted SQL, build, real-device visual and real Netlify latency still NOT VERIFIED.
+
+## 0.2.2-dev — CANDIDATE (2026-10-12)
+- Consolidated Home to local/online and online public/private explorer; discoverable named rooms with password-protected private joins.
+- Host can change room privacy after creation without resetting members; browser reflects visibility within periodic refresh.
+- Added salted scrypt private password storage, atomic create/join/privacy PostgreSQL RPCs, name to state DTO and host-only checks.
+- Added client-only solo mode with curated local answer bundles; preserved online server-secret answers, clean letter tiles and result PNG.
+- Added regression suite (40 tests), mobile/desktop CSS fixture, localhost smoke and user-facing migration guidance.
+- BLOCKED from STABLE by unrun hosted SQL, Vite bundle, Realtime and real-device QA.

@@ -1,3 +1,5 @@
+> **0.2.2 Candidate:** read [README_0.2.2.md](README_0.2.2.md) for the changed local/online flow, new SQL migration and QA blockers.
+
 # Palabra Arena 0.2.0-dev — CANDIDATE
 
 Esta rama de trabajo se creó a partir del **repositorio GitHub 0.1.0-dev** suministrado el 2026-10-09. Aunque en el chat se había entregado 0.1.5, **los archivos fuente 0.1.5 no aparecen en este ZIP/repo**. La rama principal de GitHub NO se modificó. Se portaron de vuelta las funciones críticas posteriores identificables en el historial: salida y rendición autoritativas, cuenta atrás de 3 s, casillas sin glifos superpuestos, retraso visual terminal de 1,75 s y PNG de resultado. No declarar equivalencia binaria ni de QA con 0.1.5.

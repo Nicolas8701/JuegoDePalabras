@@ -1,7 +1,7 @@
 import { resolveRoundConfig } from '../domain/word-game.mjs';
 import { normalizeWord } from '../data/words.mjs';
 import { modeId, countryId } from '../data/modes.mjs';
-import { hashToken, newId, newRoomCode, newToken, safePlayerName } from '../domain/security.mjs';
+import { hashToken, newId, newRoomCode, newToken, safePlayerName, safeRoomName, hashRoomPassword, verifyRoomPassword } from '../domain/security.mjs';
 
 const MAX_ATTEMPTS = 6;
 const FINISH_GRACE_MS = 15_000;
@@ -32,7 +32,8 @@ export class SupabaseStore {
       const status = {
         ROOM_NOT_FOUND:404,UNAUTHORIZED_PLAYER:401,WRONG_LENGTH:422,
         INVALID_LETTERS:422,PLAYER_FINISHED:409,NO_ACTIVE_ROUND:409,
-        COUNTDOWN_ACTIVE:409,ROUND_EXPIRED:409,ROUND_SECRET_MISSING:500
+        COUNTDOWN_ACTIVE:409,ROUND_EXPIRED:409,ROUND_SECRET_MISSING:500,
+        ROOM_FULL:409,ROOM_CODE_COLLISION:409,ROOM_CHANGED:409,HOST_ONLY:403,ROOM_NOT_EDITABLE:409,INVALID_ROOM_PASSWORD:403
       }[errorCode] ?? (data?.code === 'PGRST202' ? 503 : 502);
       throw apiError(data?.code === 'PGRST202' ? 'DB_MIGRATION_REQUIRED' : errorCode, status);
     }
@@ -54,7 +55,7 @@ export class SupabaseStore {
 
   roomDto(room, count = 0) {
     return {
-      id: room.id, code: room.code, visibility: room.visibility, language: room.language,
+      id: room.id, code: room.code, name:room.name, visibility: room.visibility, language: room.language,
       mode: room.mode || 'classic', country: room.country || 'random', languageMode:room.language_mode || 'fixed',
       lengthMode: room.length_mode, status: room.status, hostPlayerId: room.host_player_id,
       playerCount: count, createdAt: room.created_at
@@ -85,54 +86,70 @@ export class SupabaseStore {
   }
 
   async listPublicRooms() {
-    const rooms = await this.request('rooms?visibility=eq.public&status=eq.lobby&select=*&order=created_at.desc&limit=40');
+    const rooms = await this.request('rooms?visibility=in.(public,private)&status=in.(lobby,active,result)&select=*&order=created_at.desc&limit=80');
     if (!rooms?.length) return [];
     const ids = rooms.map(r => r.id).join(',');
     const players = await this.request(`room_players?room_id=in.(${ids})&select=room_id`);
     const counts = new Map();
     for(const p of players) counts.set(p.room_id,(counts.get(p.room_id)||0)+1);
-    return rooms.map(r=>this.roomDto(r,counts.get(r.id)||0));
+    return rooms.map(r=>this.roomDto(r,counts.get(r.id)||0)).sort((a,b)=>Number(b.status==='lobby')-Number(a.status==='lobby')||b.createdAt.localeCompare(a.createdAt));
   }
 
-  async createRoom({ visibility, language, lengthMode, playerName, mode, country, languageMode }) {
-    const roomId = newId(), playerId = newId(), token = newToken();
-    const normalizedLength = lengthMode === 'random' ? 'random' : Number(lengthMode);
-    for(const lang of (languageMode==='random'?['es','en']:[language === 'en' ? 'en' : 'es'])) resolveRoundConfig(lang,normalizedLength,mode,country,()=>0);
-    let code = newRoomCode();
-    for (let tries = 0; tries < 5; tries += 1) {
-      const collision = await this.one(`rooms?code=eq.${code}&select=id`);
-      if (!collision) break;
-      code = newRoomCode();
+  async createRoom({ visibility, language, lengthMode, playerName, mode, country, languageMode, roomName, password }) {
+    const roomId=newId(),playerId=newId(),token=newToken();
+    const normalizedLength=lengthMode==='random'?'random':Number(lengthMode);
+    const selectedVisibility=visibility==='solo'?'solo':visibility==='private'?'private':'public';
+    const selectedLanguage=language==='en'?'en':'es';
+    const selectedMode=modeId(mode),selectedCountry=countryId(country);
+    const selectedLanguageMode=languageMode==='random'?'random':'fixed';
+    for(const lang of selectedLanguageMode==='random'?['es','en']:[selectedLanguage])
+      resolveRoundConfig(lang,normalizedLength,selectedMode,selectedCountry,()=>0);
+    const roomNameSafe=safeRoomName(roomName,playerName),hostName=safePlayerName(playerName);
+    const passwordHash=selectedVisibility==='private'?hashRoomPassword(password):null;
+    // Room and host are created together in PostgreSQL; no orphan room on partial failure.
+    for(let tries=0;tries<5;tries++){
+      const code=newRoomCode(),now=nowIso();
+      try{
+        await this.rpc('pa_create_room_v2',{
+          p_room_id:roomId,p_code:code,p_name:roomNameSafe,p_visibility:selectedVisibility,
+          p_password_hash:passwordHash,p_language:selectedLanguage,p_mode:selectedMode,
+          p_country:selectedCountry,p_language_mode:selectedLanguageMode,p_length_mode:String(normalizedLength),
+          p_host_player_id:playerId,p_host_name:hostName,p_token_hash:hashToken(token)
+        });
+        const room={id:roomId,code,name:roomNameSafe,visibility:selectedVisibility,language:selectedLanguage,
+          mode:selectedMode,country:selectedCountry,language_mode:selectedLanguageMode,
+          length_mode:String(normalizedLength),status:'lobby',host_player_id:playerId,created_at:now};
+        return {room:this.roomDto(room,1),player:{id:playerId,token,name:hostName}};
+      }catch(err){if(err.code!=='ROOM_CODE_COLLISION'||tries===4)throw err;}
     }
-    const room = {
-      id: roomId, code, visibility: visibility === 'private' ? 'private' : visibility === 'solo' ? 'solo' : 'public',
-      language: language === 'en' ? 'en' : 'es', mode:modeId(mode),country:countryId(country), language_mode:languageMode==='random'?'random':'fixed',length_mode: String(normalizedLength), status: 'lobby',
-      host_player_id: playerId, created_at: nowIso(), updated_at: nowIso()
-    };
-    const player = {
-      id: playerId, room_id: roomId, name: safePlayerName(playerName), ready: true,
-      session_token_hash: hashToken(token), joined_at: nowIso(), attempts_count: 0,
-      solved: false, completed: false, solved_at: null
-    };
-    await this.request('rooms', { method: 'POST', body: room, prefer: 'return=representation' });
-    await this.request('room_players', { method: 'POST', body: player, prefer: 'return=representation' });
-    return { room: this.roomDto(room, 1), player: { id: playerId, token, name: player.name } };
+    throw apiError('ROOM_CODE_COLLISION',409);
   }
 
-  async joinRoom({ code, playerName }) {
+  async joinRoom({ code, playerName, password }) {
     const room = await this.one(`rooms?code=eq.${encodeURIComponent(String(code ?? '').trim().toUpperCase())}&status=neq.closed&select=*`);
-    if (!room) throw apiError('ROOM_NOT_FOUND', 404);
+    if (!room || room.visibility === 'solo') throw apiError('ROOM_NOT_FOUND', 404);
     if (room.status !== 'lobby') throw apiError('ROUND_ALREADY_STARTED', 409);
-    const players = await this.playerRows(room.id);
-    if (players.length >= (room.mode === 'duel' ? 2 : 8)) throw apiError('ROOM_FULL', 409);
-    const id = newId(), token = newToken();
-    const player = {
-      id, room_id: room.id, name: safePlayerName(playerName), ready: false,
-      session_token_hash: hashToken(token), joined_at: nowIso(), attempts_count: 0,
-      solved: false, completed: false, solved_at: null
-    };
-    await this.request('room_players', { method: 'POST', body: player, prefer: 'return=representation' });
-    return { room: this.roomDto(room, players.length + 1), player: { id, token, name: player.name } };
+    if (room.visibility === 'private' && !verifyRoomPassword(password, room.password_hash)) throw apiError('INVALID_ROOM_PASSWORD', 403);
+    const id=newId(), token=newToken(), name=safePlayerName(playerName);
+    // DB row locking makes capacity checks and privacy transitions atomic.
+    const joined = await this.rpc('pa_join_room_v2', {
+      p_code: room.code, p_player_id:id, p_name:name, p_token_hash:hashToken(token),
+      p_expected_visibility:room.visibility, p_expected_password_hash:room.password_hash
+    });
+    return { room: this.roomDto(room, joined.count), player: { id, token, name } };
+  }
+
+  async updateRoomPrivacy({ roomId, playerId, token, visibility, password }) {
+    if (!['public','private'].includes(visibility)) throw apiError('INVALID_VISIBILITY',422);
+    // Without a replacement password, the existing hash is retained only if already private.
+    const { room } = await this.auth(roomId,playerId,token);
+    const hash = visibility==='public' ? null : password ? hashRoomPassword(password) : room.password_hash;
+    if (visibility==='private' && !hash) throw apiError('PASSWORD_LENGTH',422);
+    await this.rpc('pa_change_privacy_v2', {
+      p_room_id:roomId, p_player_id:playerId, p_token_hash:hashToken(token),
+      p_visibility:visibility,p_password_hash:hash
+    });
+    return this.getRoomState({roomId,playerId,token});
   }
 
   async setReady({ roomId, playerId, token, ready }) {
@@ -195,7 +212,7 @@ export class SupabaseStore {
   async getRoomState({ roomId, playerId, token }) {
     // One authenticated PostgREST RPC instead of 4-6 REST requests per poll.
     // The SQL function can reveal a secret ONLY if round.status='result'.
-    return this.rpc('pa_get_room_state_v1', {
+    return this.rpc('pa_get_room_state_v2', {
       p_room_id: roomId, p_player_id: playerId,
       p_token_hash: hashToken(token)
     });

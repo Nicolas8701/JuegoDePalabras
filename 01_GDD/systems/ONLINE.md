@@ -36,3 +36,7 @@ Room events are low frequency. Do not bind gameplay timing to render FPS. UI tim
 
 ## 0.2.0 DEV NOTE — CANDIDATE
 State POST moves session token from URL into body; client serialises/pause polling and rejects stale session replies; Supabase reads batched/parallel. Realtime remains APPROVED intended backend transport but still NOT IMPLEMENTED. Hosted deployment requires actual Supabase configuration and migration.
+
+
+## 0.2.2 ROOM DISCOVERY — CANDIDATE implementation
+Both public/private rooms are visible in one online browser with tab selection. Private rooms need a secret password in addition to the room code. Password is scrypt-hashed with a random per-room salt and never sent in public/state/list responses. Public rooms have a visible name. The host may convert room privacy without resetting current players, including during an active match. Newly created rooms + host use one transactional SQL RPC; joining locks the room and checks the current privacy/hash/capacity inside a transaction. Supabase Realtime remains planned; this build still polls. Legacy private rooms without a hash require the host to assign a password before guests can join. Brute-force mitigation for public internet traffic requires a persistent per-IP/account rate-limit before STABLE.

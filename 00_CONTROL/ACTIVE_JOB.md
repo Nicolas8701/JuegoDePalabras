@@ -1,26 +1,9 @@
-# ACTIVE JOB
+# JOB — PALABRA ARENA 0.2.2
 
-ID: JOB-0001_VERTICAL_SLICE
-Status: IMPLEMENTED / CANDIDATE / HUMAN_QA_PENDING
+Status: CANDIDATE implementation ready for staging QA.
 
-Objective completed in source:
-- bilingual ES/EN board;
-- unlimited solo rounds;
-- public/private room creation and code join;
-- host ready/start lifecycle;
-- same-word multiplayer race with 15 s finish grace after first solve;
-- authoritative server-side target and guess evaluation;
-- safe opponent progress only;
-- rematch loop;
-- responsive touch/keyboard UI, sound/haptic hooks and reduced-motion CSS;
-- Netlify Function + Supabase persistence adapter;
-- local in-memory authoritative server for two-tab testing.
+Goal: clarify local vs online entry and remove saturated navigation; show named public and discoverable password-protected private rooms; allow authenticated host privacy conversion without losing room members. Preserve prior same-word/secret/feedback/pause/PNG gameplay.
 
-Evidence:
-- `npm test`: 6/6 PASS;
-- all server/Netlify `.mjs`: `node --check` PASS;
-- TS/TSX syntax transpile diagnostics: 0;
-- local API `/api/health` and `/api/rooms`: PASS;
-- frontend dependency install/build: NOT VERIFIED because npm registry was unreachable in this execution environment.
+Executor/tools: local code editing, Node test runner, temporary TS semantic stubs and Chromium CSS fixture (no new provider-authority). Risks: online protocol change, migration and password abuse. Reversibility: redeploy old source, preserve DB additive columns. No GitHub main changes.
 
-This is not STABLE and has not passed PASS_VISUAL_HUMAN or PASS_GAME_FEEL_HUMAN.
+Acceptance: true Postgres transaction create/join/privacy, staging E2E in two browsers, no hash leak, invalid password denial, mobile/desktop UX, performance metrics in Netlify, human visual/feel. Existing automated 40/40 Node tests and CSS fixture are only partial evidence.

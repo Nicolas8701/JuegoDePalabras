@@ -8,6 +8,7 @@ export type Mark = 'correct' | 'present' | 'absent';
 export interface RoomSummary {
   id: string;
   code: string;
+  name: string;
   visibility: Visibility;
   language: Language;
   mode: GameMode;

@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "version": "0.2.2-dev",
+  "channel": "CANDIDATE",
+  "parent": "0.2.1-dev",
+  "requirements": "Local/browser versus online; both room types discoverable; named public room; password-protected private room; host conversion; UX regression",
+  "migrations": [
+    "supabase/schema.sql",
+    "supabase/0.2.0_modes.sql",
+    "supabase/0.2.1_atomic_state.sql",
+    "supabase/0.2.2_room_discovery.sql"
+  ],
+  "tests": {
+    "node": "40/40 PASS",
+    "localhost_http": "PASS 40 HTTP reads",
+    "typescript_syntax": "PASS",
+    "typescript_semantic_stub": "PASS, temporary React stubs only",
+    "chromium_css_layout_fixture": "320/375/768/1440 PASS, not compiled React",
+    "vite_production_build": "NOT_RUN npm EAI_AGAIN",
+    "supabase_sql_runtime": "NOT_RUN",
+    "visual_human": "NOT_RUN",
+    "game_feel_human": "NOT_RUN"
+  },
+  "known_issues": [
+    "Supabase 0.2.2 migration must be applied/verified on staging",
+    "no hosted DB lock race validation",
+    "not actual Vite build/Playwright React E2E",
+    "Realtime not yet integrated",
+    "no durable distributed room-password rate limit",
+    "PWA offline reload not guaranteed"
+  ],
+  "source_tree_manifest": "09_HISTORY/TREE_MANIFEST_0.2.2.json",
+  "delta_manifest": "09_HISTORY/DELTA_MANIFEST_0.2.2.json"
+}

@@ -1,3 +1,5 @@
+> **0.2.2-dev CANDIDATE:** local/online split, discoverable public/private named rooms, hashed room passwords, host privacy conversion. See `11_PRODUCTION/web/README_0.2.2.md`.
+
 # PALABRA ARENA — 0.2.0 DEV CANDIDATE
 
 Proyecto de juego web de palabras ES/EN con salas públicas/privadas, modos regionales y partida infinita. Consulta `11_PRODUCTION/web/README.md` para instalación, Netlify, migración, QA y limitaciones.

@@ -17,3 +17,13 @@ Status: APPROVED BASELINE — ADR-0001 approved; numeric player/word-length rang
 - save model: local preferences + optional guest/profile stats later. No save crítico requerido for round state; room state authoritative online.
 - online/local requirements: APPROVED — public room browser, private room code, quick join, reconnect, host settings, authoritative word/guess validation, no answer exposed to clients before reveal.
 - non-goals v0.1: ranked seasonal ladder, user-generated word packs, accounts/social graph, monetization, voice chat.
+
+
+## Approved requirements from user feedback — 2026-10-12
+- Navigation top-level: **local browser game** and **online rooms**.
+- Online browser shows **both public and private rooms** with separate browse/create pathways.
+- Public rooms have a user-entered room name. Private rooms are discoverable but joining requires a password.
+- A room's current host may switch public ↔ private after creation, without changing the room ID or removing existing players.
+- Keep UI simple, comfortable across desktop/mobile, with explicit functional/usability QA gates.
+
+Implementation details of password storage, discovery status filters and specific UI layout are **0.2.2 CANDIDATE**; no design approval inferred from merely compiling code.

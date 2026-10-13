@@ -1,6 +1,6 @@
 import { resolveRoundConfig, evaluateGuess, resolveWordLength, validateGuess } from '../domain/word-game.mjs';
 import { modeId, countryId } from '../data/modes.mjs';
-import { hashToken, newId, newRoomCode, newToken, safePlayerName } from '../domain/security.mjs';
+import { hashToken, newId, newRoomCode, newToken, safePlayerName, safeRoomName, hashRoomPassword, verifyRoomPassword } from '../domain/security.mjs';
 
 const FINISH_GRACE_MS = 15_000;
 const MAX_ATTEMPTS = 6;
@@ -13,6 +13,7 @@ function publicRoom(room, playerCount = 0) {
   return {
     id: room.id,
     code: room.code,
+    name: room.name,
     visibility: room.visibility,
     language: room.language,
     mode: room.mode || 'classic', country: room.country || 'random', languageMode:room.languageMode || 'fixed',
@@ -43,12 +44,12 @@ export class MemoryStore {
 
   async listPublicRooms() {
     return [...this.rooms.values()]
-      .filter((r) => r.visibility === 'public' && r.status === 'lobby')
+      .filter((r) => r.visibility !== 'solo' && r.status !== 'closed')
       .map((r) => publicRoom(r, this.playersInRoom(r.id).length))
-      .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+      .sort((a, b) => Number(b.status === 'lobby') - Number(a.status === 'lobby') || b.createdAt.localeCompare(a.createdAt));
   }
 
-  async createRoom({ visibility, language, lengthMode, playerName, mode, country, languageMode }) {
+  async createRoom({ visibility, language, lengthMode, playerName, mode, country, languageMode, roomName, password }) {
     const roomId = newId();
     const playerId = newId();
     const token = newToken();
@@ -58,6 +59,8 @@ export class MemoryStore {
     const room = {
       id: roomId,
       code,
+      name: safeRoomName(roomName, playerName),
+      passwordHash: visibility === 'private' ? hashRoomPassword(password) : null,
       visibility: visibility === 'private' ? 'private' : visibility === 'solo' ? 'solo' : 'public',
       language: language === 'en' ? 'en' : 'es',
       mode: modeId(mode), country: countryId(country), languageMode:languageMode==='random'?'random':'fixed',
@@ -85,11 +88,13 @@ export class MemoryStore {
     return { room: publicRoom(room, 1), player: { id: playerId, token, name: player.name } };
   }
 
-  async joinRoom({ code, playerName }) {
+  async joinRoom({ code, playerName, password }) {
     const normalizedCode = String(code ?? '').trim().toUpperCase();
     const room = [...this.rooms.values()].find((r) => r.code === normalizedCode && r.status !== 'closed');
     if (!room) throw this.error('ROOM_NOT_FOUND', 404);
     if (room.status !== 'lobby') throw this.error('ROUND_ALREADY_STARTED', 409);
+    if (room.visibility === 'solo') throw this.error('ROOM_NOT_FOUND', 404);
+    if (room.visibility === 'private' && !verifyRoomPassword(password, room.passwordHash)) throw this.error('INVALID_ROOM_PASSWORD', 403);
     if (this.playersInRoom(room.id).length >= (room.mode === 'duel' ? 2 : 8)) throw this.error('ROOM_FULL', 409);
 
     const id = newId();
@@ -109,6 +114,21 @@ export class MemoryStore {
     this.players.set(id, player);
     room.updatedAt = nowIso();
     return { room: publicRoom(room, this.playersInRoom(room.id).length), player: { id, token, name: player.name } };
+  }
+
+  async updateRoomPrivacy({ roomId, playerId, token, visibility, password }) {
+    const { room, player } = this.auth(roomId, playerId, token);
+    if (room.hostPlayerId !== player.id) throw this.error('HOST_ONLY', 403);
+    if (room.visibility === 'solo' || room.status === 'closed') throw this.error('ROOM_NOT_EDITABLE', 409);
+    if (!['public', 'private'].includes(visibility)) throw this.error('INVALID_VISIBILITY', 422);
+    const nextHash = visibility === 'private'
+      ? (password ? hashRoomPassword(password) : room.passwordHash)
+      : null;
+    if (visibility === 'private' && !nextHash) throw this.error('PASSWORD_LENGTH', 422);
+    room.visibility = visibility;
+    room.passwordHash = nextHash;
+    room.updatedAt = nowIso();
+    return this.getRoomState({ roomId, playerId, token });
   }
 
   auth(roomId, playerId, token) {
