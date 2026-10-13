@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200"><defs>
+<linearGradient id="bg" x2="1" y2="1"><stop stop-color="#132e5c"/><stop offset="1" stop-color="#080c23"/></linearGradient>
+<radialGradient id="light"><stop stop-color="#ffffff" stop-opacity=".24"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+<filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
+<linearGradient id="metal" x2=".85" y2="1"><stop stop-color="#fff7ce"/><stop offset=".45" stop-color="#dfa96e"/><stop offset="1" stop-color="#805e62"/></linearGradient>
+<linearGradient id="paper" x2="0" y2="1"><stop stop-color="#f4f8ff"/><stop offset="1" stop-color="#a8b8dd"/></linearGradient></defs>
+<rect width="360" height="200" fill="url(#bg)"/><ellipse cx="190" cy="108" rx="180" ry="123" fill="url(#light)"/>
+<path d="M0 160Q60 130 115 168T230 160T360 157V200H0" fill="#000814" opacity=".5"/>
+<g fill="#fff" opacity=".26"><circle cx="33" cy="28" r="1.6"/><circle cx="316" cy="19" r="1.6"/><circle cx="332" cy="86" r="1.1"/><circle cx="100" cy="46" r="1.1"/><circle cx="45" cy="110" r="1"/></g>
+<g stroke="#4ab7ff" stroke-width="1" opacity=".32" fill="none"><path d="M34 158h292M70 42h222M180 16v160"/><path d="M31 112Q180 15 329 112M80 185Q180 125 280 185"/></g>
+<ellipse cx="181" cy="162" rx="129" ry="17" fill="#00baff" opacity=".24" filter="url(#glow)"/>
+<g transform="translate(176 111)">
+<path d="M-126-17Q-80-46-11-24Q-4-17 0-12Q11-25 18-25Q91-46 124-16V61Q69 36 9 57Q3 59 0 65Q-5 58-12 56Q-67 36-126 61Z" fill="#132346" stroke="#52a5f8" stroke-width="3"/>
+<path d="M-118-23Q-59-42-7-19V52Q-62 29-118 53Z" fill="url(#paper)" stroke="#98d4ff" stroke-width="2"/>
+<path d="M7-19Q55-42 118-23V53Q62 29 7 52Z" fill="url(#paper)" stroke="#98d4ff" stroke-width="2"/>
+<path d="M0-8V63" stroke="#d7ecff" stroke-width="3"/><g stroke="#6686c1" stroke-linecap="round" opacity=".7"><path d="M-105-6Q-61-19-23-6M-105 8Q-62-4-23 8M-105 22Q-62 9-23 22M23-7Q65-19 105-5M23 7Q65-5 105 8M23 22Q65 11 105 21"/></g>
+</g><g fill="#c0f1ff" opacity=".8"><rect x="42" y="58" width="20" height="21" rx="5" transform="rotate(-18 52 68)"/><rect x="293" y="45" width="19" height="20" rx="5" transform="rotate(15 302 55)"/><circle cx="170" cy="28" r="5"/><circle cx="251" cy="45" r="3"/></g>
+</svg>
