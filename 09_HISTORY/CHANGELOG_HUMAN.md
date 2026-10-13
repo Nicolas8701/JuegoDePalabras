@@ -88,3 +88,9 @@
 - PR #3 user-approved and merged at f5bd258146eb04e5c6b94fc77ba85455a84a6049.
 - CI exact candidate head: 51/51 Node, 16/16 Chromium, Vite/Wrangler PASS.
 - Cloudflare deployment verification and live Supabase online game remain pending; Netlify redirect unchanged.
+
+## 0.2.6-dev — Illustrated Mode UI CANDIDATE (2026-10-13)
+- Four new SVG mode artworks (book, culture globe, speech bubbles, hourglass) and three language pictograms (ES-419 globe, English flag, random dice).
+- Title is semantic non-selectable/non-clickable H1; removed ◆ header/icon placeholders; mode cards have illustration, concise copy, selection border and focus states.
+- Language of written solution and regional cultural/slang subject controlled separately; selected mode preview on Home.
+- E2E in four viewports and visual human approval pending; no changes to online server or Netlify.

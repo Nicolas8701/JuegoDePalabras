@@ -1,20 +1,19 @@
 {
   "schema_version": 1,
   "project": "PALABRA_ARENA",
-  "version": "0.2.5-dev",
+  "version": "0.2.6-dev",
   "phase": "PROTOTYPE",
-  "subphase": "VISUAL_REFINEMENT_MERGED_MAIN_HOSTED_VALIDATION_PENDING",
-  "active_task": "0.2.5 UX visual cleanup user APPROVED and GitHub PR #3 merged to main; Cloudflare deployment/check running. Do not claim Supabase online operational without runtime secrets and hosted tests.",
+  "subphase": "ILLUSTRATED_MODE_UI_CANDIDATE",
+  "active_task": "Recover 0.2.5 emoji/symbol mode cards with original illustration assets, make title unselectable, remove diamond, separate answer language from cultural region. Keep production Cloudflare 0.2.5 unchanged until human visual approval and E2E.",
   "blockers": [
-    "CLOUDFLARE_HOSTED_QA: verify deployed commit and browser visual/game feel after Workers Builds success.",
-    "SUPABASE_ONLINE: runtime Supabase credentials absent/unverified; online rooms return 503.",
-    "SUPABASE_SQL_AND_CONCURRENCY: staging schema/migrations and two-client private/public room functionality unverified.",
-    "SECURITY_RATE_LIMIT: protect online password attempts before public release.",
-    "REALTIME_PERFORMANCE: hosted P95 RTT/CPU and polling costs not measured."
+    "VISUAL_HUMAN: illustrated art/card design remains CANDIDATE pending screenshot review and user acceptance.",
+    "QA_0_2_6: GitHub CI real-browser screenshots and regression checks pending.",
+    "ONLINE_SUPABASE: Cloudflare runtime Supabase secrets absent/unverified; this UI change does not fix online backend.",
+    "ONLINE_MULTI_CLIENT: Supabase SQL/staging, private/public discovery and two clients not yet validated."
   ],
-  "next_action": "Verify Cloudflare Workers Builds result for main merge f5bd258, test current frontend, then configure Supabase runtime secrets privately via dashboard; verify /api/health?deep=1, apply migrations and run real two-browser online QA. Keep Netlify redirect unchanged.",
+  "next_action": "Run CI and inspect real 320/375/768/1365 screenshots, adjust layout if needed, create PR draft and ask user visual approval; keep main untouched. Online Supabase independently blocked.",
   "stable_build": null,
-  "candidate_build": "candidate/ux-0.2.4 (nickname+responsive+result PNG)",
+  "candidate_build": "candidate/illustrated-modes-0.2.6",
   "authorities": "00_CONTROL/AUTHORITIES.json",
   "last_verified_artifact": "PR #3 merged f5bd258146eb04e5c6b94fc77ba85455a84a6049. Candidate CI 38418488607: 51 Node PASS, 16 Chromium PASS, Vite and Wrangler dry-run PASS. Production Cloudflare build post-merge running at last check."
 }

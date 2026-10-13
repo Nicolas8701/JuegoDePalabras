@@ -1,1 +1,89 @@
-{"schema_version":1,"assets":[]}
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "PA-0.2.6-classic",
+      "domain": "ui",
+      "status": "CANDIDATE",
+      "production_state": "PRODUCED",
+      "path": "11_PRODUCTION/web/public/images/modes/classic.svg",
+      "description": "Open illuminated book",
+      "approved": false,
+      "source": "original hand-authored SVG from proposed premium visual direction; no stock/third-party sprites",
+      "qa": "PENDING visual screenshot/human review",
+      "approx_bytes": 2328
+    },
+    {
+      "id": "PA-0.2.6-culture",
+      "domain": "ui",
+      "status": "CANDIDATE",
+      "production_state": "PRODUCED",
+      "path": "11_PRODUCTION/web/public/images/modes/culture.svg",
+      "description": "Globe and cultural monuments",
+      "approved": false,
+      "source": "original hand-authored SVG from proposed premium visual direction; no stock/third-party sprites",
+      "qa": "PENDING visual screenshot/human review",
+      "approx_bytes": 2211
+    },
+    {
+      "id": "PA-0.2.6-insults",
+      "domain": "ui",
+      "status": "CANDIDATE",
+      "production_state": "PRODUCED",
+      "path": "11_PRODUCTION/web/public/images/modes/insults.svg",
+      "description": "Comic speech balloon",
+      "approved": false,
+      "source": "original hand-authored SVG from proposed premium visual direction; no stock/third-party sprites",
+      "qa": "PENDING visual screenshot/human review",
+      "approx_bytes": 2061
+    },
+    {
+      "id": "PA-0.2.6-blitz",
+      "domain": "ui",
+      "status": "CANDIDATE",
+      "production_state": "PRODUCED",
+      "path": "11_PRODUCTION/web/public/images/modes/blitz.svg",
+      "description": "Illuminated hourglass",
+      "approved": false,
+      "source": "original hand-authored SVG from proposed premium visual direction; no stock/third-party sprites",
+      "qa": "PENDING visual screenshot/human review",
+      "approx_bytes": 2316
+    },
+    {
+      "id": "PA-0.2.6-latam",
+      "domain": "ui",
+      "status": "CANDIDATE",
+      "production_state": "PRODUCED",
+      "path": "11_PRODUCTION/web/public/images/language/latam.svg",
+      "description": "LatAm globe language selector",
+      "approved": false,
+      "source": "original hand-authored SVG from proposed premium visual direction; no stock/third-party sprites",
+      "qa": "PENDING visual screenshot/human review",
+      "approx_bytes": null
+    },
+    {
+      "id": "PA-0.2.6-english",
+      "domain": "ui",
+      "status": "CANDIDATE",
+      "production_state": "PRODUCED",
+      "path": "11_PRODUCTION/web/public/images/language/english.svg",
+      "description": "UK English language icon",
+      "approved": false,
+      "source": "original hand-authored SVG from proposed premium visual direction; no stock/third-party sprites",
+      "qa": "PENDING visual screenshot/human review",
+      "approx_bytes": null
+    },
+    {
+      "id": "PA-0.2.6-random",
+      "domain": "ui",
+      "status": "CANDIDATE",
+      "production_state": "PRODUCED",
+      "path": "11_PRODUCTION/web/public/images/language/random.svg",
+      "description": "Dice icon for randomized language",
+      "approved": false,
+      "source": "original hand-authored SVG from proposed premium visual direction; no stock/third-party sprites",
+      "qa": "PENDING visual screenshot/human review",
+      "approx_bytes": null
+    }
+  ]
+}

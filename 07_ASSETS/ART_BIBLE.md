@@ -27,3 +27,9 @@ No depender sólo de verde/amarillo/gris. Cada estado debe tener también forma/
 - A calmer hierarchy: centered board, adjacent accessible keyboard, secondary player list; compact result with attempts grid.
 - No glyph overlays on letters; color status with external legend remains the user-approved choice.
 - This does not modify APPROVED imagery (none); review actual browser screenshots before approving visual canon.
+
+## Illustration candidate 0.2.6
+- Four curated 360×200 inline-independent runtime SVG illustrations for mode cards, with dark atmospheric background and a shared cinematic blue/teal/rose/amber palette. No baked strings, icons derived from real illustrated scenes rather than unicode emoji.
+- Three SVG language selector art icons: Latin America globe (not single-country flag), Union Jack for English, dice for random.
+- Runtime location: `11_PRODUCTION/web/public/images/modes/` and `.../language/`.
+- State all PRODUCED/CANDIDATE (not APPROVED). Image source of previous external mockups is not canon. Card composition must pass screenshot QA desktop/mobile and human review.

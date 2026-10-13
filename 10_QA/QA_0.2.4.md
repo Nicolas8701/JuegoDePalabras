@@ -18,3 +18,9 @@ GitHub Actions 38405965139 — **PASS 50/50 Node, 12/12 Playwright Chromium, Typ
 
 ### 0.2.5 visual candidate
 New real Chromium test asserts PALABRA ARENA hero, no redundant marketing/version labels, four selectable modes and language choice controls. Backend cannot be claimed operational without Supabase runtime secrets and hosted integration tests. Final CI and human visual review pending.
+
+## 0.2.6 Illustrated mode selector — CANDIDATE
+- Real SVG image-loading test per mode, accessible `aria-pressed` semantics, no stray diamond, heading `user-select: none; pointer-events: none`.
+- E2E independent selection: English written answers + Argentina cultural context; switch to Slang retains Argentina.
+- E2E screenshot home and config at 320/375/768/1365; ensure keyboard, result screenshot unaffected.
+- No online Supabase claims: runtime hosted connectivity remains separate blocker.
