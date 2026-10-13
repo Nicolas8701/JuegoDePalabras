@@ -133,3 +133,58 @@ test('real narrow-phone bounds: language illustrations/text and length chips do 
  expect(bounds).toHaveLength(6);
  for(const r of bounds){expect(r.inside).toBeTruthy();expect(r.width).toBeGreaterThan(30)}
 });
+
+test('reference crops render as modular illustrations and room cards keep real interaction',async({page},testInfo)=>{
+ await page.goto('/');await chooseProfile(page);
+ const modeCards=page.locator('.featured-modes .illustrated-modes button');
+ await expect(modeCards).toHaveCount(4);
+ for(const button of await modeCards.all()){
+  const image=button.locator('img');
+  await expect(image).toHaveAttribute('src',/\/images\/reference-crops\/modes\/[^/]+\.webp$/);
+  const imageMeta=await image.evaluate(el=>{const i=el as HTMLImageElement;return {loaded:i.complete&&i.naturalWidth>300&&i.naturalHeight>150,width:i.naturalWidth}});
+  expect(imageMeta.loaded).toBe(true);
+ }
+ await modeCards.nth(2).click();
+ await expect(modeCards.nth(2)).toHaveAttribute('aria-pressed','true');
+ await page.getByRole('button',{name:/Jugar local/}).click();
+ const icons=page.locator('.illustrated-languages button img');
+ await expect(icons).toHaveCount(3);
+ for(const img of await icons.all()){
+  await expect(img).toHaveAttribute('src',/\/images\/reference-crops\/language\/[^/]+\.webp$/);
+  expect(await img.evaluate(e=>(e as HTMLImageElement).naturalWidth)).toBeGreaterThan(100);
+ }
+ await page.screenshot({path:`test-results/${testInfo.project.name}-source-crop-config.png`,fullPage:true});
+ await page.getByRole('button',{name:/Volver/}).click();
+ await page.getByRole('button',{name:/Jugar online/}).click();
+ const publicTab=page.locator('.online-browser .privacy-tabs button').nth(0);
+ const privateTab=page.locator('.online-browser .privacy-tabs button').nth(1);
+ await expect(publicTab.locator('img')).toHaveAttribute('src','/images/reference-crops/rooms/public.webp');
+ await expect(privateTab.locator('img')).toHaveAttribute('src','/images/reference-crops/rooms/private.webp');
+ for(const img of [publicTab.locator('img'),privateTab.locator('img')]){
+  expect(await img.evaluate(e=>{const i=e as HTMLImageElement;return i.complete&&i.naturalWidth>=90})).toBe(true);
+ }
+ await privateTab.click();
+ await expect(privateTab).toHaveAttribute('aria-pressed','true');
+ await expect(publicTab).toHaveAttribute('aria-pressed','false');
+ const roomBounds=await privateTab.evaluate(el=>{
+  const rect=el.getBoundingClientRect(),img=el.querySelector('img')!.getBoundingClientRect(),text=el.querySelector('span')!.getBoundingClientRect();
+  return {inside:img.left>=rect.left-1&&img.right<=rect.right+1&&text.right<=rect.right+1,intersects:!(img.right<=text.left+1||text.right<=img.left+1),pageScrollWidth:document.documentElement.scrollWidth,viewportWidth:window.innerWidth};
+ });
+ expect(roomBounds.inside).toBe(true);expect(roomBounds.intersects).toBe(false);
+ expect(roomBounds.pageScrollWidth).toBeLessThanOrEqual(roomBounds.viewportWidth+1);
+ await page.screenshot({path:`test-results/${testInfo.project.name}-source-crop-online.png`,fullPage:true});
+ await publicTab.click();
+ await expect(publicTab).toHaveAttribute('aria-pressed','true');
+});
+test('desktop hover on image-backed mode cards responds visually, not with emoji fallback',async({page},testInfo)=>{
+ test.skip(testInfo.project.name!=='desktop','Desktop hover gesture');
+ await page.goto('/');await chooseProfile(page);
+ const button=page.locator('.featured-modes button[data-mode="culture"]');
+ const image=button.locator('img');
+ const before=await image.evaluate(x=>getComputedStyle(x).transform);
+ await button.hover();await page.waitForTimeout(400);
+ const after=await image.evaluate(x=>getComputedStyle(x).transform);
+ expect(after).not.toBe(before);
+ await button.focus();await expect(button).toHaveAttribute('aria-pressed','false');
+ await button.click();await expect(button).toHaveAttribute('aria-pressed','true');
+});
