@@ -1,6 +1,6 @@
 import {test,expect} from '@playwright/test';
 
-async function chooseProfile(page:any,name='Nico'){
+async function chooseProfile(page:any,name='Jugador QA'){
  await expect(page.getByRole('heading',{name:/Cómo te llamamos|What should we call you/})).toBeVisible();
  await page.locator('#profile-name').fill(name);
  await page.getByRole('button',{name:/Continuar|Continue/}).click();
@@ -9,7 +9,7 @@ test('nickname is mandatory, editable and persists on refresh',async({page})=>{
  await page.goto('/');
  await expect(page.getByRole('button',{name:/Jugar local/})).toHaveCount(0);
  await chooseProfile(page);
- await expect(page.getByRole('button',{name:/Editar nombre/})).toContainText('Nico');
+ await expect(page.getByRole('button',{name:/Editar nombre/})).toContainText('Jugador QA');
  await page.reload();
  await expect(page.getByRole('button',{name:/Jugar local/})).toBeVisible();
  await page.getByRole('button',{name:/Editar nombre/}).click();
@@ -68,4 +68,145 @@ test('entry UI has brand as heading, clean copy and visible four-mode cards',asy
  await expect(page.locator('.language-choices button')).toHaveCount(3);
  await page.getByRole('button',{name:/Cultura general/}).click();
  await expect(page.locator('.mode-picks .selected')).toContainText('Cultura general');
+});
+
+
+test('title is not interactive or selectable, four image cards are real assets',async({page},testInfo)=>{
+ await page.goto('/');await chooseProfile(page);
+ const title=page.getByRole('heading',{level:1,name:'PALABRA ARENA'});
+ await expect(title).toBeVisible();
+ const rules=await title.evaluate(e=>{
+  const css=getComputedStyle(e);return {select:css.userSelect,pointer:css.pointerEvents,tag:e.tagName,parent:e.closest('button,a')?.tagName};
+ });
+ expect(rules.select).toBe('none');expect(rules.pointer).toBe('none');
+ expect(rules.parent).toBeUndefined();expect(rules.tag).toBe('H1');
+ await expect(page.getByText('◆')).toHaveCount(0);
+ const cards=page.locator('.featured-modes .illustrated-modes button');
+ await expect(cards).toHaveCount(4);
+ for(const [i,card] of (await cards.all()).entries()){
+  const img=card.locator('img');
+  await expect(img).toHaveCount(1);
+  expect(await img.evaluate(el=>(el as HTMLImageElement).naturalWidth)).toBeGreaterThan(100);
+  await expect(card).toHaveAttribute('data-mode',['classic','culture','insults','blitz'][i]);
+ }
+ await page.screenshot({path:`test-results/${testInfo.project.name}-home-illustrated.png`,fullPage:true});
+ await cards.nth(1).click();
+ await expect(cards.nth(1)).toHaveAttribute('aria-pressed','true');
+ await page.getByRole('button',{name:/Jugar local/}).click();
+ await expect(page.locator('.clean-config .illustrated-modes button[data-mode="culture"]')).toHaveAttribute('aria-pressed','true');
+ await page.screenshot({path:`test-results/${testInfo.project.name}-illustrated-config.png`,fullPage:true});
+});
+test('culture origin and answer language stay independent including EN with Argentina',async({page})=>{
+ await page.goto('/');await chooseProfile(page);
+ await page.getByRole('button',{name:/Jugar local/}).click();
+ await page.locator('.clean-config button[data-mode="culture"]').click();
+ const region=page.getByRole('group',{name:'País de la cultura'});
+ await expect(region).toBeVisible();
+ await region.getByRole('button',{name:'Argentina',exact:true}).click();
+ await expect(region.getByRole('button',{name:'Argentina',exact:true})).toHaveAttribute('aria-pressed','true');
+ const language=page.getByRole('group',{name:'Idioma de la palabra'});
+ await language.getByRole('button',{name:'English'}).click();
+ await expect(page.getByRole('group',{name:'Culture country'}).getByRole('button',{name:'Argentina',exact:true})).toHaveAttribute('aria-pressed','true');
+ await expect(page.getByRole('group',{name:'Answer language'}).getByRole('button',{name:'English'})).toHaveAttribute('aria-pressed','true');
+ await expect(page.getByRole('group',{name:'Culture country'}).getByRole('button',{name:'Argentina',exact:true})).toHaveAttribute('aria-pressed','true');
+ await page.locator('.clean-config button[data-mode="insults"]').click();
+ await expect(page.getByRole('group',{name:'Slang region'})).toBeVisible();
+ await expect(page.getByRole('group',{name:'Slang region'}).getByRole('button',{name:'Argentina'})).toHaveAttribute('aria-pressed','true');
+});
+
+test('real narrow-phone bounds: language illustrations/text and length chips do not overlap or clip',async({page})=>{
+ await page.goto('/');await chooseProfile(page);
+ await page.getByRole('button',{name:/Jugar local/}).click();
+ for(const button of await page.locator('.language-choices button').all()){
+  const result=await button.evaluate(el=>{
+   const a=el.getBoundingClientRect(),im=el.querySelector('img')!.getBoundingClientRect(),label=el.querySelector('span')!.getBoundingClientRect();
+   const inside=(r:DOMRect)=>r.left>=a.left-1&&r.right<=a.right+1&&r.top>=a.top-1&&r.bottom<=a.bottom+1;
+   return {imageInside:inside(im),labelInside:inside(label),nonOverlap:im.right<=label.left+1||label.right<=im.left+1||im.bottom<=label.top+1||label.bottom<=im.top+1,buttonWidth:a.width};
+  });
+  expect(result.imageInside).toBeTruthy();expect(result.labelInside).toBeTruthy();expect(result.nonOverlap).toBeTruthy();
+  expect(result.buttonWidth).toBeGreaterThan(46);
+ }
+ const bounds=await page.locator('.length-row').evaluate(el=>{
+  const a=el.getBoundingClientRect();
+  return [...el.querySelectorAll('button')].map(b=>{const r=b.getBoundingClientRect();return {inside:r.left>=a.left-1&&r.right<=a.right+1,width:r.width}});
+ });
+ expect(bounds).toHaveLength(6);
+ for(const r of bounds){expect(r.inside).toBeTruthy();expect(r.width).toBeGreaterThan(30)}
+});
+
+test('reference crops render as modular illustrations and room cards keep real interaction',async({page},testInfo)=>{
+ await page.goto('/');await chooseProfile(page);
+ const modeCards=page.locator('.featured-modes .illustrated-modes button');
+ await expect(modeCards).toHaveCount(4);
+ for(const button of await modeCards.all()){
+  const image=button.locator('img');
+  await expect(image).toHaveAttribute('src',/\/images\/reference-crops\/modes\/[^/]+\.webp$/);
+  const imageMeta=await image.evaluate(el=>{const i=el as HTMLImageElement;return {loaded:i.complete&&i.naturalWidth>300&&i.naturalHeight>150,width:i.naturalWidth}});
+  expect(imageMeta.loaded).toBe(true);
+ }
+ await modeCards.nth(2).click();
+ await expect(modeCards.nth(2)).toHaveAttribute('aria-pressed','true');
+ await page.getByRole('button',{name:/Jugar local/}).click();
+ const icons=page.locator('.illustrated-languages button img');
+ await expect(icons).toHaveCount(3);
+ for(const img of await icons.all()){
+  await expect(img).toHaveAttribute('src',/\/images\/reference-crops\/language\/[^/]+\.webp$/);
+  expect(await img.evaluate(e=>(e as HTMLImageElement).naturalWidth)).toBeGreaterThan(100);
+ }
+ await page.screenshot({path:`test-results/${testInfo.project.name}-source-crop-config.png`,fullPage:true});
+ await page.getByRole('button',{name:/Volver/}).click();
+ await page.getByRole('button',{name:/Jugar online/}).click();
+ const publicTab=page.locator('.online-browser .privacy-tabs button').nth(0);
+ const privateTab=page.locator('.online-browser .privacy-tabs button').nth(1);
+ await expect(publicTab.locator('img')).toHaveAttribute('src','/images/reference-crops/rooms/public.webp');
+ await expect(privateTab.locator('img')).toHaveAttribute('src','/images/reference-crops/rooms/private.webp');
+ for(const img of [publicTab.locator('img'),privateTab.locator('img')]){
+  expect(await img.evaluate(e=>{const i=e as HTMLImageElement;return i.complete&&i.naturalWidth>=90})).toBe(true);
+ }
+ await privateTab.click();
+ await expect(privateTab).toHaveAttribute('aria-pressed','true');
+ await expect(publicTab).toHaveAttribute('aria-pressed','false');
+ const roomBounds=await privateTab.evaluate(el=>{
+  const rect=el.getBoundingClientRect(),img=el.querySelector('img')!.getBoundingClientRect(),text=el.querySelector('span')!.getBoundingClientRect();
+  return {inside:img.left>=rect.left-1&&img.right<=rect.right+1&&text.right<=rect.right+1,intersects:!(img.right<=text.left+1||text.right<=img.left+1),pageScrollWidth:document.documentElement.scrollWidth,viewportWidth:window.innerWidth};
+ });
+ expect(roomBounds.inside).toBe(true);expect(roomBounds.intersects).toBe(false);
+ expect(roomBounds.pageScrollWidth).toBeLessThanOrEqual(roomBounds.viewportWidth+1);
+ await page.screenshot({path:`test-results/${testInfo.project.name}-source-crop-online.png`,fullPage:true});
+ await publicTab.click();
+ await expect(publicTab).toHaveAttribute('aria-pressed','true');
+});
+test('desktop hover on image-backed mode cards responds visually, not with emoji fallback',async({page},testInfo)=>{
+ test.skip(testInfo.project.name!=='desktop','Desktop hover gesture');
+ await page.goto('/');await chooseProfile(page);
+ const button=page.locator('.featured-modes button[data-mode="culture"]');
+ const image=button.locator('img');
+ const before=await image.evaluate(x=>getComputedStyle(x).transform);
+ await button.hover();await page.waitForTimeout(400);
+ const after=await image.evaluate(x=>getComputedStyle(x).transform);
+ expect(after).not.toBe(before);
+ await button.focus();await expect(button).toHaveAttribute('aria-pressed','false');
+ await button.click();await expect(button).toHaveAttribute('aria-pressed','true');
+});
+
+test('desktop home gives illustrated mode modules full-sized layout, mobile remains bounded',async({page},testInfo)=>{
+ await page.goto('/');await chooseProfile(page);
+ const rects=await page.evaluate(()=>{
+  const b=(s:string)=>document.querySelector(s)!.getBoundingClientRect();
+  const panel=b('.landing-panel'),modes=b('.featured-modes .illustrated-modes'),screen=window.innerWidth;
+  return {panel:panel.width,modes:modes.width,screen,scrollWidth:document.documentElement.scrollWidth,columns:getComputedStyle(document.querySelector('.featured-modes .illustrated-modes')!).gridTemplateColumns.split(' ').length};
+ });
+ expect(rects.scrollWidth).toBeLessThanOrEqual(rects.screen+1);
+ if(testInfo.project.name==='desktop'){
+  expect(rects.panel).toBeGreaterThan(800);
+  expect(rects.modes).toBeGreaterThan(750);
+  expect(rects.columns).toBe(4);
+  const choices=await page.locator('.landing-panel .choice').all();
+  const bounds=await Promise.all(choices.map(c=>c.boundingBox()));
+  expect(Math.abs(bounds[0]!.y-bounds[1]!.y)).toBeLessThan(3);
+ }else if(rects.screen<=700){
+  expect(rects.panel).toBeLessThanOrEqual(rects.screen);
+  expect(rects.columns).toBe(2);
+ }
+ await page.screenshot({path:`test-results/${testInfo.project.name}-approved-modular-home.png`,fullPage:true});
 });

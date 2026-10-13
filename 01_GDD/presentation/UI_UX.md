@@ -44,3 +44,15 @@ Home offers **Local** and **Online** only. Online displays discoverable Public/P
 - Visible flag/world-based language selection (world marker for es-419 avoids implying one nation represents Latin American Spanish).
 - Primary home stays Local/Online progressive navigation and nickname editing top-left.
 - Existing 0.2.4 results, keyboard, accessible external legend and Cloudflare safeguards untouched.
+
+## 0.2.6 illustrated mode selector (CANDIDATE)
+- First-class original imagery for four primary modes: classic (open book), culture (globe/landmarks), slang (comic speech bubble), time trial (hourglass). No emoji substitutes and no baked text in asset.
+- Home choice screen previews selectable mode cards; selected mode persists when choosing Local or Online. Configure reuses the same cards for edits.
+- Brand title is plain semantic h1, not link/button and not pointer-selectable; ◆ symbol removed from header and mode icons.
+- Language controls only answer vocabulary/writing; Country controls thematic regional source (culture/slang) independently. ES-419 is multinational, so use an Americas globe instead of any particular country's flag.
+- Card artworks remain CANDIDATE until human visual check, no mass asset production initiated.
+
+## 0.2.6 modular crop use — user conditionally APPROVED (2026-10-13)
+- Extract artwork only, not a background: 4 mode illustrations, 3 language icons, 2 room privacy emblems. All user-supplied reference glyph/labels remain out of runtime; keep native translated HTML text.
+- Same 4 mode choices with real hover/pressed/focus, responsive rows 4 desktop / 2 phone. Privacy cards Public/Private remain functional tabs with image + selectable state; Local/Online route remains unmodified.
+- Country-for-topic remains independent of word language. Don't interpret attached sample profile as game identity.

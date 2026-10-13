@@ -44,6 +44,36 @@
       "fix": "Cloudflare-specific, actionable error while local mode remains playable",
       "verification": "PASS GitHub Actions 38405965139: Node 50/50; Chromium 12/12 at 320/375/768/1365; screenshots visually inspected, hosted human QA pending.",
       "regression": "e2e/ux.spec.ts"
+    },
+    {
+      "id": "PA-UX-012",
+      "status": "FIXED_CANDIDATE",
+      "severity": "HIGH",
+      "symptom": "Modes shown as emoji/glyphs instead of illustrated cards despite explicit UX request; title selectable; diamond symbol persists",
+      "cause": "UI used unicode placeholder icons instead of dedicated assets and lacked user-select constraints",
+      "fix": "Original SVG illustration assets + ModeCards component + non-interactive h1, no diamond",
+      "verification": "PASS GitHub Actions 38444786639 Node 54/54, Chromium 28/28 (4 viewports), screenshot inspection. Human sign-off pending.",
+      "regression": "tests/illustrated-mode-0.2.6.test.mjs and e2e/ux.spec.ts"
+    },
+    {
+      "id": "PA-UX-013",
+      "status": "FIXED_CANDIDATE",
+      "severity": "MEDIUM",
+      "symptom": "Language vs country theme visually presented as if interchangeable",
+      "cause": "Generic language label plus country after mode, ambiguous regional vs vocabulary concept",
+      "fix": "LanguagePicker controls answer vocabulary independently; RegionPicker only in culture/slang with independent state",
+      "verification": "PASS GitHub Actions 38444786639 Node 54/54, Chromium 28/28 (4 viewports), screenshot inspection. Human sign-off pending.",
+      "regression": "e2e/ux.spec.ts"
+    },
+    {
+      "id": "PA-UX-014",
+      "status": "FIXED_CANDIDATE",
+      "severity": "MEDIUM",
+      "symptom": "Lang icon overlaps button text and Azar length option clipped at 320/375 width",
+      "cause": "Desktop horizontal flex language layout and unconstrained six length chips were reused at narrow phone widths",
+      "fix": "At <=700px language selector vertical icon+label, six equal-grid length columns and geometry-based E2E assertions",
+      "verification": "PASS GitHub Actions 38444786639 28/28 Chromium, screenshots reviewed at 320 and 375, target boxes within bounds",
+      "regression": "e2e/ux.spec.ts real narrow-phone bounds"
     }
   ]
 }

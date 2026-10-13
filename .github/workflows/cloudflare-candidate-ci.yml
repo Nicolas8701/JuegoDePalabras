@@ -5,6 +5,7 @@ on:
       - candidate/cloudflare-0.2.3
       - candidate/ux-0.2.4
       - candidate/visual-cleanup-0.2.5
+      - candidate/illustrated-modes-0.2.6
   pull_request:
     branches:
       - main

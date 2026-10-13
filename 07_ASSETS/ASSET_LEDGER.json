@@ -1,1 +1,298 @@
-{"schema_version":1,"assets":[]}
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "PA-0.2.6-classic",
+      "domain": "ui",
+      "status": "CANDIDATE",
+      "production_state": "PRODUCED",
+      "path": "11_PRODUCTION/web/public/images/modes/classic.svg",
+      "description": "Open illuminated book",
+      "approved": false,
+      "source": "original hand-authored SVG from proposed premium visual direction; no stock/third-party sprites",
+      "qa": "Chromium 0.2.6 VISUAL_OBJECTIVE PASS 4 sizes 2026-10-13; VISUAL_HUMAN pending",
+      "approx_bytes": 2328,
+      "superseded_by": "PA-0.2.6-REF-[respective crop]; old SVG retained in VCS, not runtime"
+    },
+    {
+      "id": "PA-0.2.6-culture",
+      "domain": "ui",
+      "status": "CANDIDATE",
+      "production_state": "PRODUCED",
+      "path": "11_PRODUCTION/web/public/images/modes/culture.svg",
+      "description": "Globe and cultural monuments",
+      "approved": false,
+      "source": "original hand-authored SVG from proposed premium visual direction; no stock/third-party sprites",
+      "qa": "Chromium 0.2.6 VISUAL_OBJECTIVE PASS 4 sizes 2026-10-13; VISUAL_HUMAN pending",
+      "approx_bytes": 2211,
+      "superseded_by": "PA-0.2.6-REF-[respective crop]; old SVG retained in VCS, not runtime"
+    },
+    {
+      "id": "PA-0.2.6-insults",
+      "domain": "ui",
+      "status": "CANDIDATE",
+      "production_state": "PRODUCED",
+      "path": "11_PRODUCTION/web/public/images/modes/insults.svg",
+      "description": "Comic speech balloon",
+      "approved": false,
+      "source": "original hand-authored SVG from proposed premium visual direction; no stock/third-party sprites",
+      "qa": "Chromium 0.2.6 VISUAL_OBJECTIVE PASS 4 sizes 2026-10-13; VISUAL_HUMAN pending",
+      "approx_bytes": 2061,
+      "superseded_by": "PA-0.2.6-REF-[respective crop]; old SVG retained in VCS, not runtime"
+    },
+    {
+      "id": "PA-0.2.6-blitz",
+      "domain": "ui",
+      "status": "CANDIDATE",
+      "production_state": "PRODUCED",
+      "path": "11_PRODUCTION/web/public/images/modes/blitz.svg",
+      "description": "Illuminated hourglass",
+      "approved": false,
+      "source": "original hand-authored SVG from proposed premium visual direction; no stock/third-party sprites",
+      "qa": "Chromium 0.2.6 VISUAL_OBJECTIVE PASS 4 sizes 2026-10-13; VISUAL_HUMAN pending",
+      "approx_bytes": 2316,
+      "superseded_by": "PA-0.2.6-REF-[respective crop]; old SVG retained in VCS, not runtime"
+    },
+    {
+      "id": "PA-0.2.6-latam",
+      "domain": "ui",
+      "status": "CANDIDATE",
+      "production_state": "PRODUCED",
+      "path": "11_PRODUCTION/web/public/images/language/latam.svg",
+      "description": "LatAm globe language selector",
+      "approved": false,
+      "source": "original hand-authored SVG from proposed premium visual direction; no stock/third-party sprites",
+      "qa": "Chromium 0.2.6 VISUAL_OBJECTIVE PASS 4 sizes 2026-10-13; VISUAL_HUMAN pending",
+      "approx_bytes": null,
+      "superseded_by": "PA-0.2.6-REF-[respective crop]; old SVG retained in VCS, not runtime"
+    },
+    {
+      "id": "PA-0.2.6-english",
+      "domain": "ui",
+      "status": "CANDIDATE",
+      "production_state": "PRODUCED",
+      "path": "11_PRODUCTION/web/public/images/language/english.svg",
+      "description": "UK English language icon",
+      "approved": false,
+      "source": "original hand-authored SVG from proposed premium visual direction; no stock/third-party sprites",
+      "qa": "Chromium 0.2.6 VISUAL_OBJECTIVE PASS 4 sizes 2026-10-13; VISUAL_HUMAN pending",
+      "approx_bytes": null,
+      "superseded_by": "PA-0.2.6-REF-[respective crop]; old SVG retained in VCS, not runtime"
+    },
+    {
+      "id": "PA-0.2.6-random",
+      "domain": "ui",
+      "status": "CANDIDATE",
+      "production_state": "PRODUCED",
+      "path": "11_PRODUCTION/web/public/images/language/random.svg",
+      "description": "Dice icon for randomized language",
+      "approved": false,
+      "source": "original hand-authored SVG from proposed premium visual direction; no stock/third-party sprites",
+      "qa": "Chromium 0.2.6 VISUAL_OBJECTIVE PASS 4 sizes 2026-10-13; VISUAL_HUMAN pending",
+      "approx_bytes": null,
+      "superseded_by": "PA-0.2.6-REF-[respective crop]; old SVG retained in VCS, not runtime"
+    },
+    {
+      "id": "PA-0.2.6-local",
+      "domain": "ui",
+      "status": "CANDIDATE",
+      "production_state": "PRODUCED",
+      "path": "11_PRODUCTION/web/public/images/actions/local.svg",
+      "description": "Illustrated controller for local game",
+      "approved": false,
+      "source": "hand-authored original SVG",
+      "qa": "Chromium 0.2.6 VISUAL_OBJECTIVE PASS 4 sizes 2026-10-13; VISUAL_HUMAN pending"
+    },
+    {
+      "id": "PA-0.2.6-online",
+      "domain": "ui",
+      "status": "CANDIDATE",
+      "production_state": "PRODUCED",
+      "path": "11_PRODUCTION/web/public/images/actions/online.svg",
+      "description": "Illustrated pair of players for online rooms",
+      "approved": false,
+      "source": "hand-authored original SVG",
+      "qa": "Chromium 0.2.6 VISUAL_OBJECTIVE PASS 4 sizes 2026-10-13; VISUAL_HUMAN pending"
+    },
+    {
+      "id": "PA-0.2.6-REF-MODE_CLASSIC",
+      "domain": "ui",
+      "status": "APPROVED",
+      "production_state": "VALIDATED",
+      "path": "11_PRODUCTION/web/public/images/reference-crops/modes/classic.webp",
+      "description": "User-approved reference crop: mode-classic",
+      "approved": true,
+      "source_sha256": "044b2f5ed415e3696e6ef4639d7e35e9acc31aede03da0ee88560704dd5b4116",
+      "source_bounds_xyxy": [
+        62,
+        299,
+        393,
+        509
+      ],
+      "sha256": "ffb0c7cb3311ecaf1681198cb9caaffa98c791d5cbb1bcacce2def33c771d650",
+      "bytes": 17734,
+      "reference_authorized": true,
+      "qa": "VALIDATED: GitHub Actions 38449067368 57 Node +37 Chromium, webp integrity, real desktop/mobile images, hover/selection, room tabs; USER-APPROVED scope modular crop only 2026-10-13."
+    },
+    {
+      "id": "PA-0.2.6-REF-MODE_CULTURE",
+      "domain": "ui",
+      "status": "APPROVED",
+      "production_state": "VALIDATED",
+      "path": "11_PRODUCTION/web/public/images/reference-crops/modes/culture.webp",
+      "description": "User-approved reference crop: mode-culture",
+      "approved": true,
+      "source_sha256": "044b2f5ed415e3696e6ef4639d7e35e9acc31aede03da0ee88560704dd5b4116",
+      "source_bounds_xyxy": [
+        428,
+        299,
+        751,
+        509
+      ],
+      "sha256": "034fcbb4d5499028912f7735b05364976782b859be46ae119f926be4e023c17b",
+      "bytes": 17498,
+      "reference_authorized": true,
+      "qa": "VALIDATED: GitHub Actions 38449067368 57 Node +37 Chromium, webp integrity, real desktop/mobile images, hover/selection, room tabs; USER-APPROVED scope modular crop only 2026-10-13."
+    },
+    {
+      "id": "PA-0.2.6-REF-MODE_INSULTS",
+      "domain": "ui",
+      "status": "APPROVED",
+      "production_state": "VALIDATED",
+      "path": "11_PRODUCTION/web/public/images/reference-crops/modes/insults.webp",
+      "description": "User-approved reference crop: mode-insults",
+      "approved": true,
+      "source_sha256": "044b2f5ed415e3696e6ef4639d7e35e9acc31aede03da0ee88560704dd5b4116",
+      "source_bounds_xyxy": [
+        787,
+        298,
+        1110,
+        508
+      ],
+      "sha256": "8d2612701bb98dc91f5b2c8af4598f01bf695a8b0b9cedc8051edb2942e248f3",
+      "bytes": 15314,
+      "reference_authorized": true,
+      "qa": "VALIDATED: GitHub Actions 38449067368 57 Node +37 Chromium, webp integrity, real desktop/mobile images, hover/selection, room tabs; USER-APPROVED scope modular crop only 2026-10-13."
+    },
+    {
+      "id": "PA-0.2.6-REF-MODE_BLITZ",
+      "domain": "ui",
+      "status": "APPROVED",
+      "production_state": "VALIDATED",
+      "path": "11_PRODUCTION/web/public/images/reference-crops/modes/blitz.webp",
+      "description": "User-approved reference crop: mode-blitz",
+      "approved": true,
+      "source_sha256": "044b2f5ed415e3696e6ef4639d7e35e9acc31aede03da0ee88560704dd5b4116",
+      "source_bounds_xyxy": [
+        1147,
+        298,
+        1475,
+        508
+      ],
+      "sha256": "d70fc081c96eb729efb13466e576424f557755285be3138f2d266f31e0a1ddc5",
+      "bytes": 17618,
+      "reference_authorized": true,
+      "qa": "VALIDATED: GitHub Actions 38449067368 57 Node +37 Chromium, webp integrity, real desktop/mobile images, hover/selection, room tabs; USER-APPROVED scope modular crop only 2026-10-13."
+    },
+    {
+      "id": "PA-0.2.6-REF-ONLINE_PUBLIC",
+      "domain": "ui",
+      "status": "APPROVED",
+      "production_state": "VALIDATED",
+      "path": "11_PRODUCTION/web/public/images/reference-crops/rooms/public.webp",
+      "description": "User-approved reference crop: online-public",
+      "approved": true,
+      "source_sha256": "044b2f5ed415e3696e6ef4639d7e35e9acc31aede03da0ee88560704dd5b4116",
+      "source_bounds_xyxy": [
+        312,
+        699,
+        431,
+        792
+      ],
+      "sha256": "8b6b4afd208fce394604fc0a41d4dfab3ae3bfcf7fcbaf3a7260171fe67d6c30",
+      "bytes": 1640,
+      "reference_authorized": true,
+      "qa": "VALIDATED: GitHub Actions 38449067368 57 Node +37 Chromium, webp integrity, real desktop/mobile images, hover/selection, room tabs; USER-APPROVED scope modular crop only 2026-10-13."
+    },
+    {
+      "id": "PA-0.2.6-REF-ONLINE_PRIVATE",
+      "domain": "ui",
+      "status": "APPROVED",
+      "production_state": "VALIDATED",
+      "path": "11_PRODUCTION/web/public/images/reference-crops/rooms/private.webp",
+      "description": "User-approved reference crop: online-private",
+      "approved": true,
+      "source_sha256": "044b2f5ed415e3696e6ef4639d7e35e9acc31aede03da0ee88560704dd5b4116",
+      "source_bounds_xyxy": [
+        814,
+        699,
+        912,
+        792
+      ],
+      "sha256": "727774f9c0b2b98e47700b06265051f11e84349f5f125a02d8eacb946b25a622",
+      "bytes": 926,
+      "reference_authorized": true,
+      "qa": "VALIDATED: GitHub Actions 38449067368 57 Node +37 Chromium, webp integrity, real desktop/mobile images, hover/selection, room tabs; USER-APPROVED scope modular crop only 2026-10-13."
+    },
+    {
+      "id": "PA-0.2.6-REF-LANGUAGE_ES",
+      "domain": "ui",
+      "status": "APPROVED",
+      "production_state": "VALIDATED",
+      "path": "11_PRODUCTION/web/public/images/reference-crops/language/es.webp",
+      "description": "User-approved reference crop: language-es",
+      "approved": true,
+      "source_sha256": "044b2f5ed415e3696e6ef4639d7e35e9acc31aede03da0ee88560704dd5b4116",
+      "source_bounds_xyxy": [
+        63,
+        871,
+        184,
+        949
+      ],
+      "sha256": "0697593803ee1e84bcd2df1ae2206f0712ab4fbe9c2ebe6ba487ba36f4fa5839",
+      "bytes": 1194,
+      "reference_authorized": true,
+      "qa": "VALIDATED: GitHub Actions 38449067368 57 Node +37 Chromium, webp integrity, real desktop/mobile images, hover/selection, room tabs; USER-APPROVED scope modular crop only 2026-10-13."
+    },
+    {
+      "id": "PA-0.2.6-REF-LANGUAGE_EN",
+      "domain": "ui",
+      "status": "APPROVED",
+      "production_state": "VALIDATED",
+      "path": "11_PRODUCTION/web/public/images/reference-crops/language/en.webp",
+      "description": "User-approved reference crop: language-en",
+      "approved": true,
+      "source_sha256": "044b2f5ed415e3696e6ef4639d7e35e9acc31aede03da0ee88560704dd5b4116",
+      "source_bounds_xyxy": [
+        232,
+        872,
+        340,
+        950
+      ],
+      "sha256": "1c4faebf6ee159902ed130c495fe67f24282212462c69927cc5d03e0fd2074d2",
+      "bytes": 1290,
+      "reference_authorized": true,
+      "qa": "VALIDATED: GitHub Actions 38449067368 57 Node +37 Chromium, webp integrity, real desktop/mobile images, hover/selection, room tabs; USER-APPROVED scope modular crop only 2026-10-13."
+    },
+    {
+      "id": "PA-0.2.6-REF-LANGUAGE_RANDOM",
+      "domain": "ui",
+      "status": "APPROVED",
+      "production_state": "VALIDATED",
+      "path": "11_PRODUCTION/web/public/images/reference-crops/language/random.webp",
+      "description": "User-approved reference crop: language-random",
+      "approved": true,
+      "source_sha256": "044b2f5ed415e3696e6ef4639d7e35e9acc31aede03da0ee88560704dd5b4116",
+      "source_bounds_xyxy": [
+        396,
+        871,
+        510,
+        950
+      ],
+      "sha256": "f999c89c915fad36fc2943e7414898345264b453112540707b0b0bb8caf3c16a",
+      "bytes": 1088,
+      "reference_authorized": true,
+      "qa": "VALIDATED: GitHub Actions 38449067368 57 Node +37 Chromium, webp integrity, real desktop/mobile images, hover/selection, room tabs; USER-APPROVED scope modular crop only 2026-10-13."
+    }
+  ]
+}

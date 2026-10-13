@@ -27,3 +27,23 @@ No depender sólo de verde/amarillo/gris. Cada estado debe tener también forma/
 - A calmer hierarchy: centered board, adjacent accessible keyboard, secondary player list; compact result with attempts grid.
 - No glyph overlays on letters; color status with external legend remains the user-approved choice.
 - This does not modify APPROVED imagery (none); review actual browser screenshots before approving visual canon.
+
+## Illustration candidate 0.2.6
+- Four curated 360×200 inline-independent runtime SVG illustrations for mode cards, with dark atmospheric background and a shared cinematic blue/teal/rose/amber palette. No baked strings, icons derived from real illustrated scenes rather than unicode emoji.
+- Three SVG language selector art icons: Latin America globe (not single-country flag), Union Jack for English, dice for random.
+- Runtime location: `11_PRODUCTION/web/public/images/modes/` and `.../language/`.
+- State all PRODUCED/CANDIDATE (not APPROVED). Image source of previous external mockups is not canon. Card composition must pass screenshot QA desktop/mobile and human review.
+
+- Additional 0.2.6 original action SVG illustrations for Local controller and Online two players; artwork state remains CANDIDATE, not APPROVED.
+- Visual objective screenshots passed at four viewport widths; Title is semantic h1 but text/pointer selection disabled; language/region selectors remain genuinely independent. Pending user's visual signoff.
+
+## 2026-10-13 reference-crop direction (USER-APPROVED CONDITIONALLY)
+- User authorized **modular use only** of pieces from illustrated reference: mode illustrations, Public/Private room symbols and 3 language symbols; **DO NOT ship the full screenshot or personal profile image** as application background or interface.
+- Runtime uses **nine independently loaded WebP crops**, 74.3 KB total, not a sprite atlas. Crop coordinates and hashes live in `07_ASSETS/derived/REFERENCE_CROP_MANIFEST_2026-10-13.json`.
+- Mode/local/online labels remain native HTML text, so ES/EN translations, focus rings, hover, accessibility and dynamic UI are not baked into artwork. Existing separate local-mode controller SVG may remain where reference has no corresponding art.
+- Supersede previous hand-authored SVG candidates **only in runtime usage**, retain source in Git history; don't delete APPROVED art. Screenshot source itself is retained out of runtime to avoid leaking nickname and unnecessary weight.
+
+## Modular extracted artwork APPROVED (2026-10-13)
+- Exactly nine derived WEBP runtime fragments APPROVED after explicit user authorization and objective visual tests: four modes, three answer-language, two online privacy. Modular only; never use complete source screenshot as background, and never include sample profile name.
+- Total runtime media bytes 74,302; provenance manifest has source SHA256, crops and individual hashes. **Do not re-generate or overwrite approved crops without explicit human decision.**
+- Existing conceptual SVGs remain historical CANDIDATE/superseded for rollback; Local controller SVG remains where reference has no offline button.

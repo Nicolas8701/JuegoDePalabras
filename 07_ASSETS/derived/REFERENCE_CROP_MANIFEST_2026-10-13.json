@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "reference": {
+    "name": "image.png",
+    "source_sha256": "044b2f5ed415e3696e6ef4639d7e35e9acc31aede03da0ee88560704dd5b4116",
+    "source_resolution": [
+      1536,
+      1024
+    ],
+    "source_role": "user-approved artwork reference, NOT runtime background",
+    "restrictions": [
+      "only nine cropped pieces for mode/language/room visuals",
+      "no user profile, header, or baked mode/language text",
+      "whole screenshot never shipped as UI",
+      "native translated HTML controls retain authority"
+    ]
+  },
+  "transform": {
+    "kind": "rectangular_crop",
+    "color": "RGB",
+    "format": "WEBP",
+    "quality": 87,
+    "method": 6,
+    "no_stylistic_regeneration": true
+  },
+  "runtime_art": [
+    {
+      "asset_id": "mode-classic",
+      "path": "11_PRODUCTION/web/public/images/reference-crops/modes/classic.webp",
+      "source_bounds_xyxy": [
+        62,
+        299,
+        393,
+        509
+      ],
+      "byte_count": 17734,
+      "sha256": "ffb0c7cb3311ecaf1681198cb9caaffa98c791d5cbb1bcacce2def33c771d650"
+    },
+    {
+      "asset_id": "mode-culture",
+      "path": "11_PRODUCTION/web/public/images/reference-crops/modes/culture.webp",
+      "source_bounds_xyxy": [
+        428,
+        299,
+        751,
+        509
+      ],
+      "byte_count": 17498,
+      "sha256": "034fcbb4d5499028912f7735b05364976782b859be46ae119f926be4e023c17b"
+    },
+    {
+      "asset_id": "mode-insults",
+      "path": "11_PRODUCTION/web/public/images/reference-crops/modes/insults.webp",
+      "source_bounds_xyxy": [
+        787,
+        298,
+        1110,
+        508
+      ],
+      "byte_count": 15314,
+      "sha256": "8d2612701bb98dc91f5b2c8af4598f01bf695a8b0b9cedc8051edb2942e248f3"
+    },
+    {
+      "asset_id": "mode-blitz",
+      "path": "11_PRODUCTION/web/public/images/reference-crops/modes/blitz.webp",
+      "source_bounds_xyxy": [
+        1147,
+        298,
+        1475,
+        508
+      ],
+      "byte_count": 17618,
+      "sha256": "d70fc081c96eb729efb13466e576424f557755285be3138f2d266f31e0a1ddc5"
+    },
+    {
+      "asset_id": "online-public",
+      "path": "11_PRODUCTION/web/public/images/reference-crops/rooms/public.webp",
+      "source_bounds_xyxy": [
+        312,
+        699,
+        431,
+        792
+      ],
+      "byte_count": 1640,
+      "sha256": "8b6b4afd208fce394604fc0a41d4dfab3ae3bfcf7fcbaf3a7260171fe67d6c30"
+    },
+    {
+      "asset_id": "online-private",
+      "path": "11_PRODUCTION/web/public/images/reference-crops/rooms/private.webp",
+      "source_bounds_xyxy": [
+        814,
+        699,
+        912,
+        792
+      ],
+      "byte_count": 926,
+      "sha256": "727774f9c0b2b98e47700b06265051f11e84349f5f125a02d8eacb946b25a622"
+    },
+    {
+      "asset_id": "language-es",
+      "path": "11_PRODUCTION/web/public/images/reference-crops/language/es.webp",
+      "source_bounds_xyxy": [
+        63,
+        871,
+        184,
+        949
+      ],
+      "byte_count": 1194,
+      "sha256": "0697593803ee1e84bcd2df1ae2206f0712ab4fbe9c2ebe6ba487ba36f4fa5839"
+    },
+    {
+      "asset_id": "language-en",
+      "path": "11_PRODUCTION/web/public/images/reference-crops/language/en.webp",
+      "source_bounds_xyxy": [
+        232,
+        872,
+        340,
+        950
+      ],
+      "byte_count": 1290,
+      "sha256": "1c4faebf6ee159902ed130c495fe67f24282212462c69927cc5d03e0fd2074d2"
+    },
+    {
+      "asset_id": "language-random",
+      "path": "11_PRODUCTION/web/public/images/reference-crops/language/random.webp",
+      "source_bounds_xyxy": [
+        396,
+        871,
+        510,
+        950
+      ],
+      "byte_count": 1088,
+      "sha256": "f999c89c915fad36fc2943e7414898345264b453112540707b0b0bb8caf3c16a"
+    }
+  ]
+}

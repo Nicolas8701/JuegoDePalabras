@@ -1,20 +1,18 @@
 {
   "schema_version": 1,
   "project": "PALABRA_ARENA",
-  "version": "0.2.5-dev",
+  "version": "0.2.6-dev",
   "phase": "PROTOTYPE",
-  "subphase": "VISUAL_REFINEMENT_MERGED_MAIN_HOSTED_VALIDATION_PENDING",
-  "active_task": "0.2.5 UX visual cleanup user APPROVED and GitHub PR #3 merged to main; Cloudflare deployment/check running. Do not claim Supabase online operational without runtime secrets and hosted tests.",
+  "subphase": "USER_APPROVED_MODULAR_CROPS_QA_VALIDATED_PENDING_MERGE",
+  "active_task": "Nine reference-derived modular WEBP images user approved and browser validated; desktop landing expanded, 57/57 Node and 37/37 Chromium + Vite/Wrangler PASS. Prepare user-authorized PR #4 merge without claiming live Supabase online works.",
   "blockers": [
-    "CLOUDFLARE_HOSTED_QA: verify deployed commit and browser visual/game feel after Workers Builds success.",
-    "SUPABASE_ONLINE: runtime Supabase credentials absent/unverified; online rooms return 503.",
-    "SUPABASE_SQL_AND_CONCURRENCY: staging schema/migrations and two-client private/public room functionality unverified.",
-    "SECURITY_RATE_LIMIT: protect online password attempts before public release.",
-    "REALTIME_PERFORMANCE: hosted P95 RTT/CPU and polling costs not measured."
+    "HOSTED_ONLINE_SUPABASE: Cloudflare Worker runtime Supabase URL/service role and staging SQL remain absent/unverified; online rooms may still show unavailable.",
+    "HOSTED_MULTI_CLIENT_QA: public/private room joining, latency, security rate limiting and 2-client functional tests pending.",
+    "GAME_FEEL_HUMAN: after deploy user playtest on physical mobile and desktop; automation is not full human signoff."
   ],
-  "next_action": "Verify Cloudflare Workers Builds result for main merge f5bd258, test current frontend, then configure Supabase runtime secrets privately via dashboard; verify /api/health?deep=1, apply migrations and run real two-browser online QA. Keep Netlify redirect unchanged.",
+  "next_action": "Integrate PR #4 on explicit conditional user approval of modular crops, confirm Cloudflare Builds production on main, test published image paths and desktop/mobile appearance; then repair online hosting separately.",
   "stable_build": null,
-  "candidate_build": "candidate/ux-0.2.4 (nickname+responsive+result PNG)",
+  "candidate_build": "candidate/illustrated-modes-0.2.6",
   "authorities": "00_CONTROL/AUTHORITIES.json",
-  "last_verified_artifact": "PR #3 merged f5bd258146eb04e5c6b94fc77ba85455a84a6049. Candidate CI 38418488607: 51 Node PASS, 16 Chromium PASS, Vite and Wrangler dry-run PASS. Production Cloudflare build post-merge running at last check."
+  "last_verified_artifact": "User-approved source modular assets total 9/74302 bytes, reference hash recorded; GitHub Actions 38449067368 PASS 57/57 Node, 37/37 Chromium (320/375/768/1365), TypeScript/Vite and Wrangler dry-run. Screenshot artifact 11838674642 checked desktop/mobile/online; candidate 0.2.6."
 }
