@@ -68,3 +68,5 @@
 - Result now shows all guess colors and PNG includes attempts+solution+scoreboard.
 - Missing Supabase message correctly references Cloudflare; local mode remains available.
 - 50/50 Node + 6/6 real Chromium e2e + Vite/Wrangler passed in prior CI; expanded viewport pass pending.
+
+- Inspected 8 actual Chromium page screenshots from Actions 38405047135. Board and result fit 320/375/mobile+desktop; follow-up polish: horizontal viewport centering on desktop and shorter compact action labels.

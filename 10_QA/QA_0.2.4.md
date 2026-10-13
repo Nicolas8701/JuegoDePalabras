@@ -7,3 +7,5 @@ Automated evidence first pass: GitHub Actions 38404477855 — Node 50/50 PASS, V
 Security: client/backend Unicode allowlist strips dangerous punctuation/control marks; React escapes text; Supabase RPC inputs remain parameterized. This is defense in depth, not a blanket proof against every injection vector. Password rate limiting/online security still pending.
 
 PENDING: Cloudflare live API with Supabase env/migrations, 2 clients/concurrency, hosted CPU/RTT, mobile real device, accessibility keyboard and human GAME_FEEL + VISUAL approval. Do not mark STABLE until these gates.
+
+Second evidence run (https://github.com/Nicolas8701/JuegoDePalabras/actions/runs/38405047135): 50/50 Node PASS; 12/12 real Chromium desktop 1365×768/mobile 375×667/small-phone 320×640/tablet 768×1024 PASS; compiled Vite and Wrangler dry run PASS. Eight PNG screenshots stored in GitHub Actions artifact `responsive-ux-evidence`, inspected visually. Remaining candidate polish: center desktop board relative to page, shorten small-phone labels, take screenshot after countdown. Re-test pending.

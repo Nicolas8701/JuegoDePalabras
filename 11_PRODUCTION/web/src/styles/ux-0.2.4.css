@@ -87,3 +87,14 @@
  .key{min-height:40px}
  .game-layout .play-panel{gap:6px}
 }
+
+/* Final QA adjustments from real Chromium screenshots, not a fixture. */
+@media(min-width:1100px){
+ .main-game{position:relative;display:block;width:min(100%,480px);max-width:480px;margin-inline:auto}
+ .match-sidebar{position:absolute;top:0;left:calc(100% + 24px);width:220px}
+}
+@media(max-width:360px){
+ .match-topbar>div small{display:none}
+ .match-topbar>div b{letter-spacing:.07em;font-size:11px}
+ .match-topbar .text-button{font-size:12px;white-space:nowrap}
+}

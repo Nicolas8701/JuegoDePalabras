@@ -33,8 +33,8 @@ test('local board stays compact and playable; PNG retains colored guesses',async
  expect(measurements.tile).toBeLessThanOrEqual(60);
  expect(measurements.scrollWidth).toBeLessThanOrEqual(measurements.viewportWidth+1);
  expect(measurements.keyBottom).toBeLessThanOrEqual(measurements.viewportHeight+8);
- await page.screenshot({path:`test-results/${testInfo.project.name}-local-board.png`,fullPage:true});
  await page.waitForTimeout(1400);
+ await page.screenshot({path:`test-results/${testInfo.project.name}-local-board.png`,fullPage:true});
  await page.keyboard.type('tuyo');
  await page.keyboard.press('Enter');
  await expect(page.locator('.board-row').first().locator('.tile.correct,.tile.present,.tile.absent')).toHaveCount(4);
@@ -44,7 +44,7 @@ test('local board stays compact and playable; PNG retains colored guesses',async
  await expect(page.locator('.result-attempt-row')).toHaveCount(1);
  await page.screenshot({path:`test-results/${testInfo.project.name}-result.png`,fullPage:true});
  const downloadPromise=page.waitForEvent('download');
- await page.getByRole('button',{name:/GUARDAR RESULTADO/}).click();
+ await page.getByRole('button',{name:/GUARDAR CAPTURA PNG/}).click();
  const download=await downloadPromise;
  expect(download.suggestedFilename()).toMatch(/palabra-arena-ronda-1\.png$/);
 });

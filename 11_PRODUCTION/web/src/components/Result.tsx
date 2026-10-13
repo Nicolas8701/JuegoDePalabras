@@ -27,7 +27,7 @@ export function Result({state,language,busy,onRematch,onLeave}:Props) {
   <div className="scoreboard"><p className="eyebrow">{language==='es'?'CLASIFICACIÓN':'SCOREBOARD'}</p>
    {order.map((p,index)=><div className={`score-row ${p.id===me.id?'me':''}`} key={p.id}><b>#{index+1}</b><span className="avatar">{p.name.slice(0,1).toUpperCase()}</span><strong>{p.name}</strong><span>{p.solved?`${p.attemptsCount} ${copy.attempts}`:'—'}</span></div>)}
   </div>
-  <div className="result-actions"><button className="primary massive" onClick={()=>saveResultCard(state,language)}>{language==='es'?'GUARDAR RESULTADO + INTENTOS (PNG)':'SAVE RESULT + GUESSES (PNG)'} <span aria-hidden="true">⇩</span></button>
+  <div className="result-actions"><button className="primary massive" onClick={()=>saveResultCard(state,language)}>{language==='es'?'GUARDAR CAPTURA PNG':'SAVE RESULT PNG'} <span aria-hidden="true">⇩</span></button>
    {me.isHost?<button className="secondary" disabled={busy} onClick={onRematch}>{copy.rematch} ↻</button>:<div className="waiting-card">{copy.waiting}</div>}
    <button className="ghost-button" onClick={onLeave}>{copy.leave}</button>
   </div>
