@@ -15,3 +15,6 @@ GitHub Actions 38405965139 — **PASS 50/50 Node, 12/12 Playwright Chromium, Typ
 
 ### Human deployment approval and build check
 2026-10-13 user explicitly approved PR #2; merged commit `67242ce20b7d08570fbad824789df5b72f5f9881`. Cloudflare Workers Builds production check SUCCESS. No verified hosted `/api/health?deep=1`, Supabase concurrent room tests or human approval of every screen. QA status remains CANDIDATE.
+
+### 0.2.5 visual candidate
+New real Chromium test asserts PALABRA ARENA hero, no redundant marketing/version labels, four selectable modes and language choice controls. Backend cannot be claimed operational without Supabase runtime secrets and hosted integration tests. Final CI and human visual review pending.

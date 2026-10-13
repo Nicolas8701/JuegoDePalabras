@@ -36,3 +36,11 @@ Home offers **Local** and **Online** only. Online displays discoverable Public/P
 - Reveal remains letter and color only. Results show recorded attempts in-order and PNG exports every guess with marks, target word and scoreboard.
 - Keep mode/country information subtle in active UI; retain accessible legend outside tiles.
 - Real React Chromium E2E includes mobile and desktop: human visual/game-feel approval still pending.
+
+## 0.2.5 visual-cleanup CANDIDATE
+- Remove marketing boilerplate, DEV badge, unnecessary profile helper instructions and personal-name examples.
+- Make PALABRA ARENA the hero headline, not microscopic metadata.
+- Four prominent side-by-side selectable mode cards (Classic, Culture, Insults/Jerga, Time Trial); Duel available as secondary online-only option.
+- Visible flag/world-based language selection (world marker for es-419 avoids implying one nation represents Latin American Spanish).
+- Primary home stays Local/Online progressive navigation and nickname editing top-left.
+- Existing 0.2.4 results, keyboard, accessible external legend and Cloudflare safeguards untouched.
