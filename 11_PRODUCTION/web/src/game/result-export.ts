@@ -6,7 +6,7 @@ const backgrounds:Record<Mark,string>={correct:'#218d70',present:'#bf9430',absen
 function rounded(ctx:CanvasRenderingContext2D,x:number,y:number,w:number,h:number,color:string,radius=12){
  ctx.fillStyle=color;ctx.beginPath();ctx.roundRect(x,y,w,h,radius);ctx.fill();
 }
-function label(ctx:CanvasRenderingContext2D,text:string,x:number,y:number,size:number,color='#ecf0ff',weight='600'|'800'='600',align:CanvasTextAlign='left'){
+function label(ctx:CanvasRenderingContext2D,text:string,x:number,y:number,size:number,color='#ecf0ff',weight:'600'|'800'='600',align:CanvasTextAlign='left'){
  ctx.font=`${weight} ${size}px system-ui,-apple-system,sans-serif`;ctx.fillStyle=color;ctx.textAlign=align;ctx.fillText(text,x,y);
 }
 function downloadBlob(blob:Blob,name:string){
