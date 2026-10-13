@@ -113,3 +113,23 @@ test('culture origin and answer language stay independent including EN with Arge
  await expect(page.getByRole('group',{name:'Slang region'})).toBeVisible();
  await expect(page.getByRole('group',{name:'Slang region'}).getByRole('button',{name:'Argentina'})).toHaveAttribute('aria-pressed','true');
 });
+
+test('real narrow-phone bounds: language illustrations/text and length chips do not overlap or clip',async({page})=>{
+ await page.goto('/');await chooseProfile(page);
+ await page.getByRole('button',{name:/Jugar local/}).click();
+ for(const button of await page.locator('.language-choices button').all()){
+  const result=await button.evaluate(el=>{
+   const a=el.getBoundingClientRect(),im=el.querySelector('img')!.getBoundingClientRect(),label=el.querySelector('span')!.getBoundingClientRect();
+   const inside=(r:DOMRect)=>r.left>=a.left-1&&r.right<=a.right+1&&r.top>=a.top-1&&r.bottom<=a.bottom+1;
+   return {imageInside:inside(im),labelInside:inside(label),nonOverlap:im.bottom<=label.top+1,buttonWidth:a.width};
+  });
+  expect(result.imageInside).toBeTruthy();expect(result.labelInside).toBeTruthy();expect(result.nonOverlap).toBeTruthy();
+  expect(result.buttonWidth).toBeGreaterThan(46);
+ }
+ const bounds=await page.locator('.length-row').evaluate(el=>{
+  const a=el.getBoundingClientRect();
+  return [...el.querySelectorAll('button')].map(b=>{const r=b.getBoundingClientRect();return {inside:r.left>=a.left-1&&r.right<=a.right+1,width:r.width}});
+ });
+ expect(bounds).toHaveLength(6);
+ for(const r of bounds){expect(r.inside).toBeTruthy();expect(r.width).toBeGreaterThan(30)}
+});

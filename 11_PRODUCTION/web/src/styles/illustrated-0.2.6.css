@@ -82,3 +82,25 @@
  .region-choices button{font-size:12px;padding:8px 10px}
 }
 @media(prefers-reduced-motion:reduce){.illustrated-modes>button{transition:none}.illustrated-modes>button:hover:not(:disabled){transform:none}}
+
+/* Screenshot-discovered 320/375 px regression: flag icons must never overlap text. */
+@media(max-width:700px){
+ .language-choices.illustrated-languages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+ .language-choices.illustrated-languages button{
+  min-width:0;width:100%;flex-direction:column;align-items:center;justify-content:center;
+  gap:3px;padding:7px 3px;min-height:70px;
+ }
+ .language-choices.illustrated-languages img{width:34px;height:27px;flex:none;object-fit:contain}
+ .language-choices.illustrated-languages button span{
+  display:block;max-width:100%;font-size:12px;font-weight:800;line-height:1.2;
+  white-space:normal;text-align:center;overflow-wrap:anywhere;
+ }
+ .clean-config .length-row{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px}
+ .clean-config .length-row .chip{min-width:0;width:100%;padding:9px 2px;font-size:clamp(11px,2.9vw,14px);white-space:nowrap;text-align:center}
+}
+@media(max-width:390px){
+ .language-choices.illustrated-languages button{min-height:65px;padding:6px 2px}
+ .language-choices.illustrated-languages img{width:30px;height:24px}
+ .language-choices.illustrated-languages button span{font-size:11px}
+ .clean-config .length-row{gap:4px}
+}
