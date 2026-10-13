@@ -121,7 +121,7 @@ test('real narrow-phone bounds: language illustrations/text and length chips do 
   const result=await button.evaluate(el=>{
    const a=el.getBoundingClientRect(),im=el.querySelector('img')!.getBoundingClientRect(),label=el.querySelector('span')!.getBoundingClientRect();
    const inside=(r:DOMRect)=>r.left>=a.left-1&&r.right<=a.right+1&&r.top>=a.top-1&&r.bottom<=a.bottom+1;
-   return {imageInside:inside(im),labelInside:inside(label),nonOverlap:im.bottom<=label.top+1,buttonWidth:a.width};
+   return {imageInside:inside(im),labelInside:inside(label),nonOverlap:im.right<=label.left+1||label.right<=im.left+1||im.bottom<=label.top+1||label.bottom<=im.top+1,buttonWidth:a.width};
   });
   expect(result.imageInside).toBeTruthy();expect(result.labelInside).toBeTruthy();expect(result.nonOverlap).toBeTruthy();
   expect(result.buttonWidth).toBeGreaterThan(46);
