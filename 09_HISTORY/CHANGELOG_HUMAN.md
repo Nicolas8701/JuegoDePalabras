@@ -101,3 +101,5 @@
 - Cropped 9 WebP visual assets from user-supplied reference: four modes, three languages, public/private room symbols; **never the screenshot as full UI**.
 - Image regions exclude source username and baked text. Native React buttons still own labels and interactions; hover/pressed/focus/reduced-motion styles refined.
 - Original SVG images retained in repository for traceability and fallback; user-approved reference fragments become runtime candidates pending responsive browser QA.
+
+- User-authorized modular reference fragments promoted to APPROVED after full tests: 57/57 Node, 37/37 Chromium in four viewports, Vite and Wrangler dry-run PASS (https://github.com/Nicolas8701/JuegoDePalabras/actions/runs/38449067368). Desktop landing visibly larger, Local/Online side-by-side, mode images 4-wide, 2-wide mobile. Source whole image NEVER used at runtime.

@@ -42,3 +42,8 @@ No depender sólo de verde/amarillo/gris. Cada estado debe tener también forma/
 - Runtime uses **nine independently loaded WebP crops**, 74.3 KB total, not a sprite atlas. Crop coordinates and hashes live in `07_ASSETS/derived/REFERENCE_CROP_MANIFEST_2026-10-13.json`.
 - Mode/local/online labels remain native HTML text, so ES/EN translations, focus rings, hover, accessibility and dynamic UI are not baked into artwork. Existing separate local-mode controller SVG may remain where reference has no corresponding art.
 - Supersede previous hand-authored SVG candidates **only in runtime usage**, retain source in Git history; don't delete APPROVED art. Screenshot source itself is retained out of runtime to avoid leaking nickname and unnecessary weight.
+
+## Modular extracted artwork APPROVED (2026-10-13)
+- Exactly nine derived WEBP runtime fragments APPROVED after explicit user authorization and objective visual tests: four modes, three answer-language, two online privacy. Modular only; never use complete source screenshot as background, and never include sample profile name.
+- Total runtime media bytes 74,302; provenance manifest has source SHA256, crops and individual hashes. **Do not re-generate or overwrite approved crops without explicit human decision.**
+- Existing conceptual SVGs remain historical CANDIDATE/superseded for rollback; Local controller SVG remains where reference has no offline button.

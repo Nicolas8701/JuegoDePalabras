@@ -3,16 +3,16 @@
   "project": "PALABRA_ARENA",
   "version": "0.2.6-dev",
   "phase": "PROTOTYPE",
-  "subphase": "APPROVED_REFERENCE_MODULAR_CROPS_QA_PENDING",
-  "active_task": "User approved source artwork for cropped modular selectors only (not full screenshot). Nine WEBP assets generated/cropped and wired to interactive HTML mode, language and room controls; CI and screenshot QA pending; Cloudflare production untouched.",
+  "subphase": "USER_APPROVED_MODULAR_CROPS_QA_VALIDATED_PENDING_MERGE",
+  "active_task": "Nine reference-derived modular WEBP images user approved and browser validated; desktop landing expanded, 57/57 Node and 37/37 Chromium + Vite/Wrangler PASS. Prepare user-authorized PR #4 merge without claiming live Supabase online works.",
   "blockers": [
-    "MODULAR_ART_QA: 0.2.6 crop assets must pass asset integrity, 320/375/768/1365 viewport and hover/focus functional/visual review before integration.",
-    "ONLINE_SUPABASE: runtime secrets/migrations absent or not verified. UI changes do not repair hosted multiplayer.",
-    "PRODUCTION_ROLLOUT: after automated browser + visible screenshot QA, integrate user-approved modular direction only; verify Cloudflare build."
+    "HOSTED_ONLINE_SUPABASE: Cloudflare Worker runtime Supabase URL/service role and staging SQL remain absent/unverified; online rooms may still show unavailable.",
+    "HOSTED_MULTI_CLIENT_QA: public/private room joining, latency, security rate limiting and 2-client functional tests pending.",
+    "GAME_FEEL_HUMAN: after deploy user playtest on physical mobile and desktop; automation is not full human signoff."
   ],
-  "next_action": "Inspect GitHub Actions screenshots for approved-source crops and mobile button bounds; if validated, record approved derived assets, merge PR #4 (user authorized modular use), check Cloudflare production. Do not use image.png whole or ship username baked into runtime.",
+  "next_action": "Integrate PR #4 on explicit conditional user approval of modular crops, confirm Cloudflare Builds production on main, test published image paths and desktop/mobile appearance; then repair online hosting separately.",
   "stable_build": null,
   "candidate_build": "candidate/illustrated-modes-0.2.6",
   "authorities": "00_CONTROL/AUTHORITIES.json",
-  "last_verified_artifact": "GitHub Actions 38444786639 on commit 29f5bc5d6f91dcbd49e2ea62b3f005242cf62c0e: 54/54 Node PASS, 28/28 Chromium PASS (320×640, 375×667, 768×1024, 1365×768), Vite build PASS and Wrangler deploy --dry-run PASS. 16 screenshots inspected via artifact 11838022958. main remains 0.2.5."
+  "last_verified_artifact": "User-approved source modular assets total 9/74302 bytes, reference hash recorded; GitHub Actions 38449067368 PASS 57/57 Node, 37/37 Chromium (320/375/768/1365), TypeScript/Vite and Wrangler dry-run. Screenshot artifact 11838674642 checked desktop/mobile/online; candidate 0.2.6."
 }

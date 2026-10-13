@@ -23,3 +23,8 @@ Status: VISUAL_OBJECTIVE PASS on tested states; VISUAL_HUMAN and GAME_FEEL_HUMAN
 - Nine assets total <120 KB; verify WEBP RIFF headers, runtime src, visual imagery loading on 320/375/768/1365 and separate native label/content.
 - Playwright checks real room privacy tabs, selected language/mode behavior and hover changes; screenshot captures Home, Configure and Online, then inspect clipping/contrast.
 - Source reference SHA256 044b2f5ed415e3696e6ef4639d7e35e9acc31aede03da0ee88560704dd5b4116; avoid committing whole screenshot or profile data.
+
+### Source-crop final QA — PASS 2026-10-13
+- Workflow: https://github.com/Nicolas8701/JuegoDePalabras/actions/runs/38449067368 (candidate code exact commit 475d0bba2d24aa120b85f107f2816d762b47745e): **57/57 Node, 37/37 Chromium PASS**, Vite/TypeScript and Wrangler packaging PASS.
+- Four viewport dimensions 1365×768, 768×1024, 375×667, 320×640. Visual screenshots in artifact 11838674642 inspected on real compiled web UI for full-width desktop/compact phone, no leaking username, room tabs clickable, image crops only, action arrows visible, native labels editable/localized.
+- PASS_SINTAXIS, PASS_RUNTIME (test web build), PASS_ASSET_STRUCTURE, PASS_VISUAL_OBJECTIVE for tested screens. PASS_VISUAL_HUMAN approved source cropping *only* via user; end-to-end hosted GAME_FEEL_HUMAN still pending. Hosted ONLINE remains blocked.

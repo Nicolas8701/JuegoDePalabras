@@ -117,11 +117,11 @@
     {
       "id": "PA-0.2.6-REF-MODE_CLASSIC",
       "domain": "ui",
-      "status": "CANDIDATE",
-      "production_state": "PRODUCED",
+      "status": "APPROVED",
+      "production_state": "VALIDATED",
       "path": "11_PRODUCTION/web/public/images/reference-crops/modes/classic.webp",
       "description": "User-approved reference crop: mode-classic",
-      "approved": false,
+      "approved": true,
       "source_sha256": "044b2f5ed415e3696e6ef4639d7e35e9acc31aede03da0ee88560704dd5b4116",
       "source_bounds_xyxy": [
         62,
@@ -132,16 +132,16 @@
       "sha256": "ffb0c7cb3311ecaf1681198cb9caaffa98c791d5cbb1bcacce2def33c771d650",
       "bytes": 17734,
       "reference_authorized": true,
-      "qa": "PENDING CI real-browser and human visual criterion; source direction approved conditionally"
+      "qa": "VALIDATED: GitHub Actions 38449067368 57 Node +37 Chromium, webp integrity, real desktop/mobile images, hover/selection, room tabs; USER-APPROVED scope modular crop only 2026-10-13."
     },
     {
       "id": "PA-0.2.6-REF-MODE_CULTURE",
       "domain": "ui",
-      "status": "CANDIDATE",
-      "production_state": "PRODUCED",
+      "status": "APPROVED",
+      "production_state": "VALIDATED",
       "path": "11_PRODUCTION/web/public/images/reference-crops/modes/culture.webp",
       "description": "User-approved reference crop: mode-culture",
-      "approved": false,
+      "approved": true,
       "source_sha256": "044b2f5ed415e3696e6ef4639d7e35e9acc31aede03da0ee88560704dd5b4116",
       "source_bounds_xyxy": [
         428,
@@ -152,16 +152,16 @@
       "sha256": "034fcbb4d5499028912f7735b05364976782b859be46ae119f926be4e023c17b",
       "bytes": 17498,
       "reference_authorized": true,
-      "qa": "PENDING CI real-browser and human visual criterion; source direction approved conditionally"
+      "qa": "VALIDATED: GitHub Actions 38449067368 57 Node +37 Chromium, webp integrity, real desktop/mobile images, hover/selection, room tabs; USER-APPROVED scope modular crop only 2026-10-13."
     },
     {
       "id": "PA-0.2.6-REF-MODE_INSULTS",
       "domain": "ui",
-      "status": "CANDIDATE",
-      "production_state": "PRODUCED",
+      "status": "APPROVED",
+      "production_state": "VALIDATED",
       "path": "11_PRODUCTION/web/public/images/reference-crops/modes/insults.webp",
       "description": "User-approved reference crop: mode-insults",
-      "approved": false,
+      "approved": true,
       "source_sha256": "044b2f5ed415e3696e6ef4639d7e35e9acc31aede03da0ee88560704dd5b4116",
       "source_bounds_xyxy": [
         787,
@@ -172,16 +172,16 @@
       "sha256": "8d2612701bb98dc91f5b2c8af4598f01bf695a8b0b9cedc8051edb2942e248f3",
       "bytes": 15314,
       "reference_authorized": true,
-      "qa": "PENDING CI real-browser and human visual criterion; source direction approved conditionally"
+      "qa": "VALIDATED: GitHub Actions 38449067368 57 Node +37 Chromium, webp integrity, real desktop/mobile images, hover/selection, room tabs; USER-APPROVED scope modular crop only 2026-10-13."
     },
     {
       "id": "PA-0.2.6-REF-MODE_BLITZ",
       "domain": "ui",
-      "status": "CANDIDATE",
-      "production_state": "PRODUCED",
+      "status": "APPROVED",
+      "production_state": "VALIDATED",
       "path": "11_PRODUCTION/web/public/images/reference-crops/modes/blitz.webp",
       "description": "User-approved reference crop: mode-blitz",
-      "approved": false,
+      "approved": true,
       "source_sha256": "044b2f5ed415e3696e6ef4639d7e35e9acc31aede03da0ee88560704dd5b4116",
       "source_bounds_xyxy": [
         1147,
@@ -192,16 +192,16 @@
       "sha256": "d70fc081c96eb729efb13466e576424f557755285be3138f2d266f31e0a1ddc5",
       "bytes": 17618,
       "reference_authorized": true,
-      "qa": "PENDING CI real-browser and human visual criterion; source direction approved conditionally"
+      "qa": "VALIDATED: GitHub Actions 38449067368 57 Node +37 Chromium, webp integrity, real desktop/mobile images, hover/selection, room tabs; USER-APPROVED scope modular crop only 2026-10-13."
     },
     {
       "id": "PA-0.2.6-REF-ONLINE_PUBLIC",
       "domain": "ui",
-      "status": "CANDIDATE",
-      "production_state": "PRODUCED",
+      "status": "APPROVED",
+      "production_state": "VALIDATED",
       "path": "11_PRODUCTION/web/public/images/reference-crops/rooms/public.webp",
       "description": "User-approved reference crop: online-public",
-      "approved": false,
+      "approved": true,
       "source_sha256": "044b2f5ed415e3696e6ef4639d7e35e9acc31aede03da0ee88560704dd5b4116",
       "source_bounds_xyxy": [
         312,
@@ -212,16 +212,16 @@
       "sha256": "8b6b4afd208fce394604fc0a41d4dfab3ae3bfcf7fcbaf3a7260171fe67d6c30",
       "bytes": 1640,
       "reference_authorized": true,
-      "qa": "PENDING CI real-browser and human visual criterion; source direction approved conditionally"
+      "qa": "VALIDATED: GitHub Actions 38449067368 57 Node +37 Chromium, webp integrity, real desktop/mobile images, hover/selection, room tabs; USER-APPROVED scope modular crop only 2026-10-13."
     },
     {
       "id": "PA-0.2.6-REF-ONLINE_PRIVATE",
       "domain": "ui",
-      "status": "CANDIDATE",
-      "production_state": "PRODUCED",
+      "status": "APPROVED",
+      "production_state": "VALIDATED",
       "path": "11_PRODUCTION/web/public/images/reference-crops/rooms/private.webp",
       "description": "User-approved reference crop: online-private",
-      "approved": false,
+      "approved": true,
       "source_sha256": "044b2f5ed415e3696e6ef4639d7e35e9acc31aede03da0ee88560704dd5b4116",
       "source_bounds_xyxy": [
         814,
@@ -232,16 +232,16 @@
       "sha256": "727774f9c0b2b98e47700b06265051f11e84349f5f125a02d8eacb946b25a622",
       "bytes": 926,
       "reference_authorized": true,
-      "qa": "PENDING CI real-browser and human visual criterion; source direction approved conditionally"
+      "qa": "VALIDATED: GitHub Actions 38449067368 57 Node +37 Chromium, webp integrity, real desktop/mobile images, hover/selection, room tabs; USER-APPROVED scope modular crop only 2026-10-13."
     },
     {
       "id": "PA-0.2.6-REF-LANGUAGE_ES",
       "domain": "ui",
-      "status": "CANDIDATE",
-      "production_state": "PRODUCED",
+      "status": "APPROVED",
+      "production_state": "VALIDATED",
       "path": "11_PRODUCTION/web/public/images/reference-crops/language/es.webp",
       "description": "User-approved reference crop: language-es",
-      "approved": false,
+      "approved": true,
       "source_sha256": "044b2f5ed415e3696e6ef4639d7e35e9acc31aede03da0ee88560704dd5b4116",
       "source_bounds_xyxy": [
         63,
@@ -252,16 +252,16 @@
       "sha256": "0697593803ee1e84bcd2df1ae2206f0712ab4fbe9c2ebe6ba487ba36f4fa5839",
       "bytes": 1194,
       "reference_authorized": true,
-      "qa": "PENDING CI real-browser and human visual criterion; source direction approved conditionally"
+      "qa": "VALIDATED: GitHub Actions 38449067368 57 Node +37 Chromium, webp integrity, real desktop/mobile images, hover/selection, room tabs; USER-APPROVED scope modular crop only 2026-10-13."
     },
     {
       "id": "PA-0.2.6-REF-LANGUAGE_EN",
       "domain": "ui",
-      "status": "CANDIDATE",
-      "production_state": "PRODUCED",
+      "status": "APPROVED",
+      "production_state": "VALIDATED",
       "path": "11_PRODUCTION/web/public/images/reference-crops/language/en.webp",
       "description": "User-approved reference crop: language-en",
-      "approved": false,
+      "approved": true,
       "source_sha256": "044b2f5ed415e3696e6ef4639d7e35e9acc31aede03da0ee88560704dd5b4116",
       "source_bounds_xyxy": [
         232,
@@ -272,16 +272,16 @@
       "sha256": "1c4faebf6ee159902ed130c495fe67f24282212462c69927cc5d03e0fd2074d2",
       "bytes": 1290,
       "reference_authorized": true,
-      "qa": "PENDING CI real-browser and human visual criterion; source direction approved conditionally"
+      "qa": "VALIDATED: GitHub Actions 38449067368 57 Node +37 Chromium, webp integrity, real desktop/mobile images, hover/selection, room tabs; USER-APPROVED scope modular crop only 2026-10-13."
     },
     {
       "id": "PA-0.2.6-REF-LANGUAGE_RANDOM",
       "domain": "ui",
-      "status": "CANDIDATE",
-      "production_state": "PRODUCED",
+      "status": "APPROVED",
+      "production_state": "VALIDATED",
       "path": "11_PRODUCTION/web/public/images/reference-crops/language/random.webp",
       "description": "User-approved reference crop: language-random",
-      "approved": false,
+      "approved": true,
       "source_sha256": "044b2f5ed415e3696e6ef4639d7e35e9acc31aede03da0ee88560704dd5b4116",
       "source_bounds_xyxy": [
         396,
@@ -292,7 +292,7 @@
       "sha256": "f999c89c915fad36fc2943e7414898345264b453112540707b0b0bb8caf3c16a",
       "bytes": 1088,
       "reference_authorized": true,
-      "qa": "PENDING CI real-browser and human visual criterion; source direction approved conditionally"
+      "qa": "VALIDATED: GitHub Actions 38449067368 57 Node +37 Chromium, webp integrity, real desktop/mobile images, hover/selection, room tabs; USER-APPROVED scope modular crop only 2026-10-13."
     }
   ]
 }
