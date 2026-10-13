@@ -1,4 +1,4 @@
-import { createHash, randomBytes, randomUUID, scryptSync, timingSafeEqual } from 'node:crypto';
+import { createHash, createHmac, randomBytes, randomUUID, scryptSync, timingSafeEqual } from 'node:crypto';
 
 const CODE_ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 
@@ -50,4 +50,25 @@ export function verifyRoomPassword(password, stored) {
   if (password.length > 64) return false;
   const candidate = scryptSync(password, Buffer.from(parts[1], 'hex'), 32);
   return timingSafeEqual(candidate, Buffer.from(parts[2], 'hex'));
+}
+
+// Cloudflare Workers Free has a strict CPU budget (10ms). The old scrypt
+// password checks can take >40ms; new hosted rooms use keyed HMAC-SHA256.
+// The key is a server-only secret (ROOM_PASSWORD_PEPPER recommended); database
+// disclosure alone must not enable an offline password guessing attack.
+// Versioned format allows legacy scrypt hashes to remain readable.
+export function hashHostedRoomPassword(password, pepper) {
+  const value = validateRoomPassword(password);
+  if (!pepper || String(pepper).length < 24) throw Object.assign(new Error('ROOM_PASSWORD_SECRET_REQUIRED'), { code: 'ROOM_PASSWORD_SECRET_REQUIRED', status: 503 });
+  const salt = randomBytes(16).toString('hex');
+  const mac = createHmac('sha256', String(pepper)).update(salt).update('\0').update(value).digest('hex');
+  return `hmac256$${salt}$${mac}`;
+}
+export function verifyHostedRoomPassword(password, stored, pepper) {
+  if (typeof password !== 'string' || typeof stored !== 'string' || password.length > 64) return false;
+  if (stored.startsWith('scrypt$')) return verifyRoomPassword(password, stored); // legacy only
+  const match = /^hmac256\$([0-9a-f]{32})\$([0-9a-f]{64})$/.exec(stored);
+  if (!match || !pepper) return false;
+  const calculated = createHmac('sha256', String(pepper)).update(match[1]).update('\0').update(password).digest();
+  return timingSafeEqual(calculated, Buffer.from(match[2], 'hex'));
 }

@@ -1,7 +1,7 @@
 import { resolveRoundConfig } from '../domain/word-game.mjs';
 import { normalizeWord } from '../data/words.mjs';
 import { modeId, countryId } from '../data/modes.mjs';
-import { hashToken, newId, newRoomCode, newToken, safePlayerName, safeRoomName, hashRoomPassword, verifyRoomPassword } from '../domain/security.mjs';
+import { hashToken, newId, newRoomCode, newToken, safePlayerName, safeRoomName, hashHostedRoomPassword, verifyHostedRoomPassword } from '../domain/security.mjs';
 
 const MAX_ATTEMPTS = 6;
 const FINISH_GRACE_MS = 15_000;
@@ -10,7 +10,10 @@ function nowIso() { return new Date().toISOString(); }
 function apiError(code, status = 400) { const e = new Error(code); e.code = code; e.status = status; return e; }
 
 export class SupabaseStore {
-  constructor(url, serviceKey) {
+  constructor(url, serviceKey, passwordPepper) {
+    // Stable ROOM_PASSWORD_PEPPER is preferred; service key fallback for existing setups.
+    // Rotating either secret requires resetting HMAC room passwords.
+    this.passwordPepper = passwordPepper || serviceKey;
     this.base = `${url.replace(/\/$/, '')}/rest/v1`;
     this.headers = {
       apikey: serviceKey,
@@ -105,7 +108,7 @@ export class SupabaseStore {
     for(const lang of selectedLanguageMode==='random'?['es','en']:[selectedLanguage])
       resolveRoundConfig(lang,normalizedLength,selectedMode,selectedCountry,()=>0);
     const roomNameSafe=safeRoomName(roomName,playerName),hostName=safePlayerName(playerName);
-    const passwordHash=selectedVisibility==='private'?hashRoomPassword(password):null;
+    const passwordHash=selectedVisibility==='private'?hashHostedRoomPassword(password, this.passwordPepper):null;
     // Room and host are created together in PostgreSQL; no orphan room on partial failure.
     for(let tries=0;tries<5;tries++){
       const code=newRoomCode(),now=nowIso();
@@ -129,7 +132,7 @@ export class SupabaseStore {
     const room = await this.one(`rooms?code=eq.${encodeURIComponent(String(code ?? '').trim().toUpperCase())}&status=neq.closed&select=*`);
     if (!room || room.visibility === 'solo') throw apiError('ROOM_NOT_FOUND', 404);
     if (room.status !== 'lobby') throw apiError('ROUND_ALREADY_STARTED', 409);
-    if (room.visibility === 'private' && !verifyRoomPassword(password, room.password_hash)) throw apiError('INVALID_ROOM_PASSWORD', 403);
+    if (room.visibility === 'private' && !verifyHostedRoomPassword(password, room.password_hash, this.passwordPepper)) throw apiError('INVALID_ROOM_PASSWORD', 403);
     const id=newId(), token=newToken(), name=safePlayerName(playerName);
     // DB row locking makes capacity checks and privacy transitions atomic.
     const joined = await this.rpc('pa_join_room_v2', {
@@ -143,7 +146,7 @@ export class SupabaseStore {
     if (!['public','private'].includes(visibility)) throw apiError('INVALID_VISIBILITY',422);
     // Without a replacement password, the existing hash is retained only if already private.
     const { room } = await this.auth(roomId,playerId,token);
-    const hash = visibility==='public' ? null : password ? hashRoomPassword(password) : room.password_hash;
+    const hash = visibility==='public' ? null : password ? hashHostedRoomPassword(password, this.passwordPepper) : room.password_hash;
     if (visibility==='private' && !hash) throw apiError('PASSWORD_LENGTH',422);
     await this.rpc('pa_change_privacy_v2', {
       p_room_id:roomId, p_player_id:playerId, p_token_hash:hashToken(token),

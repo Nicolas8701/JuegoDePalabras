@@ -1,9 +1,5 @@
-# JOB — PALABRA ARENA 0.2.2
+# JOB 0.2.3 — Cloudflare hosting migration
 
-Status: CANDIDATE implementation ready for staging QA.
+Scope: Replace Netlify hosting with Cloudflare Worker+Static Assets without changing gameplay or sala protocol. Maintain Netlify and Supabase. Worker refuses ephemeral MemoryStore; free CPU scrypt problem mitigated for new passwords with secret-keyed HMAC. GitHub review branch/PR, no merge or deploy prod.
 
-Goal: clarify local vs online entry and remove saturated navigation; show named public and discoverable password-protected private rooms; allow authenticated host privacy conversion without losing room members. Preserve prior same-word/secret/feedback/pause/PNG gameplay.
-
-Executor/tools: local code editing, Node test runner, temporary TS semantic stubs and Chromium CSS fixture (no new provider-authority). Risks: online protocol change, migration and password abuse. Reversibility: redeploy old source, preserve DB additive columns. No GitHub main changes.
-
-Acceptance: true Postgres transaction create/join/privacy, staging E2E in two browsers, no hash leak, invalid password denial, mobile/desktop UX, performance metrics in Netlify, human visual/feel. Existing automated 40/40 Node tests and CSS fixture are only partial evidence.
+Evidence: 45/45 Node PASS and HTTP MemoryStore local smoke. Next QA gates: actual Cloudflare build, staging Supabase, /api/health?deep=1, two clients/host privacy races, CPU/RTT, mobile/desktop visual human.

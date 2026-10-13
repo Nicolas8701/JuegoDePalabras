@@ -5,7 +5,7 @@ Status: APPROVED BASELINE — ADR-0001 approved; numeric player/word-length rang
 - internal codename: PALABRA_ARENA
 - elevator pitch: Juego web de adivinar palabras, rejugable sin límite diario, bilingüe ES/EN y centrado en partidas rápidas, satisfactorias y sociales mediante salas públicas o privadas.
 - genre: word puzzle / social multiplayer / short-session party game
-- platform/stack: APPROVED — Web: Vite + TypeScript + React on Netlify; Supabase Postgres/Auth/Realtime; Netlify Functions for authoritative room/guess endpoints.
+- platform/stack: APPROVED — Web: Vite + TypeScript + React; Supabase Postgres/Auth/Realtime and authoritative room/guess API. Hosting provider change to Cloudflare Workers + Static Assets is explicitly USER-DIRECTED 2026-10-12, implementation 0.2.3 CANDIDATE; historical Netlify Functions baseline retained under ADR-0001.
 - core loop: APPROVED baseline — elegir/join sala → configurar idioma y longitud → ronda sincronizada Race/Same Word → introducir intentos → feedback por letra → resolución → puntuación/resultado → rematch o nueva configuración.
 - player count: solo 1; online target 2–8 players per room (CANDIDATE).
 - controls: keyboard físico + teclado táctil en pantalla; mouse/touch. Mobile-first.

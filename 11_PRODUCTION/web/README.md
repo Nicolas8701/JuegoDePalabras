@@ -1,3 +1,7 @@
+# Current migration (0.2.3-dev CANDIDATE)
+
+See [Cloudflare hosting/setup](README_CLOUDFLARE.md). The Netlify notes below are retained for historical reference only.
+
 > **0.2.2 Candidate:** read [README_0.2.2.md](README_0.2.2.md) for the changed local/online flow, new SQL migration and QA blockers.
 
 # Palabra Arena 0.2.0-dev — CANDIDATE

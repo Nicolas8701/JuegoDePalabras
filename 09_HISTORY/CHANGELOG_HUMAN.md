@@ -46,3 +46,13 @@
 - Added client-only solo mode with curated local answer bundles; preserved online server-secret answers, clean letter tiles and result PNG.
 - Added regression suite (40 tests), mobile/desktop CSS fixture, localhost smoke and user-facing migration guidance.
 - BLOCKED from STABLE by unrun hosted SQL, Vite bundle, Realtime and real-device QA.
+
+## 0.2.3-dev — Cloudflare migration CANDIDATE (2026-10-12)
+- Cloudflare Worker with Static Assets and same `/api/*` contract.
+- Fail-closed online backend; no MemoryStore in Workers.
+- New hosted room passwords use versioned HMAC with server-only pepper to mitigate scrypt CPU constraints. Legacy scrypt compatible but slow.
+- Netlify version/config kept. No Cloudflare deploy or real visual testing claimed.
+
+### 0.2.3 Cloudflare build-config hotfix (2026-10-12)
+- Fixed Worker name to match existing `palabraarena` and added regression test.
+- Documented Cloudflare monorepo root/build/preview settings; GitHub main remains unchanged.
