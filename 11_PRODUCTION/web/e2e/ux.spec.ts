@@ -106,7 +106,7 @@ test('culture origin and answer language stay independent including EN with Arge
  await expect(region.getByRole('button',{name:'Argentina',exact:true})).toHaveAttribute('aria-pressed','true');
  const language=page.getByRole('group',{name:'Idioma de la palabra'});
  await language.getByRole('button',{name:'English'}).click();
- await expect(region.getByRole('button',{name:'Argentina',exact:true})).toHaveAttribute('aria-pressed','true');
+ await expect(page.getByRole('group',{name:'Culture country'}).getByRole('button',{name:'Argentina',exact:true})).toHaveAttribute('aria-pressed','true');
  await expect(page.getByRole('group',{name:'Answer language'}).getByRole('button',{name:'English'})).toHaveAttribute('aria-pressed','true');
  await expect(page.getByRole('group',{name:'Culture country'}).getByRole('button',{name:'Argentina',exact:true})).toHaveAttribute('aria-pressed','true');
  await page.locator('.clean-config button[data-mode="insults"]').click();
