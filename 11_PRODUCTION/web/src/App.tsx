@@ -7,13 +7,14 @@ import {Lobby} from './components/Lobby';
 import {GameBoard} from './components/GameBoard';
 import {Result} from './components/Result';
 import {t} from './game/i18n';
+import {cleanPlayerName,readPlayerName,savePlayerName} from './game/profile';
 import type {Country,GameMode,Language,LengthMode,RoomState,RoomSummary,Session,Visibility} from './types/api';
 
-const SESSION_KEY='palabra:session',NAME_KEY='palabra:name',LANG_KEY='palabra:language';
+const SESSION_KEY='palabra:session',LANG_KEY='palabra:language';
 function loadSession():Session|null{try{return JSON.parse(localStorage.getItem(SESSION_KEY)||'null');}catch{return null;}}
 export function App(){
  const [language,setLanguageState]=useState<Language>(()=>localStorage.getItem(LANG_KEY)==='en'?'en':'es');
- const [playerName,setPlayerNameState]=useState(()=>localStorage.getItem(NAME_KEY)||'');
+ const [playerName,setPlayerNameState]=useState(readPlayerName);
  const [localConfig,setLocalConfig]=useState<{mode:GameMode;country:Country;languageMode:'fixed'|'random';language:Language;lengthMode:LengthMode}|null>(null);
  const [session,setSession]=useState<Session|null>(loadSession);
  const [state,setState]=useState<RoomState|null>(null);
@@ -27,7 +28,7 @@ export function App(){
  const sessionId=(s:Session|null)=>s?`${s.roomId}/${s.playerId}/${s.token}`:'';
  const persistSession=(next:Session|null)=>{sessionRef.current=next;opRef.current++;failedPollsRef.current=0;setSession(next);setState(null);if(next)localStorage.setItem(SESSION_KEY,JSON.stringify(next));else localStorage.removeItem(SESSION_KEY);};
  const setLanguage=(lang:Language)=>{setLanguageState(lang);localStorage.setItem(LANG_KEY,lang);};
- const setPlayerName=(v:string)=>{setPlayerNameState(v);localStorage.setItem(NAME_KEY,v);};
+ const setPlayerName=(v:string)=>{const clean=cleanPlayerName(v);setPlayerNameState(clean);savePlayerName(clean);};
  const translateError=useCallback((err:unknown)=>{
   const code=err instanceof ApiError?err.code:'UNKNOWN';const isEs=language==='es';
   const messages:Record<string,string>={WRONG_LENGTH:copy.wrongLength,PLAYERS_NOT_READY:copy.playersNotReady,
@@ -41,7 +42,7 @@ export function App(){
    ROOM_CODE_COLLISION:isEs?'No se pudo generar un código único. Probá otra vez.':'Could not generate a unique code. Try again.',
    UNAUTHORIZED_PLAYER:isEs?'Esta sesión ya no es válida.':'This session is no longer valid.',
    INVALID_LETTERS:isEs?'Usá solo letras del idioma.':'Use letters from the chosen language.',
-   BACKEND_NOT_CONFIGURED:isEs?'Falta configurar Supabase en Netlify.':'Supabase is not configured on Netlify.',DB_MIGRATION_REQUIRED:isEs?'Falta ejecutar la migración de la base de datos 0.2.1.':'Database migration 0.2.1 is required.',ROUND_EXPIRED:isEs?'El tiempo de la ronda terminó.':'The round has expired.'};
+   BACKEND_NOT_CONFIGURED:isEs?'El modo online necesita configurar Supabase en Cloudflare. El modo local funciona sin servidor.':'Online rooms need Supabase configured on Cloudflare. Local play works without a server.',DB_MIGRATION_REQUIRED:isEs?'Falta ejecutar la migración de la base de datos 0.2.1.':'Database migration 0.2.1 is required.',ROUND_EXPIRED:isEs?'El tiempo de la ronda terminó.':'The round has expired.'};
   return messages[code]??copy.genericError;
  },[copy,language]);
  const refreshState=useCallback(async(s:Session,silent=true)=>{

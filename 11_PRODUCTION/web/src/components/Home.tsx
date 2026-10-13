@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Country, GameMode, Language, LengthMode, RoomSummary, Visibility } from '../types/api';
 import { countryLabel, modeLabel } from '../game/modes';
+import {cleanPlayerName,isValidPlayerName} from '../game/profile';
 
 type OnlineVisibility = 'public'|'private';
 interface Props {
@@ -14,6 +15,11 @@ const modes:GameMode[]=['classic','culture','insults','blitz','duel'];
 const countries:Country[]=['random','ar','es','us','mx','gb','cl'];
 export function Home({language,onLanguage,playerName,onPlayerName,busy,rooms,onRefreshRooms,onCreate,onJoin}:Props){
  const es=language==='es';
+ const [editingProfile,setEditingProfile]=useState(false);
+ const [profileDraft,setProfileDraft]=useState(playerName);
+ const profileReady=isValidPlayerName(playerName);
+ const profileGate=!profileReady||editingProfile;
+ const submitProfile=(e:React.FormEvent<HTMLFormElement>)=>{e.preventDefault();const cleaned=cleanPlayerName(profileDraft);if(isValidPlayerName(cleaned)){onPlayerName(cleaned);setEditingProfile(false);}};
  const [screen,setScreen]=useState<'choose'|'online'|'configure'>('choose');
  const [visibility,setVisibility]=useState<Visibility>('solo');
  const [filter,setFilter]=useState<OnlineVisibility>('public');
@@ -50,7 +56,8 @@ export function Home({language,onLanguage,playerName,onPlayerName,busy,rooms,onR
  const enter=(r:RoomSummary)=>{if(r.status!=='lobby'||busy)return;if(r.visibility==='private'){setJoinTarget(r);setJoinPassword('');}else onJoin(r.code);};
  const enterByCode=()=>{if(code.length===5){const r=rooms.find(r=>r.code===code);if(r?.visibility==='private')enter(r);else onJoin(code);}};
  return <main className="home-shell clean-home">
-  <header className="home-header"><span className="brand-mark">PA<span>✦</span></span><span className="eyebrow">PALABRA ARENA</span><span className="version">0.2.2 · DEV</span></header>
+  <header className="home-header"><button type="button" className="profile-trigger" onClick={()=>{setProfileDraft(playerName);setEditingProfile(true);setScreen('choose')}} aria-label={es?'Editar nombre de jugador':'Edit player name'}><span className="profile-avatar" aria-hidden="true">{profileReady?playerName.charAt(0).toUpperCase():'?'}</span><span>{profileReady?playerName:(es?'Tu nombre':'Your name')}</span><span className="profile-edit" aria-hidden="true">✎</span></button><span className="eyebrow home-brand">PALABRA ARENA</span><span className="version">0.2.4 · DEV</span></header>
+  {profileGate?<section className="panel profile-onboarding" aria-labelledby="profile-title"><span className="eyebrow">{es?'PASO 1 · TU PERFIL':'STEP 1 · YOUR PROFILE'}</span><h1 id="profile-title">{es?'¿Cómo te llamamos?':'What should we call you?'}</h1><p>{es?'Este apodo aparecerá en las partidas locales y online. Se guarda solo en este navegador.':'This nickname appears in local and online games. It is saved only in this browser.'}</p><form onSubmit={submitProfile}><label htmlFor="profile-name">{es?'Tu nombre de jugador':'Your player name'}</label><input autoFocus id="profile-name" autoComplete="nickname" inputMode="text" maxLength={32} value={profileDraft} onChange={e=>setProfileDraft(e.target.value)} placeholder={es?'Ej. Nico':'E.g. Alex'}/><p className="field-note">{es?'2–18 caracteres: letras, números, espacios, punto, guion o guion bajo.':'2–18 characters: letters, numbers, spaces, dot, dash or underscore.'}</p><div className="profile-actions">{profileReady&&<button type="button" className="secondary" onClick={()=>setEditingProfile(false)}>{es?'Cancelar':'Cancel'}</button>}<button className="primary" type="submit" disabled={!isValidPlayerName(cleanPlayerName(profileDraft))}>{es?'Continuar':'Continue'} →</button></div></form></section>:<>
   <section className="hero"><p className="eyebrow">{es?'PARTIDAS ILIMITADAS':'UNLIMITED ROUNDS'}</p><h1>{es?'Cada palabra cuenta.':'Every word counts.'}</h1><p>{es?'Elegí cómo querés jugar.':'Choose how you want to play.'}</p></section>
   <div className="home-panel panel">
    {screen!=='choose'&&<button type="button" className="text-back" onClick={()=>{if(screen==='configure'&&visibility!=='solo')setScreen('online');else setScreen('choose');setJoinTarget(null);}}>← {es?'Volver':'Back'}</button>}
@@ -59,7 +66,6 @@ export function Home({language,onLanguage,playerName,onPlayerName,busy,rooms,onR
      <button className="choice" onClick={()=>begin('solo')}><span className="choice-icon">✦</span><span><strong>{es?'Jugar local':'Play locally'}</strong><small>{es?'Sin servidor de salas, a tu ritmo':'No room server needed'}</small></span><b>→</b></button>
      <button className="choice" onClick={()=>setScreen('online')}><span className="choice-icon">◎</span><span><strong>{es?'Jugar online':'Play online'}</strong><small>{es?'Explorar salas, crear o unirse':'Find a room, create or join'}</small></span><b>→</b></button>
     </div>
-    <label className="nickname">{es?'Tu apodo':'Nickname'}<input maxLength={18} autoComplete="nickname" value={playerName} onChange={e=>onPlayerName(e.target.value)} placeholder={es?'Tu nombre en partida':'Name in game'}/></label>
    </div>}
    {screen==='online'&&<div className="online-browser">
     <div className="panel-heading"><h2>{es?'Salas disponibles':'Available rooms'}</h2><p className="field-note">{es?'Todas las salas son visibles; las privadas necesitan contraseña.':'All rooms are visible; private rooms need a password.'}</p></div>
@@ -86,6 +92,6 @@ export function Home({language,onLanguage,playerName,onPlayerName,busy,rooms,onR
    </div>}
   </div>
   {joinTarget&&<div className="modal-backdrop" role="presentation"><div ref={dialogRef} className="panel join-dialog" role="dialog" aria-modal="true" aria-labelledby="join-title"><h2 id="join-title">{joinTarget.name||joinTarget.code}</h2><p className="field-note">{es?'Esta sala requiere contraseña.':'This room requires a password.'}</p><label>{es?'Contraseña':'Password'}<input autoFocus type="password" autoComplete="off" value={joinPassword} onChange={e=>setJoinPassword(e.target.value)} onKeyDown={e=>{if(e.key==='Enter'&&joinPassword)onJoin(joinTarget.code,joinPassword)}}/></label><div className="dialog-actions"><button className="secondary" onClick={()=>setJoinTarget(null)}>{es?'Cancelar':'Cancel'}</button><button className="primary" disabled={busy||!joinPassword} onClick={()=>onJoin(joinTarget.code,joinPassword)}>{es?'Unirse':'Join'}</button></div></div></div>}
-  <footer className="home-footer">{es?'Sin límite diario · PC y móvil':'No daily limit · Desktop and mobile'}</footer>
+  <footer className="home-footer">{es?'Sin límite diario · PC y móvil':'No daily limit · Desktop and mobile'}</footer></>}
  </main>;
 }
