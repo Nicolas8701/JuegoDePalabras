@@ -2,6 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import type { Country, GameMode, Language, LengthMode, RoomSummary, Visibility } from '../types/api';
 import { countryLabel, modeLabel } from '../game/modes';
 import {cleanPlayerName,isValidPlayerName} from '../game/profile';
+import {ModeCards} from './ModeCards';
+import {LanguagePicker} from './LanguagePicker';
+import {RegionPicker} from './RegionPicker';
 
 type OnlineVisibility = 'public'|'private';
 interface Props {
@@ -12,7 +15,6 @@ interface Props {
 }
 const lengths:LengthMode[]=[4,5,6,7,8,'random'];
 const modes:('classic'|'culture'|'insults'|'blitz')[]=['classic','culture','insults','blitz'];
-const modeIcons:Record<'classic'|'culture'|'insults'|'blitz',string>={classic:'◆',culture:'◉',insults:'⚡',blitz:'◷'};
 const countries:Country[]=['random','ar','es','us','mx','gb','cl'];
 export function Home({language,onLanguage,playerName,onPlayerName,busy,rooms,onRefreshRooms,onCreate,onJoin}:Props){
  const es=language==='es';
@@ -57,9 +59,9 @@ export function Home({language,onLanguage,playerName,onPlayerName,busy,rooms,onR
  const enter=(r:RoomSummary)=>{if(r.status!=='lobby'||busy)return;if(r.visibility==='private'){setJoinTarget(r);setJoinPassword('');}else onJoin(r.code);};
  const enterByCode=()=>{if(code.length===5){const r=rooms.find(r=>r.code===code);if(r?.visibility==='private')enter(r);else onJoin(code);}};
  return <main className="home-shell clean-home">
-  <header className="home-header"><button type="button" className="profile-trigger" onClick={()=>{setProfileDraft(playerName);setEditingProfile(true);setScreen('choose')}} aria-label={es?'Editar nombre de jugador':'Edit player name'}><span className="profile-avatar" aria-hidden="true">{profileReady?playerName.charAt(0).toUpperCase():'?'}</span><span>{profileReady?playerName:(es?'Tu nombre':'Your name')}</span><span className="profile-edit" aria-hidden="true">✎</span></button><span className="home-brand" aria-hidden="true">◆</span></header>
+  <header className="home-header"><button type="button" className="profile-trigger" onClick={()=>{setProfileDraft(playerName);setEditingProfile(true);setScreen('choose')}} aria-label={es?'Editar nombre de jugador':'Edit player name'}><span className="profile-avatar" aria-hidden="true">{profileReady?playerName.charAt(0).toUpperCase():'?'}</span><span>{profileReady?playerName:(es?'Tu nombre':'Your name')}</span><span className="profile-edit" aria-hidden="true">✎</span></button></header>
   {profileGate?<section className="panel profile-onboarding" aria-labelledby="profile-title"><span className="profile-heading-brand">PALABRA ARENA</span><h1 id="profile-title">{es?'¿Cómo te llamamos?':'What should we call you?'}</h1><p>{es?'Este apodo aparecerá en las partidas locales y online. Se guarda solo en este navegador.':'This nickname appears in local and online games. It is saved only in this browser.'}</p><form onSubmit={submitProfile}><label htmlFor="profile-name">{es?'Tu nombre de jugador':'Your player name'}</label><input autoFocus id="profile-name" autoComplete="nickname" inputMode="text" maxLength={32} value={profileDraft} onChange={e=>setProfileDraft(e.target.value)} placeholder={es?'Ej. Jugador':'E.g. Player'}/><div className="profile-actions">{profileReady&&<button type="button" className="secondary" onClick={()=>setEditingProfile(false)}>{es?'Cancelar':'Cancel'}</button>}<button className="primary" type="submit" disabled={!isValidPlayerName(cleanPlayerName(profileDraft))}>{es?'Continuar':'Continue'} →</button></div></form></section>:<>
-  <section className="hero"><h1>PALABRA <span>ARENA</span></h1><p className="hero-tagline">{es?'Encontrá la palabra. Ganá la ronda.':'Find the word. Win the round.'}</p></section>
+  <section className="hero"><h1 className="brand-title" draggable={false}>PALABRA <span>ARENA</span></h1><p className="hero-tagline">{es?'Encontrá la palabra. Ganá la ronda.':'Find the word. Win the round.'}</p></section>
   <div className="home-panel panel">
    {screen!=='choose'&&<button type="button" className="text-back" onClick={()=>{if(screen==='configure'&&visibility!=='solo')setScreen('online');else setScreen('choose');setJoinTarget(null);}}>← {es?'Volver':'Back'}</button>}
    {screen==='choose'&&<div className="clean-entry">
@@ -67,6 +69,7 @@ export function Home({language,onLanguage,playerName,onPlayerName,busy,rooms,onR
      <button className="choice" onClick={()=>begin('solo')}><span className="choice-icon">✦</span><span><strong>{es?'Jugar local':'Play locally'}</strong><small>{es?'Sin servidor de salas, a tu ritmo':'No room server needed'}</small></span><b>→</b></button>
      <button className="choice" onClick={()=>setScreen('online')}><span className="choice-icon">◎</span><span><strong>{es?'Jugar online':'Play online'}</strong><small>{es?'Explorar salas, crear o unirse':'Find a room, create or join'}</small></span><b>→</b></button>
     </div>
+    <div className="featured-modes"><span className="field-label">{es?'Modos de juego':'Game modes'}</span><ModeCards mode={mode} language={language} onMode={setMode}/></div>
    </div>}
    {screen==='online'&&<div className="online-browser">
     <div className="panel-heading"><h2>{es?'Salas disponibles':'Available rooms'}</h2><p className="field-note">{es?'Todas las salas son visibles; las privadas necesitan contraseña.':'All rooms are visible; private rooms need a password.'}</p></div>
@@ -85,9 +88,9 @@ export function Home({language,onLanguage,playerName,onPlayerName,busy,rooms,onR
    {screen==='configure'&&<div className="settings-stack clean-config">
     <div className="panel-heading"><p className="eyebrow">{es?'CONFIGURAR PARTIDA':'GAME SETTINGS'}</p><h2>{visibility==='solo'?(es?'Partida local':'Local game'):visibility==='private'?(es?'Crear sala privada':'Create private room'):(es?'Crear sala pública':'Create public room')}</h2></div>
     {visibility!=='solo'&&<><label>{es?'Nombre de la sala':'Room name'}<input autoFocus maxLength={40} value={roomName} onChange={e=>setRoomName(e.target.value)} placeholder={es?'Ej.: Partida de amigos':'E.g. Friends game'}/></label>{visibility==='private'&&<label>{es?'Contraseña de la sala (4 a 64 caracteres)':'Room password (4–64 characters)'}<input type="password" autoComplete="new-password" minLength={4} maxLength={64} value={password} onChange={e=>setPassword(e.target.value)}/></label>}</>}
-    <div className="field-block"><div className="field-label">{es?'Idioma':'Language'}</div><div className="language-choices" role="group" aria-label={es?'Idioma':'Language'}><button type="button" className={languageMode==='fixed'&&language==='es'?'selected':''} aria-pressed={languageMode==='fixed'&&language==='es'} onClick={()=>{setLanguageMode('fixed');onLanguage('es')}}><span aria-hidden="true">🌎</span> Español</button><button type="button" className={languageMode==='fixed'&&language==='en'?'selected':''} aria-pressed={languageMode==='fixed'&&language==='en'} onClick={()=>{setLanguageMode('fixed');onLanguage('en')}}><span aria-hidden="true">🇬🇧</span> English</button><button type="button" className={languageMode==='random'?'selected':''} aria-pressed={languageMode==='random'} onClick={()=>setLanguageMode('random')}><span aria-hidden="true">🎲</span> {es?'Azar':'Random'}</button></div></div>
-    <div className="field-block"><div className="field-label">{es?'Modo':'Mode'}</div><div className="mode-picks" role="group" aria-label={es?'Modo':'Mode'}>{modes.map(m=><button type="button" key={m} className={mode===m?'selected':''} aria-pressed={mode===m} onClick={()=>setMode(m)}><span className="mode-symbol" aria-hidden="true">{modeIcons[m]}</span><span>{modeLabel(m,language)}</span></button>)}</div>{visibility!=='solo'&&<button className={mode==='duel'?'duel-opt selected':'duel-opt'} type="button" aria-pressed={mode==='duel'} onClick={()=>setMode('duel')}>{es?'⚔ Duelo de dos jugadores':'⚔ Two-player duel'}</button>}</div>
-    {(mode==='culture'||mode==='insults')&&<label>{es?'País':'Country'}<select value={country} onChange={e=>setCountry(e.target.value as Country)}>{countries.map(c=><option value={c} key={c}>{countryLabel(c,language)}</option>)}</select></label>}
+    <div className="field-block"><div className="field-label">{es?'Modo de juego':'Game mode'}</div><ModeCards mode={mode} language={language} onMode={setMode}/>{visibility!=='solo'&&<button className={mode==='duel'?'duel-opt selected':'duel-opt'} type="button" aria-pressed={mode==='duel'} onClick={()=>setMode('duel')}>{es?'Duelo de dos jugadores':'Two-player duel'}</button>}</div>
+    <LanguagePicker language={language} languageMode={languageMode} onLanguage={onLanguage} onMode={setLanguageMode}/>
+    {(mode==='culture'||mode==='insults')&&<RegionPicker country={country} language={language} onCountry={setCountry} isSlang={mode==='insults'}/>} 
     <div className="field-block"><div className="field-label">{es?'Letras':'Letters'}</div><div className="length-row">{lengths.map(n=><button className={`chip ${n===length?'selected':''}`} aria-pressed={n===length} key={n} onClick={()=>setLength(n)}>{n==='random'?(es?'Azar':'Random'):n}</button>)}</div></div>
     <button className="primary massive" disabled={!canSubmit} onClick={()=>onCreate(visibility,length,mode,country,languageMode,roomName,password)}>{busy?'…':visibility==='solo'?(es?'JUGAR':'PLAY'):(es?'CREAR SALA':'CREATE ROOM')} →</button>
    </div>}
