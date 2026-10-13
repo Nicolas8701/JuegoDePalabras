@@ -113,7 +113,7 @@ test('offline packs are bundled and the no-server local engine reuses clean tile
 });
 
 test('local runtime resolves ES/EN words and duplicate-letter marks without any HTTP',async()=>{
- const ts=await import('/opt/nvm/versions/node/v22.16.0/lib/node_modules/typescript/lib/typescript.js');
+ const ts=await import('typescript');
  const source=readFileSync(new URL('../src/game/local-engine.ts',import.meta.url),'utf8');
  const transformed=ts.default.transpileModule(source,{compilerOptions:{module:ts.default.ModuleKind.CommonJS,esModuleInterop:true,target:ts.default.ScriptTarget.ES2022}});
  const exports={};const packs=JSON.parse(readFileSync(new URL('../src/game/local-packs.json',import.meta.url),'utf8'));

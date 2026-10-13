@@ -44,3 +44,11 @@ test('hosted room password hashes are unique, authenticated and cheap to validat
   assert.equal(verifyHostedRoomPassword('clave124',one,pepper),false);
   assert.equal(verifyHostedRoomPassword('clave123',one,'different-long-secret-0123456789'),false);
 });
+
+test('test suite imports toolchain modules from the project, not a local machine path', () => {
+  const sources = ['room-discovery.test.mjs','cloudflare.test.mjs'];
+  for (const file of sources) {
+    const source = readFileSync(new URL(file, import.meta.url), 'utf8');
+    assert.ok(!/\/opt\/nvm\/|C:\\\\Users\\\\|\/Users\/[^/]+\/\.nvm\//.test(source), file);
+  }
+});
