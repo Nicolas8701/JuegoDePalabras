@@ -61,3 +61,10 @@
 - User approved PR #1 merge into `main`, resulting merge commit `950b5ad292e721e5dcce5c149d934adb056f7c58`.
 - CI on exact candidate head: 46/46 Node PASS, Vite PASS, Wrangler dry-run PASS. Cloudflare Workers Builds success check on merge.
 - **NOT STABLE**: public URL, Supabase runtime, security, performance and browser usability still pending. Netlify retained for later redirect only.
+
+## 2026-10-13 — 0.2.4-dev UX Recovery CANDIDATE
+- First-run nickname required, persistent per browser and editable from Home top-left, with server/client normalization against markup and SQL metacharacters.
+- Game board centered, tiles constrained by height/word length and keyboard visible on mobile+desktop.
+- Result now shows all guess colors and PNG includes attempts+solution+scoreboard.
+- Missing Supabase message correctly references Cloudflare; local mode remains available.
+- 50/50 Node + 6/6 real Chromium e2e + Vite/Wrangler passed in prior CI; expanded viewport pass pending.

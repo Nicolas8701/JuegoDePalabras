@@ -31,7 +31,7 @@ jobs:
       - name: Real browser functional and responsive UX
         run: npm run test:ui
       - name: Store browser evidence on failure
-        if: failure()
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: responsive-ux-evidence

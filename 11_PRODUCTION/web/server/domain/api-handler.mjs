@@ -81,6 +81,6 @@ export async function handleApiRequest(request, env = process.env) {
   const duration = Math.max(0, performance.now() - start).toFixed(1);
   return { ...result, headers: { ...result.headers,
     'server-timing': `api;dur=${duration}`,
-    'x-palabra-arena-build': '0.2.3-dev'
+    'x-palabra-arena-build': '0.2.4-dev'
   } };
 }

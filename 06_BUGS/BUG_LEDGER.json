@@ -1,1 +1,49 @@
-{"schema_version":1,"bugs":[]}
+{
+  "schema_version": 1,
+  "bugs": [
+    {
+      "id": "PA-UX-008",
+      "build": "0.2.3-dev",
+      "status": "FIXED_CANDIDATE",
+      "severity": "HIGH",
+      "symptom": "4-letter board tiles oversized, keyboard below fold on desktop and mobile",
+      "cause": "board max width independent of word length + 1:1 tiles and six rows",
+      "fix": "0.2.4 responsive board width keyed to word length and viewport height; central layout",
+      "verification": "Compiled Chromium e2e at desktop/mobile; 320/tablet expansion pending",
+      "regression": "e2e/ux.spec.ts"
+    },
+    {
+      "id": "PA-UX-009",
+      "build": "0.2.3-dev",
+      "status": "FIXED_CANDIDATE",
+      "severity": "MEDIUM",
+      "symptom": "new players may launch without nickname and cannot conveniently rename",
+      "cause": "optional input buried below choices",
+      "fix": "mandatory first-run profile, Home top-left edit, localStorage and server allowlist",
+      "verification": "Node sanitization tests, Chromium profile persistence tests",
+      "regression": "tests/ux-0.2.4.test.mjs + e2e/ux.spec.ts"
+    },
+    {
+      "id": "PA-UX-010",
+      "build": "0.2.3-dev",
+      "status": "FIXED_CANDIDATE",
+      "severity": "MEDIUM",
+      "symptom": "shared PNG excludes attempted guesses and color marks",
+      "cause": "result card exported answer and ranking only",
+      "fix": "modular canvas exporter includes ordered guess grid and marks; results UI shows same",
+      "verification": "Node contract tests and browser screenshot download",
+      "regression": "tests/reliability.test.mjs + e2e/ux.spec.ts"
+    },
+    {
+      "id": "PA-UX-011",
+      "build": "0.2.3-dev",
+      "status": "FIXED_CANDIDATE",
+      "severity": "MEDIUM",
+      "symptom": "Missing Supabase error falsely mentions Netlify on Cloudflare",
+      "cause": "hardcoded stale provider text",
+      "fix": "Cloudflare-specific, actionable error while local mode remains playable",
+      "verification": "Node source regression and Chromium intercepted 503 test",
+      "regression": "e2e/ux.spec.ts"
+    }
+  ]
+}
