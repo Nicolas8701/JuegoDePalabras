@@ -3,16 +3,17 @@
   "project": "PALABRA_ARENA",
   "version": "0.2.6-dev",
   "phase": "PROTOTYPE",
-  "subphase": "USER_APPROVED_MODULAR_CROPS_QA_VALIDATED_PENDING_MERGE",
-  "active_task": "Nine reference-derived modular WEBP images user approved and browser validated; desktop landing expanded, 57/57 Node and 37/37 Chromium + Vite/Wrangler PASS. Prepare user-authorized PR #4 merge without claiming live Supabase online works.",
+  "subphase": "USER_APPROVED_MODULAR_ASSETS_MERGED_MAIN_CLOUDFLARE_BUILD_PASS",
+  "active_task": "PR #4 0.2.6 modular source-crop UI merged into main by user's explicit conditional approval; Cloudflare Workers Builds SUCCESS. Verify hosted frontend with user, then configure Supabase runtime and test online rooms separately.",
   "blockers": [
-    "HOSTED_ONLINE_SUPABASE: Cloudflare Worker runtime Supabase URL/service role and staging SQL remain absent/unverified; online rooms may still show unavailable.",
-    "HOSTED_MULTI_CLIENT_QA: public/private room joining, latency, security rate limiting and 2-client functional tests pending.",
-    "GAME_FEEL_HUMAN: after deploy user playtest on physical mobile and desktop; automation is not full human signoff."
+    "CLOUDFLARE_LIVE_URL: Cloudflare Workers Builds SUCCESS, but direct GET from assistant web environment not accessible; user browser visual validation pending.",
+    "SUPABASE_RUNTIME: Cloudflare Worker runtime Supabase URL/service role/pepper not confirmed; online may still return 503.",
+    "ONLINE_STAGING_QA: SQL migrations, password rate limiting, public/private room switching, 2-client sessions and network latency need hosted functional verification.",
+    "HUMAN_GAME_FEEL: user physical PC/mobile playtest beyond automated Chromium, no STABLE."
   ],
-  "next_action": "Integrate PR #4 on explicit conditional user approval of modular crops, confirm Cloudflare Builds production on main, test published image paths and desktop/mobile appearance; then repair online hosting separately.",
+  "next_action": "Open https://palabraarena.nicofre351.workers.dev/ and confirm assets/hover/language, then set Supabase runtime secrets securely in Cloudflare (not chat) and verify /api/health?deep=1, public/private 2-browser QA. Preserve Netlify redirect until online verified.",
   "stable_build": null,
   "candidate_build": "candidate/illustrated-modes-0.2.6",
   "authorities": "00_CONTROL/AUTHORITIES.json",
-  "last_verified_artifact": "User-approved source modular assets total 9/74302 bytes, reference hash recorded; GitHub Actions 38449067368 PASS 57/57 Node, 37/37 Chromium (320/375/768/1365), TypeScript/Vite and Wrangler dry-run. Screenshot artifact 11838674642 checked desktop/mobile/online; candidate 0.2.6."
+  "last_verified_artifact": "PR #4 merged f2938e1ae5016f0fb0fd55525d5738a98d9bc713; Cloudflare Workers Builds SUCCESS. Exact PR head 4072f0960ad70266a46f3a479d7bb92afdaefc98 CI 38449780346 PASS: 57/57 Node, 37/37 compiled browser Chromium at 320/375/768/1365, Vite and Wrangler dry-run. Direct URL fetch via assistant unavailable."
 }

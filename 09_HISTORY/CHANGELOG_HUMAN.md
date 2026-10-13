@@ -103,3 +103,8 @@
 - Original SVG images retained in repository for traceability and fallback; user-approved reference fragments become runtime candidates pending responsive browser QA.
 
 - User-authorized modular reference fragments promoted to APPROVED after full tests: 57/57 Node, 37/37 Chromium in four viewports, Vite and Wrangler dry-run PASS (https://github.com/Nicolas8701/JuegoDePalabras/actions/runs/38449067368). Desktop landing visibly larger, Local/Online side-by-side, mode images 4-wide, 2-wide mobile. Source whole image NEVER used at runtime.
+
+## 2026-10-13 — 0.2.6 approved crop UI deployed through GitHub main
+- PR #4 user-approved and merged at `f2938e1ae5016f0fb0fd55525d5738a98d9bc713`; Cloudflare Workers Builds SUCCESS on merge. No full-screen user screenshot published.
+- 9 reusable WEBP assets, 74.3 KB combined, approved in visual ledger. Independent responsive interactive buttons for modes, answer language, and public/private room browser, refined hover and focus.
+- 57/57 Node, 37/37 Chromium on exact candidate head and Wrangler dry-run PASS. Hosted online Supabase is still separate blocker and not claimed fixed.
