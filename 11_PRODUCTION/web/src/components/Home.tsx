@@ -66,8 +66,8 @@ export function Home({language,onLanguage,playerName,onPlayerName,busy,rooms,onR
    {screen!=='choose'&&<button type="button" className="text-back" onClick={()=>{if(screen==='configure'&&visibility!=='solo')setScreen('online');else setScreen('choose');setJoinTarget(null);}}>← {es?'Volver':'Back'}</button>}
    {screen==='choose'&&<div className="clean-entry">
     <div className="choice-list">
-     <button className="choice" onClick={()=>begin('solo')}><span className="choice-icon">✦</span><span><strong>{es?'Jugar local':'Play locally'}</strong><small>{es?'Sin servidor de salas, a tu ritmo':'No room server needed'}</small></span><b>→</b></button>
-     <button className="choice" onClick={()=>setScreen('online')}><span className="choice-icon">◎</span><span><strong>{es?'Jugar online':'Play online'}</strong><small>{es?'Explorar salas, crear o unirse':'Find a room, create or join'}</small></span><b>→</b></button>
+     <button className="choice" onClick={()=>begin('solo')}><span className="choice-icon"><img src="/images/actions/local.svg" alt="" aria-hidden="true"/></span><span><strong>{es?'Jugar local':'Play locally'}</strong><small>{es?'Sin servidor de salas, a tu ritmo':'No room server needed'}</small></span><b>→</b></button>
+     <button className="choice" onClick={()=>setScreen('online')}><span className="choice-icon"><img src="/images/actions/online.svg" alt="" aria-hidden="true"/></span><span><strong>{es?'Jugar online':'Play online'}</strong><small>{es?'Explorar salas, crear o unirse':'Find a room, create or join'}</small></span><b>→</b></button>
     </div>
     <div className="featured-modes"><span className="field-label">{es?'Modos de juego':'Game modes'}</span><ModeCards mode={mode} language={language} onMode={setMode}/></div>
    </div>}

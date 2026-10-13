@@ -104,3 +104,10 @@
  .language-choices.illustrated-languages button span{font-size:11px}
  .clean-config .length-row{gap:4px}
 }
+
+/* Cohesive action illustrations: local/online buttons match mode cards. */
+.clean-entry .choice{border:1px solid #424f70;background:linear-gradient(112deg,#1c273e,#171e32);box-shadow:inset 0 1px #ffffff0e;transition:transform .18s,border-color .18s,box-shadow .18s}
+.clean-entry .choice:hover{border-color:#a095ff;box-shadow:0 10px 20px #02050e88;transform:translateY(-2px)}
+.clean-entry .choice .choice-icon{background:transparent;overflow:hidden;width:52px;height:52px}
+.clean-entry .choice .choice-icon img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none;-webkit-user-drag:none}
+@media(prefers-reduced-motion:reduce){.clean-entry .choice{transition:none}.clean-entry .choice:hover{transform:none}}
