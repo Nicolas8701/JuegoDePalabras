@@ -1,19 +1,20 @@
 {
   "schema_version": 1,
   "project": "PALABRA_ARENA",
-  "version": "0.2.4-dev",
+  "version": "0.2.5-dev",
   "phase": "PROTOTYPE",
-  "subphase": "CLOUDFLARE_0_2_4_MAIN_MERGED_HOSTED_QA_PENDING",
-  "active_task": "PR #2 user approved and merged into main; Cloudflare Workers Builds production SUCCESS. Validate real hosted frontend and Supabase online rooms; user playtest visual and game feel pending.",
+  "subphase": "VISUAL_REFINEMENT_CANDIDATE",
+  "active_task": "User requests uncluttered home, prominent PALABRA ARENA, neutral sample nickname, no debug version/marketing copy, 4 stylish primary mode cards and language flag controls; online Supabase remains blocked by unset Cloudflare runtime secrets.",
   "blockers": [
     "ONLINE_SUPABASE: runtime secrets SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY (and recommended ROOM_PASSWORD_PEPPER) not confirmed in Cloudflare; backend returns 503 when absent.",
     "HOSTED_PUBLIC_API: Cloudflare Workers Builds SUCCESS but /api/health?deep=1 and public SPA could not be verified externally in this chat session.",
     "SUPABASE_SQL: migration chain through 0.2.2 and real staged online concurrent joins/private room switching not verified.",
     "ONLINE_ABUSE: no durable rate limiting against room-password guessing.",
-    "GAME_FEEL_HUMAN: user must try current responsive UX on real PC/mobile; automated browser tests do not make STABLE.",
-    "PERFORMANCE: hosted P95 RTT, Worker CPU and polling costs not measured."
+    "PERFORMANCE: hosted P95 RTT, Worker CPU and polling costs not measured.",
+    "0.2.5 VISUAL_HUMAN: style requires user preview/approval",
+    "ONLINE_NOT_CONFIGURED: requires Supabase service-role runtime secrets in Cloudflare dashboard; no assistant access to values"
   ],
-  "next_action": "User tests https://palabraarena.nicofre351.workers.dev/ with hard refresh and local nickname/board/export; configure Supabase runtime secrets securely in Cloudflare, verify /api/health?deep=1 and migrations; then 2-browser public/private online QA. Keep Netlify redirect untouched until online health confirmed.",
+  "next_action": "Review draft 0.2.5 GitHub PR and Chromium screenshots; authorize merge only after QA; user must configure Cloudflare Supabase runtime secrets to enable hosted online rooms. Investigate alternative no-Supabase backend only with human architecture approval.",
   "stable_build": null,
   "candidate_build": "candidate/ux-0.2.4 (nickname+responsive+result PNG)",
   "authorities": "00_CONTROL/AUTHORITIES.json",

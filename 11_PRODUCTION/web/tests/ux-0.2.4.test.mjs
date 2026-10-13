@@ -43,3 +43,5 @@ test('responsive CSS bounds tiles against viewport height and width',()=>{
  assert.match(css,/\.game-layout\{width:min\(100%,900px\)/);
  assert.match(css,/\.keyboard\{width:min\(100%,480px\)/);
 });
+
+test('0.2.5 cleans marketing clutter and genericizes examples',()=>{const home=readFileSync(new URL('../src/components/Home.tsx',import.meta.url),'utf8');assert.doesNotMatch(home,/Ej\. Nico|E\.g\. Alex|PARTIDAS ILIMITADAS|0\.2\.4 · DEV|Sin límite diario|Elegí cómo querés jugar|2–18 caracteres:/);assert.match(home,/mode-picks/);assert.match(home,/language-choices/);assert.match(home,/PALABRA <span>ARENA<\/span>/);});

@@ -98,3 +98,33 @@
  .match-topbar>div b{letter-spacing:.07em;font-size:11px}
  .match-topbar .text-button{font-size:12px;white-space:nowrap}
 }
+
+/* 0.2.5: restrained, purposeful entry hierarchy and card controls. */
+.home-header{display:flex;justify-content:space-between;min-height:48px}
+.home-brand{font-size:25px;color:#b9afff;margin-left:auto;line-height:1}
+.home-shell{max-width:900px}
+.clean-home .hero{padding:clamp(18px,5vh,42px) 0 20px}
+.clean-home .hero h1{font-size:clamp(41px,7.5vw,77px);font-weight:900;letter-spacing:-.07em;line-height:1;margin:0;text-shadow:0 10px 45px #725bf044}
+.clean-home .hero h1 span{color:#a99aff}
+.clean-home .hero .hero-tagline{margin:12px 0 0;font-size:clamp(13px,2vw,17px);color:#bcc9e3;letter-spacing:.01em}
+.profile-heading-brand{font-size:14px;font-weight:950;letter-spacing:.17em;color:#b5aaff}
+.profile-onboarding .field-note{display:none}
+.clean-config{gap:17px}
+.language-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.language-choices button{min-width:0;min-height:54px;border:1px solid #3f4863;background:#202741;color:#e5ebfa;border-radius:12px;font-size:clamp(12px,2.7vw,14px);font-weight:800;display:flex;align-items:center;justify-content:center;gap:6px}
+.language-choices button span{font-size:21px}
+.language-choices button.selected,.mode-picks button.selected,.duel-opt.selected{background:#36315d;border-color:#b4a9ff;box-shadow:inset 0 0 0 1px #8c78ed}
+.mode-picks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.mode-picks button{min-width:0;min-height:89px;border-radius:13px;border:1px solid #38435e;background:#1d263b;color:#eaf0ff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:9px 5px;font-weight:800;font-size:clamp(11px,1.6vw,13px);text-align:center;line-height:1.25}
+.mode-picks .mode-symbol{font-size:25px;color:#d4c8ff;line-height:1}
+.duel-opt{align-self:start;border:0;background:none;color:#b5bee0;text-decoration:underline;text-underline-offset:4px;font-size:12px;text-align:left;padding:5px 0}
+@media(max-width:500px){
+ .clean-home .hero{padding:22px 0 16px}
+ .clean-home .hero h1{font-size:clamp(37px,10vw,51px)}
+ .mode-picks{gap:5px}
+ .mode-picks button{min-height:80px;padding:8px 3px;font-size:10px}
+ .mode-picks .mode-symbol{font-size:21px}
+ .language-choices{gap:5px}
+ .language-choices button{min-height:50px;gap:4px;font-size:11px}
+ .language-choices button span{font-size:17px}
+}

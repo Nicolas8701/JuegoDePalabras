@@ -78,3 +78,8 @@
 - Verified prior to merge: 50/50 Node PASS, 12/12 real Chromium PASS, Vite and Wrangler dry-run PASS.
 - This authorizes deployment, **not STABLE**: online Supabase, password abuse controls, hosted RTT and human UX still pending.
 - Netlify remains unchanged; redirect only after healthy Cloudflare service confirmed.
+
+## 0.2.5-dev — Visual cleanup CANDIDATE (2026-10-13)
+- Remove profile step label, nickname rules prose, sample names associated with user, debug version, unlimited/daily and verbose choice copy; headline is PALABRA ARENA.
+- 4 horizontally arranged mode choice cards, language flag/world buttons, secondary online duel.
+- Missing Supabase is real 503 requiring Cloudflare Worker runtime secrets, not just UI wording.

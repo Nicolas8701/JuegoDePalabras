@@ -42,7 +42,7 @@ export function App(){
    ROOM_CODE_COLLISION:isEs?'No se pudo generar un código único. Probá otra vez.':'Could not generate a unique code. Try again.',
    UNAUTHORIZED_PLAYER:isEs?'Esta sesión ya no es válida.':'This session is no longer valid.',
    INVALID_LETTERS:isEs?'Usá solo letras del idioma.':'Use letters from the chosen language.',
-   BACKEND_NOT_CONFIGURED:isEs?'El modo online necesita configurar Supabase en Cloudflare. El modo local funciona sin servidor.':'Online rooms need Supabase configured on Cloudflare. Local play works without a server.',DB_MIGRATION_REQUIRED:isEs?'Falta ejecutar la migración de la base de datos 0.2.1.':'Database migration 0.2.1 is required.',ROUND_EXPIRED:isEs?'El tiempo de la ronda terminó.':'The round has expired.'};
+   BACKEND_NOT_CONFIGURED:isEs?'Salas online temporalmente no disponibles. Revisá la configuración del servidor.':'Online rooms are temporarily unavailable. Check the server configuration.',DB_MIGRATION_REQUIRED:isEs?'Falta ejecutar la migración de la base de datos 0.2.1.':'Database migration 0.2.1 is required.',ROUND_EXPIRED:isEs?'El tiempo de la ronda terminó.':'The round has expired.'};
   return messages[code]??copy.genericError;
  },[copy,language]);
  const refreshState=useCallback(async(s:Session,silent=true)=>{

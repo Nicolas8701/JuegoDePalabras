@@ -48,11 +48,24 @@ test('local board stays compact and playable; PNG retains colored guesses',async
  const download=await downloadPromise;
  expect(download.suggestedFilename()).toMatch(/palabra-arena-ronda-1\.png$/);
 });
-test('Cloudflare error message never mentions Netlify',async({page})=>{
+test('online backend failure is clear without obsolete provider text',async({page})=>{
  await page.route('**/api/rooms',route=>route.fulfill({status:503,contentType:'application/json',body:JSON.stringify({error:'BACKEND_NOT_CONFIGURED'})}));
  await page.goto('/');
  await chooseProfile(page);
  await page.getByRole('button',{name:/Jugar online/}).click();
- await expect(page.getByRole('alert')).toContainText('Cloudflare');
+ await expect(page.getByRole('alert')).toContainText('Salas online temporalmente no disponibles');
  await expect(page.getByRole('alert')).not.toContainText('Netlify');
+});
+
+test('entry UI has brand as heading, clean copy and visible four-mode cards',async({page})=>{
+ await page.goto('/');await chooseProfile(page);
+ await expect(page.getByRole('heading',{name:'PALABRA ARENA'})).toBeVisible();
+ await expect(page.getByText('PARTIDAS ILIMITADAS')).toHaveCount(0);
+ await expect(page.getByText('0.2.4 · DEV')).toHaveCount(0);
+ await page.getByRole('button',{name:/Jugar local/}).click();
+ const modes=page.locator('.mode-picks button');
+ await expect(modes).toHaveCount(4);
+ await expect(page.locator('.language-choices button')).toHaveCount(3);
+ await page.getByRole('button',{name:/Cultura general/}).click();
+ await expect(page.locator('.mode-picks .selected')).toContainText('Cultura general');
 });
