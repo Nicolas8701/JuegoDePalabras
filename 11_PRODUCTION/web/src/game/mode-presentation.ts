@@ -2,7 +2,7 @@ import type {Country,GameMode,Language} from '../types/api';
 export const primaryModes=['classic','culture','insults','blitz'] as const;
 export type PrimaryMode=typeof primaryModes[number];
 export const modeArt:Record<PrimaryMode,string>={
- classic:'/images/modes/classic.svg',culture:'/images/modes/culture.svg',insults:'/images/modes/insults.svg',blitz:'/images/modes/blitz.svg'
+ classic:'/images/reference-crops/modes/classic.webp',culture:'/images/reference-crops/modes/culture.webp',insults:'/images/reference-crops/modes/insults.webp',blitz:'/images/reference-crops/modes/blitz.webp'
 };
 export const modeDescriptions:Record<PrimaryMode,[string,string]>={
  classic:['Descubrí la palabra','Find the hidden word'],

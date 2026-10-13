@@ -74,8 +74,8 @@ export function Home({language,onLanguage,playerName,onPlayerName,busy,rooms,onR
    {screen==='online'&&<div className="online-browser">
     <div className="panel-heading"><h2>{es?'Salas disponibles':'Available rooms'}</h2><p className="field-note">{es?'Todas las salas son visibles; las privadas necesitan contraseña.':'All rooms are visible; private rooms need a password.'}</p></div>
     <div className="privacy-tabs" role="group" aria-label={es?'Tipo de sala':'Room type'}>
-     <button className={filter==='public'?'active':''} aria-pressed={filter==='public'} onClick={()=>{setFilter('public');setJoinTarget(null)}}>{es?'Públicas':'Public'}</button>
-     <button className={filter==='private'?'active':''} aria-pressed={filter==='private'} onClick={()=>{setFilter('private');setJoinTarget(null)}}>{es?'Privadas · contraseña':'Private · password'}</button>
+     <button className={filter==='public'?'active':''} aria-pressed={filter==='public'} onClick={()=>{setFilter('public');setJoinTarget(null)}}><img alt="" aria-hidden="true" src="/images/reference-crops/rooms/public.webp"/><span><strong>{es?'Públicas':'Public'}</strong><small>{es?'Sin contraseña':'No password'}</small></span></button>
+     <button className={filter==='private'?'active':''} aria-pressed={filter==='private'} onClick={()=>{setFilter('private');setJoinTarget(null)}}><img alt="" aria-hidden="true" src="/images/reference-crops/rooms/private.webp"/><span><strong>{es?'Privadas':'Private'}</strong><small>{es?'Con contraseña':'Password required'}</small></span></button>
     </div>
     <div className="browser-actions"><button className="primary" disabled={busy} onClick={()=>begin(filter)}>+ {es?'Crear sala':'Create room'}</button><button className="secondary" disabled={busy} onClick={()=>onRefreshRooms()}>↻ {es?'Actualizar':'Refresh'}</button></div>
     <label className="browser-filter">{es?'Modo':'Mode'}<select value={selectedFilter} onChange={e=>setSelectedFilter(e.target.value as GameMode|'all')}><option value="all">{es?'Todos los modos':'All modes'}</option>{([...modes,'duel'] as GameMode[]).map(m=><option key={m} value={m}>{modeLabel(m,language)}</option>)}</select></label>
