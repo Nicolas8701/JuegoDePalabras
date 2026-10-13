@@ -15,7 +15,7 @@ export function scoreGuess(target:string,guess:string):Mark[]{
 }
 export function chooseLocalAnswer(config:LocalConfig,random=Math.random):LocalAnswer {
  const language:Language=config.languageMode==='random'?(random()<.5?'es':'en'):config.language;
- const mode=['culture','insults'].includes(config.mode)?config.mode:'classic';
+ const mode:'classic'|'culture'|'insults' = config.mode==='culture'||config.mode==='insults'?config.mode:'classic';
  const allowed=(config.lengthMode==='random'?[4,5,6,7,8]:[Number(config.lengthMode)]);
  const all:LocalAnswer[]=[];
  if(mode==='classic'){
