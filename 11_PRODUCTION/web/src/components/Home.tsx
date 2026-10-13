@@ -11,7 +11,7 @@ interface Props {
  onJoin:(code:string,password?:string)=>void;
 }
 const lengths:LengthMode[]=[4,5,6,7,8,'random'];
-const modes:GameMode[]=['classic','culture','insults','blitz'];
+const modes:('classic'|'culture'|'insults'|'blitz')[]=['classic','culture','insults','blitz'];
 const modeIcons:Record<'classic'|'culture'|'insults'|'blitz',string>={classic:'◆',culture:'◉',insults:'⚡',blitz:'◷'};
 const countries:Country[]=['random','ar','es','us','mx','gb','cl'];
 export function Home({language,onLanguage,playerName,onPlayerName,busy,rooms,onRefreshRooms,onCreate,onJoin}:Props){
