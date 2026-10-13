@@ -10,7 +10,7 @@
       "description": "Open illuminated book",
       "approved": false,
       "source": "original hand-authored SVG from proposed premium visual direction; no stock/third-party sprites",
-      "qa": "PENDING visual screenshot/human review",
+      "qa": "Chromium 0.2.6 VISUAL_OBJECTIVE PASS 4 sizes 2026-10-13; VISUAL_HUMAN pending",
       "approx_bytes": 2328
     },
     {
@@ -22,7 +22,7 @@
       "description": "Globe and cultural monuments",
       "approved": false,
       "source": "original hand-authored SVG from proposed premium visual direction; no stock/third-party sprites",
-      "qa": "PENDING visual screenshot/human review",
+      "qa": "Chromium 0.2.6 VISUAL_OBJECTIVE PASS 4 sizes 2026-10-13; VISUAL_HUMAN pending",
       "approx_bytes": 2211
     },
     {
@@ -34,7 +34,7 @@
       "description": "Comic speech balloon",
       "approved": false,
       "source": "original hand-authored SVG from proposed premium visual direction; no stock/third-party sprites",
-      "qa": "PENDING visual screenshot/human review",
+      "qa": "Chromium 0.2.6 VISUAL_OBJECTIVE PASS 4 sizes 2026-10-13; VISUAL_HUMAN pending",
       "approx_bytes": 2061
     },
     {
@@ -46,7 +46,7 @@
       "description": "Illuminated hourglass",
       "approved": false,
       "source": "original hand-authored SVG from proposed premium visual direction; no stock/third-party sprites",
-      "qa": "PENDING visual screenshot/human review",
+      "qa": "Chromium 0.2.6 VISUAL_OBJECTIVE PASS 4 sizes 2026-10-13; VISUAL_HUMAN pending",
       "approx_bytes": 2316
     },
     {
@@ -58,7 +58,7 @@
       "description": "LatAm globe language selector",
       "approved": false,
       "source": "original hand-authored SVG from proposed premium visual direction; no stock/third-party sprites",
-      "qa": "PENDING visual screenshot/human review",
+      "qa": "Chromium 0.2.6 VISUAL_OBJECTIVE PASS 4 sizes 2026-10-13; VISUAL_HUMAN pending",
       "approx_bytes": null
     },
     {
@@ -70,7 +70,7 @@
       "description": "UK English language icon",
       "approved": false,
       "source": "original hand-authored SVG from proposed premium visual direction; no stock/third-party sprites",
-      "qa": "PENDING visual screenshot/human review",
+      "qa": "Chromium 0.2.6 VISUAL_OBJECTIVE PASS 4 sizes 2026-10-13; VISUAL_HUMAN pending",
       "approx_bytes": null
     },
     {
@@ -82,8 +82,30 @@
       "description": "Dice icon for randomized language",
       "approved": false,
       "source": "original hand-authored SVG from proposed premium visual direction; no stock/third-party sprites",
-      "qa": "PENDING visual screenshot/human review",
+      "qa": "Chromium 0.2.6 VISUAL_OBJECTIVE PASS 4 sizes 2026-10-13; VISUAL_HUMAN pending",
       "approx_bytes": null
+    },
+    {
+      "id": "PA-0.2.6-local",
+      "domain": "ui",
+      "status": "CANDIDATE",
+      "production_state": "PRODUCED",
+      "path": "11_PRODUCTION/web/public/images/actions/local.svg",
+      "description": "Illustrated controller for local game",
+      "approved": false,
+      "source": "hand-authored original SVG",
+      "qa": "Chromium 0.2.6 VISUAL_OBJECTIVE PASS 4 sizes 2026-10-13; VISUAL_HUMAN pending"
+    },
+    {
+      "id": "PA-0.2.6-online",
+      "domain": "ui",
+      "status": "CANDIDATE",
+      "production_state": "PRODUCED",
+      "path": "11_PRODUCTION/web/public/images/actions/online.svg",
+      "description": "Illustrated pair of players for online rooms",
+      "approved": false,
+      "source": "hand-authored original SVG",
+      "qa": "Chromium 0.2.6 VISUAL_OBJECTIVE PASS 4 sizes 2026-10-13; VISUAL_HUMAN pending"
     }
   ]
 }

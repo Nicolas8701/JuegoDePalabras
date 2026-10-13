@@ -3,17 +3,16 @@
   "project": "PALABRA_ARENA",
   "version": "0.2.6-dev",
   "phase": "PROTOTYPE",
-  "subphase": "ILLUSTRATED_MODE_UI_CANDIDATE",
-  "active_task": "Recover 0.2.5 emoji/symbol mode cards with original illustration assets, make title unselectable, remove diamond, separate answer language from cultural region. Keep production Cloudflare 0.2.5 unchanged until human visual approval and E2E.",
+  "subphase": "ILLUSTRATED_MODE_VISUAL_OBJECTIVE_VALIDATED_CANDIDATE",
+  "active_task": "0.2.6 original illustrated image-backed mode cards, country/answer-language separation, non-selectable title and action icons completed. Real compiled Chromium QA objective PASS at four viewports; human approval/online connectivity still pending.",
   "blockers": [
-    "VISUAL_HUMAN: illustrated art/card design remains CANDIDATE pending screenshot review and user acceptance.",
-    "QA_0_2_6: GitHub CI real-browser screenshots and regression checks pending.",
-    "ONLINE_SUPABASE: Cloudflare runtime Supabase secrets absent/unverified; this UI change does not fix online backend.",
-    "ONLINE_MULTI_CLIENT: Supabase SQL/staging, private/public discovery and two clients not yet validated."
+    "VISUAL_HUMAN: user must review 0.2.6 art and UX before merging PR #4 into main/Cloudflare.",
+    "ONLINE_SUPABASE: Worker runtime Supabase credentials not configured or unverified; live online mode stays unavailable.",
+    "ONLINE_QA: staged migrations, password security/rate limiting, concurrent rooms and P95 not verified."
   ],
-  "next_action": "Run CI and inspect real 320/375/768/1365 screenshots, adjust layout if needed, create PR draft and ask user visual approval; keep main untouched. Online Supabase independently blocked.",
+  "next_action": "Request visual human approval of PR #4 after showing desktop/mobile screenshots. If approved, merge to main and check Cloudflare Builds; separately set secure Supabase runtime credentials to repair online. Do not claim live multiplayer QA completed.",
   "stable_build": null,
   "candidate_build": "candidate/illustrated-modes-0.2.6",
   "authorities": "00_CONTROL/AUTHORITIES.json",
-  "last_verified_artifact": "PR #3 merged f5bd258146eb04e5c6b94fc77ba85455a84a6049. Candidate CI 38418488607: 51 Node PASS, 16 Chromium PASS, Vite and Wrangler dry-run PASS. Production Cloudflare build post-merge running at last check."
+  "last_verified_artifact": "GitHub Actions 38444786639 on commit 29f5bc5d6f91dcbd49e2ea62b3f005242cf62c0e: 54/54 Node PASS, 28/28 Chromium PASS (320×640, 375×667, 768×1024, 1365×768), Vite build PASS and Wrangler deploy --dry-run PASS. 16 screenshots inspected via artifact 11838022958. main remains 0.2.5."
 }

@@ -94,3 +94,5 @@
 - Title is semantic non-selectable/non-clickable H1; removed ◆ header/icon placeholders; mode cards have illustration, concise copy, selection border and focus states.
 - Language of written solution and regional cultural/slang subject controlled separately; selected mode preview on Home.
 - E2E in four viewports and visual human approval pending; no changes to online server or Netlify.
+
+- **0.2.6 Final QA**: seven illustrated mode/language SVGs + two Local/Online icon SVGs; 54/54 Node PASS, 28/28 compiled React Chromium PASS, Vite/TypeScript and Wrangler dry-run PASS (Actions 38444786639). Real screenshots at 320/375/768/1365 inspected after correcting language/chip overlap. Art visual objective CANDIDATE passes; human approval and live online backend still pending.

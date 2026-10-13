@@ -33,3 +33,6 @@ No depender sólo de verde/amarillo/gris. Cada estado debe tener también forma/
 - Three SVG language selector art icons: Latin America globe (not single-country flag), Union Jack for English, dice for random.
 - Runtime location: `11_PRODUCTION/web/public/images/modes/` and `.../language/`.
 - State all PRODUCED/CANDIDATE (not APPROVED). Image source of previous external mockups is not canon. Card composition must pass screenshot QA desktop/mobile and human review.
+
+- Additional 0.2.6 original action SVG illustrations for Local controller and Online two players; artwork state remains CANDIDATE, not APPROVED.
+- Visual objective screenshots passed at four viewport widths; Title is semantic h1 but text/pointer selection disabled; language/region selectors remain genuinely independent. Pending user's visual signoff.
