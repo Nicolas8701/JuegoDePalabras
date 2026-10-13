@@ -1,6 +1,6 @@
 # ADR-0004 — Cloudflare Workers hosting migration
 
-Status: CANDIDATE technical implementation; provider migration explicitly user-directed 2026-10-12.
+Status: APPROVED provider change and GitHub main integration (human approval 2026-10-13); technical implementation remains CANDIDATE pending hosted runtime/Supabase/security/visual gates.
 
 This supersedes only the Netlify hosting component of APPROVED ADR-0001. React, Supabase, Race/Same Word and client/server secret separation remain unchanged.
 

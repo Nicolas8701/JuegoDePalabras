@@ -3,20 +3,19 @@
   "project": "PALABRA_ARENA",
   "version": "0.2.3-dev",
   "phase": "PROTOTYPE",
-  "subphase": "CLOUDFLARE_WORKER_MIGRATION_CANDIDATE",
-  "active_task": "Move Netlify frontend/API hosting to Cloudflare Worker with static assets; preserve Supabase/room protocol; GitHub review branch and staging QA.",
+  "subphase": "CLOUDFLARE_MERGED_MAIN_DEPLOY_VALIDATION_PENDING",
+  "active_task": "Cloudflare 0.2.3 code merged into main by explicit user approval; Worker Build successful; validate public URL, Supabase runtime secrets/staging, security and mobile/PC usability before STABLE.",
   "blockers": [
-    "CLOUDFLARE_ACCOUNT: Worker deploy and GitHub Builds connection require account authorization, runtime Supabase secrets.",
-    "SUPABASE_STAGING: existing 0.2.2 SQL needs real hosted integration/concurrency tests.",
-    "CPU_FREE: Workers 10ms CPU/request; HMAC candidate for new passwords, legacy scrypt can exceed the budget.",
-    "SECURITY: listed private rooms require durable rate limiting before public launch.",
-    "BUILD_VISUAL: npm registry DNS unavailable for Vite/ Wrangler; no compiled visual-human or game-feel pass.",
-    "REALTIME_PERFORMANCE: continues polling; measure Cloudflare/Supabase RTT before optimizations.",
-    "CLOUDFLARE_BUILD_CONFIG: user screenshot 2026-10-12 root=/ build=None branch=main; corrected Wrangler Worker name palabraarena; dashboard changes/preview still needed."
+    "CLOUDFLARE_PUBLIC_URL: Workers Builds success on merge commit but workers.dev domain was disabled in user screenshot; public endpoint unavailable/unverified.",
+    "SUPABASE_RUNTIME_SECRETS: Cloudflare Worker runtime Supabase URL/service-role/pepper not confirmed; online API expected to fail closed with 503 when missing.",
+    "SUPABASE_STAGING: migrations through 0.2.2 need real hosted integration/concurrency verification.",
+    "WORKER_CPU_AND_SECURITY: 10ms free CPU risk, legacy scrypt, no persistent password rate limiting yet.",
+    "ONLINE_REALTIME_PERFORMANCE: polling remains; Cloudflare/Supabase RTT and P95 need measurements.",
+    "VISUAL_HUMAN_AND_GAME_FEEL: desktop and mobile app playtest pending; no STABLE release."
   ],
-  "next_action": "In Cloudflare Worker palabraarena: set Builds root 11_PRODUCTION/web, build npm run build, deploy npx wrangler deploy; enable non-production previews for candidate/cloudflare-0.2.3. Then check preview, Supabase runtime secrets, health and two-browser QA. Keep main unchanged.",
+  "next_action": "Verify Cloudflare public workers.dev URL enabled, open /api/health?deep=1 and configure SUPABASE_URL/SUPABASE_SERVICE_ROLE_KEY/ROOM_PASSWORD_PEPPER as runtime secrets; test hosted rooms and mobile/desktop. Keep Netlify redirect disabled until a healthy URL is verified.",
   "stable_build": null,
   "candidate_build": "11_PRODUCTION/web (Cloudflare Worker+Static Assets)",
   "authorities": "00_CONTROL/AUTHORITIES.json",
-  "last_verified_artifact": "45/45 Node tests, HTTP localhost smoke, Worker adapter contract; no Cloudflare production runtime"
+  "last_verified_artifact": "main merge 950b5ad292e721e5dcce5c149d934adb056f7c58; GitHub Actions 38332875429 46/46 Node, Vite build, Wrangler dry-run PASS; Cloudflare Workers Builds check SUCCESS; public endpoint unverified."
 }

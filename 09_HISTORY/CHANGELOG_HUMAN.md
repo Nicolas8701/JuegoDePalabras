@@ -56,3 +56,8 @@
 ### 0.2.3 Cloudflare build-config hotfix (2026-10-12)
 - Fixed Worker name to match existing `palabraarena` and added regression test.
 - Documented Cloudflare monorepo root/build/preview settings; GitHub main remains unchanged.
+
+## 2026-10-13 — GitHub main integration authorized
+- User approved PR #1 merge into `main`, resulting merge commit `950b5ad292e721e5dcce5c149d934adb056f7c58`.
+- CI on exact candidate head: 46/46 Node PASS, Vite PASS, Wrangler dry-run PASS. Cloudflare Workers Builds success check on merge.
+- **NOT STABLE**: public URL, Supabase runtime, security, performance and browser usability still pending. Netlify retained for later redirect only.
