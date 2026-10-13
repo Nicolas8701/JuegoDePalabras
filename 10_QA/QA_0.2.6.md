@@ -18,3 +18,8 @@ Status: VISUAL_OBJECTIVE PASS on tested states; VISUAL_HUMAN and GAME_FEEL_HUMAN
 - Human visual approval, motion feel and physical touch interaction; no canon promotion solely due to green tests.
 - Hosted Cloudflare online API with Supabase configured, migrations, two-browser joins, password protection/rate limiting and latency.
 - Do not call this STABLE. `main`/Cloudflare production remains 0.2.5 until explicit merge approval.
+
+### Approved-source modular crop QA
+- Nine assets total <120 KB; verify WEBP RIFF headers, runtime src, visual imagery loading on 320/375/768/1365 and separate native label/content.
+- Playwright checks real room privacy tabs, selected language/mode behavior and hover changes; screenshot captures Home, Configure and Online, then inspect clipping/contrast.
+- Source reference SHA256 044b2f5ed415e3696e6ef4639d7e35e9acc31aede03da0ee88560704dd5b4116; avoid committing whole screenshot or profile data.

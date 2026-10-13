@@ -96,3 +96,8 @@
 - E2E in four viewports and visual human approval pending; no changes to online server or Netlify.
 
 - **0.2.6 Final QA**: seven illustrated mode/language SVGs + two Local/Online icon SVGs; 54/54 Node PASS, 28/28 compiled React Chromium PASS, Vite/TypeScript and Wrangler dry-run PASS (Actions 38444786639). Real screenshots at 320/375/768/1365 inspected after correcting language/chip overlap. Art visual objective CANDIDATE passes; human approval and live online backend still pending.
+
+## 2026-10-13 — Approved modular use of source image (CANDIDATE QA)
+- Cropped 9 WebP visual assets from user-supplied reference: four modes, three languages, public/private room symbols; **never the screenshot as full UI**.
+- Image regions exclude source username and baked text. Native React buttons still own labels and interactions; hover/pressed/focus/reduced-motion styles refined.
+- Original SVG images retained in repository for traceability and fallback; user-approved reference fragments become runtime candidates pending responsive browser QA.

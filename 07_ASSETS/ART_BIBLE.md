@@ -36,3 +36,9 @@ No depender sólo de verde/amarillo/gris. Cada estado debe tener también forma/
 
 - Additional 0.2.6 original action SVG illustrations for Local controller and Online two players; artwork state remains CANDIDATE, not APPROVED.
 - Visual objective screenshots passed at four viewport widths; Title is semantic h1 but text/pointer selection disabled; language/region selectors remain genuinely independent. Pending user's visual signoff.
+
+## 2026-10-13 reference-crop direction (USER-APPROVED CONDITIONALLY)
+- User authorized **modular use only** of pieces from illustrated reference: mode illustrations, Public/Private room symbols and 3 language symbols; **DO NOT ship the full screenshot or personal profile image** as application background or interface.
+- Runtime uses **nine independently loaded WebP crops**, 74.3 KB total, not a sprite atlas. Crop coordinates and hashes live in `07_ASSETS/derived/REFERENCE_CROP_MANIFEST_2026-10-13.json`.
+- Mode/local/online labels remain native HTML text, so ES/EN translations, focus rings, hover, accessibility and dynamic UI are not baked into artwork. Existing separate local-mode controller SVG may remain where reference has no corresponding art.
+- Supersede previous hand-authored SVG candidates **only in runtime usage**, retain source in Git history; don't delete APPROVED art. Screenshot source itself is retained out of runtime to avoid leaking nickname and unnecessary weight.

@@ -51,3 +51,8 @@ Home offers **Local** and **Online** only. Online displays discoverable Public/P
 - Brand title is plain semantic h1, not link/button and not pointer-selectable; ◆ symbol removed from header and mode icons.
 - Language controls only answer vocabulary/writing; Country controls thematic regional source (culture/slang) independently. ES-419 is multinational, so use an Americas globe instead of any particular country's flag.
 - Card artworks remain CANDIDATE until human visual check, no mass asset production initiated.
+
+## 0.2.6 modular crop use — user conditionally APPROVED (2026-10-13)
+- Extract artwork only, not a background: 4 mode illustrations, 3 language icons, 2 room privacy emblems. All user-supplied reference glyph/labels remain out of runtime; keep native translated HTML text.
+- Same 4 mode choices with real hover/pressed/focus, responsive rows 4 desktop / 2 phone. Privacy cards Public/Private remain functional tabs with image + selectable state; Local/Online route remains unmodified.
+- Country-for-topic remains independent of word language. Don't interpret attached sample profile as game identity.

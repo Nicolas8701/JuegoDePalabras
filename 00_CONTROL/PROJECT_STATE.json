@@ -3,14 +3,14 @@
   "project": "PALABRA_ARENA",
   "version": "0.2.6-dev",
   "phase": "PROTOTYPE",
-  "subphase": "ILLUSTRATED_MODE_VISUAL_OBJECTIVE_VALIDATED_CANDIDATE",
-  "active_task": "0.2.6 original illustrated image-backed mode cards, country/answer-language separation, non-selectable title and action icons completed. Real compiled Chromium QA objective PASS at four viewports; human approval/online connectivity still pending.",
+  "subphase": "APPROVED_REFERENCE_MODULAR_CROPS_QA_PENDING",
+  "active_task": "User approved source artwork for cropped modular selectors only (not full screenshot). Nine WEBP assets generated/cropped and wired to interactive HTML mode, language and room controls; CI and screenshot QA pending; Cloudflare production untouched.",
   "blockers": [
-    "VISUAL_HUMAN: user must review 0.2.6 art and UX before merging PR #4 into main/Cloudflare.",
-    "ONLINE_SUPABASE: Worker runtime Supabase credentials not configured or unverified; live online mode stays unavailable.",
-    "ONLINE_QA: staged migrations, password security/rate limiting, concurrent rooms and P95 not verified."
+    "MODULAR_ART_QA: 0.2.6 crop assets must pass asset integrity, 320/375/768/1365 viewport and hover/focus functional/visual review before integration.",
+    "ONLINE_SUPABASE: runtime secrets/migrations absent or not verified. UI changes do not repair hosted multiplayer.",
+    "PRODUCTION_ROLLOUT: after automated browser + visible screenshot QA, integrate user-approved modular direction only; verify Cloudflare build."
   ],
-  "next_action": "Request visual human approval of PR #4 after showing desktop/mobile screenshots. If approved, merge to main and check Cloudflare Builds; separately set secure Supabase runtime credentials to repair online. Do not claim live multiplayer QA completed.",
+  "next_action": "Inspect GitHub Actions screenshots for approved-source crops and mobile button bounds; if validated, record approved derived assets, merge PR #4 (user authorized modular use), check Cloudflare production. Do not use image.png whole or ship username baked into runtime.",
   "stable_build": null,
   "candidate_build": "candidate/illustrated-modes-0.2.6",
   "authorities": "00_CONTROL/AUTHORITIES.json",
