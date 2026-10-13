@@ -3,19 +3,19 @@
   "project": "PALABRA_ARENA",
   "version": "0.2.4-dev",
   "phase": "PROTOTYPE",
-  "subphase": "PROFILE_UX_AND_RESULT_CANDIDATE",
-  "active_task": "User-reported 0.2.3 responsive oversized board, stale Supabase/Netlify error, missing nickname-first UX, and incomplete result PNG; fix in candidate/ux-0.2.4 without pushing unfinished visuals to Cloudflare production.",
+  "subphase": "CLOUDFLARE_0_2_4_MAIN_MERGED_HOSTED_QA_PENDING",
+  "active_task": "PR #2 user approved and merged into main; Cloudflare Workers Builds production SUCCESS. Validate real hosted frontend and Supabase online rooms; user playtest visual and game feel pending.",
   "blockers": [
-    "PRODUCTION_APPROVAL: 0.2.4 code exists only in candidate branch and requires human design approval before main/Cloudflare auto-deploy.",
-    "SUPABASE_RUNTIME_SECRETS: Cloudflare online mode not configured (user reports app says Supabase missing); secrets must be entered as Worker runtime secrets, never chat or repository.",
-    "ONLINE_MULTICLIENT: live Supabase room creation, password/private/public transitions and concurrency remain unverified in Cloudflare.",
-    "UX_HUMAN: compiled Chromium automated dimensions/capture tests are not human visual/game-feel approval.",
-    "ONLINE_ABUSE: durable rate limiting for room password attempts remains pending.",
-    "PERFORMANCE: no hosted P95 RTT or CPU measurements; game still polls."
+    "ONLINE_SUPABASE: runtime secrets SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY (and recommended ROOM_PASSWORD_PEPPER) not confirmed in Cloudflare; backend returns 503 when absent.",
+    "HOSTED_PUBLIC_API: Cloudflare Workers Builds SUCCESS but /api/health?deep=1 and public SPA could not be verified externally in this chat session.",
+    "SUPABASE_SQL: migration chain through 0.2.2 and real staged online concurrent joins/private room switching not verified.",
+    "ONLINE_ABUSE: no durable rate limiting against room-password guessing.",
+    "GAME_FEEL_HUMAN: user must try current responsive UX on real PC/mobile; automated browser tests do not make STABLE.",
+    "PERFORMANCE: hosted P95 RTT, Worker CPU and polling costs not measured."
   ],
-  "next_action": "Review GitHub PR and responsive screenshots after CI, configure Supabase runtime secrets on Worker, complete online 2-client UX/security tests before human-approved merge. Keep Netlify redirect unchanged until online is healthy.",
+  "next_action": "User tests https://palabraarena.nicofre351.workers.dev/ with hard refresh and local nickname/board/export; configure Supabase runtime secrets securely in Cloudflare, verify /api/health?deep=1 and migrations; then 2-browser public/private online QA. Keep Netlify redirect untouched until online health confirmed.",
   "stable_build": null,
   "candidate_build": "candidate/ux-0.2.4 (nickname+responsive+result PNG)",
   "authorities": "00_CONTROL/AUTHORITIES.json",
-  "last_verified_artifact": "GitHub Actions 38405965139: 50/50 Node PASS, 12/12 real compiled React Chromium (320x640, 375x667, 768x1024, 1365x768) PASS, Vite PASS, Wrangler dry-run PASS. 8 screenshots saved and visually inspected. No hosted Supabase QA or VISUAL_HUMAN."
+  "last_verified_artifact": "PR #2 merge 67242ce20b7d08570fbad824789df5b72f5f9881; GitHub Actions 38406481836 50/50 Node, 12/12 Chromium, Vite and Wrangler dry-run PASS; Cloudflare Workers Builds production SUCCESS on merge commit; hosted API unverified."
 }

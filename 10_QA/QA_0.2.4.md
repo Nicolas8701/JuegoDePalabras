@@ -12,3 +12,6 @@ Second evidence run (https://github.com/Nicolas8701/JuegoDePalabras/actions/runs
 
 ### Final objective browser QA (2026-10-13)
 GitHub Actions 38405965139 — **PASS 50/50 Node, 12/12 Playwright Chromium, TypeScript/Vite build, Wrangler dry-run**. Actual screenshots at four viewports saved in artifact `responsive-ux-evidence` (artifact ID 11818887359), visually inspected: clean letter-only tiles, keyboard on screen, no horizontal overflow, central desktop alignment, small-phone header uncluttered, result shows guesses and correctly labeled PNG action. **VISUAL_OBJECTIVE: PASS** for these tested cases, not every state/phone; **VISUAL_HUMAN/GAME_FEEL_HUMAN: PENDING**.
+
+### Human deployment approval and build check
+2026-10-13 user explicitly approved PR #2; merged commit `67242ce20b7d08570fbad824789df5b72f5f9881`. Cloudflare Workers Builds production check SUCCESS. No verified hosted `/api/health?deep=1`, Supabase concurrent room tests or human approval of every screen. QA status remains CANDIDATE.

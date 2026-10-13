@@ -72,3 +72,9 @@
 - Inspected 8 actual Chromium page screenshots from Actions 38405047135. Board and result fit 320/375/mobile+desktop; follow-up polish: horizontal viewport centering on desktop and shorter compact action labels.
 
 - **FINAL OBJECTIVE QA 0.2.4**: GitHub Actions 38405965139 PASS 50/50 Node + 12/12 real-browser desktop/tablet/mobile/small-mobile + Vite + Wrangler. 8 real browser screenshots captured and inspected. Human usability/game-feel and hosted Supabase online still pending.
+
+## 2026-10-13 — 0.2.4-dev User-approved GitHub/Cloudflare integration
+- PR #2 merged into `main`: `67242ce20b7d08570fbad824789df5b72f5f9881`, Cloudflare Workers Builds: SUCCESS.
+- Verified prior to merge: 50/50 Node PASS, 12/12 real Chromium PASS, Vite and Wrangler dry-run PASS.
+- This authorizes deployment, **not STABLE**: online Supabase, password abuse controls, hosted RTT and human UX still pending.
+- Netlify remains unchanged; redirect only after healthy Cloudflare service confirmed.

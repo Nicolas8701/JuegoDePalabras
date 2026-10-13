@@ -1,6 +1,6 @@
 # ADR-0005 — First-run nickname and presentation recovery
 
-Status: CANDIDATE implementation of explicitly user-requested behavior (2026-10-13); no new account/auth authority.
+Status: USER-APPROVED integration into main and Cloudflare production (2026-10-13); implementation/visual remains QA CANDIDATE until human game-feel and hosted online verification; no new account/auth authority.
 
 Problem: Game starts without clear player identity; name buried at bottom, four-letter board giant, result PNG incomplete, old Netlify error in Cloudflare.
 
