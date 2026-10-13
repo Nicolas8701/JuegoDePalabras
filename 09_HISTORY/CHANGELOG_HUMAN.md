@@ -83,3 +83,8 @@
 - Remove profile step label, nickname rules prose, sample names associated with user, debug version, unlimited/daily and verbose choice copy; headline is PALABRA ARENA.
 - 4 horizontally arranged mode choice cards, language flag/world buttons, secondary online duel.
 - Missing Supabase is real 503 requiring Cloudflare Worker runtime secrets, not just UI wording.
+
+## 2026-10-13 — 0.2.5-dev visual cleanup approved for main
+- PR #3 user-approved and merged at f5bd258146eb04e5c6b94fc77ba85455a84a6049.
+- CI exact candidate head: 51/51 Node, 16/16 Chromium, Vite/Wrangler PASS.
+- Cloudflare deployment verification and live Supabase online game remain pending; Netlify redirect unchanged.
