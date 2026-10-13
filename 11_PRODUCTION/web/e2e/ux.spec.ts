@@ -1,6 +1,6 @@
 import {test,expect} from '@playwright/test';
 
-async function chooseProfile(page:any,name='Nico'){
+async function chooseProfile(page:any,name='Jugador QA'){
  await expect(page.getByRole('heading',{name:/Cómo te llamamos|What should we call you/})).toBeVisible();
  await page.locator('#profile-name').fill(name);
  await page.getByRole('button',{name:/Continuar|Continue/}).click();
@@ -9,7 +9,7 @@ test('nickname is mandatory, editable and persists on refresh',async({page})=>{
  await page.goto('/');
  await expect(page.getByRole('button',{name:/Jugar local/})).toHaveCount(0);
  await chooseProfile(page);
- await expect(page.getByRole('button',{name:/Editar nombre/})).toContainText('Nico');
+ await expect(page.getByRole('button',{name:/Editar nombre/})).toContainText('Jugador QA');
  await page.reload();
  await expect(page.getByRole('button',{name:/Jugar local/})).toBeVisible();
  await page.getByRole('button',{name:/Editar nombre/}).click();
@@ -68,4 +68,48 @@ test('entry UI has brand as heading, clean copy and visible four-mode cards',asy
  await expect(page.locator('.language-choices button')).toHaveCount(3);
  await page.getByRole('button',{name:/Cultura general/}).click();
  await expect(page.locator('.mode-picks .selected')).toContainText('Cultura general');
+});
+
+
+test('title is not interactive or selectable, four image cards are real assets',async({page},testInfo)=>{
+ await page.goto('/');await chooseProfile(page);
+ const title=page.getByRole('heading',{level:1,name:'PALABRA ARENA'});
+ await expect(title).toBeVisible();
+ const rules=await title.evaluate(e=>{
+  const css=getComputedStyle(e);return {select:css.userSelect,pointer:css.pointerEvents,tag:e.tagName,parent:e.closest('button,a')?.tagName};
+ });
+ expect(rules.select).toBe('none');expect(rules.pointer).toBe('none');
+ expect(rules.parent).toBeUndefined();expect(rules.tag).toBe('H1');
+ await expect(page.getByText('◆')).toHaveCount(0);
+ const cards=page.locator('.featured-modes .illustrated-modes button');
+ await expect(cards).toHaveCount(4);
+ for(const [i,card] of (await cards.all()).entries()){
+  const img=card.locator('img');
+  await expect(img).toHaveCount(1);
+  expect(await img.evaluate(el=>(el as HTMLImageElement).naturalWidth)).toBeGreaterThan(100);
+  await expect(card).toHaveAttribute('data-mode',['classic','culture','insults','blitz'][i]);
+ }
+ await page.screenshot({path:`test-results/${testInfo.project.name}-home-illustrated.png`,fullPage:true});
+ await cards.nth(1).click();
+ await expect(cards.nth(1)).toHaveAttribute('aria-pressed','true');
+ await page.getByRole('button',{name:/Jugar local/}).click();
+ await expect(page.locator('.clean-config .illustrated-modes button[data-mode="culture"]')).toHaveAttribute('aria-pressed','true');
+ await page.screenshot({path:`test-results/${testInfo.project.name}-illustrated-config.png`,fullPage:true});
+});
+test('culture origin and answer language stay independent including EN with Argentina',async({page})=>{
+ await page.goto('/');await chooseProfile(page);
+ await page.getByRole('button',{name:/Jugar local/}).click();
+ await page.locator('.clean-config button[data-mode="culture"]').click();
+ const region=page.getByRole('group',{name:'País de la cultura'});
+ await expect(region).toBeVisible();
+ await region.getByRole('button',{name:'Argentina',exact:true}).click();
+ await expect(region.getByRole('button',{name:'Argentina',exact:true})).toHaveAttribute('aria-pressed','true');
+ const language=page.getByRole('group',{name:'Idioma de la palabra'});
+ await language.getByRole('button',{name:'English'}).click();
+ await expect(region.getByRole('button',{name:'Argentina',exact:true})).toHaveAttribute('aria-pressed','true');
+ await expect(page.getByRole('group',{name:'Answer language'}).getByRole('button',{name:'English'})).toHaveAttribute('aria-pressed','true');
+ await expect(page.getByRole('group',{name:'Culture country'}).getByRole('button',{name:'Argentina',exact:true})).toHaveAttribute('aria-pressed','true');
+ await page.locator('.clean-config button[data-mode="insults"]').click();
+ await expect(page.getByRole('group',{name:'Slang region'})).toBeVisible();
+ await expect(page.getByRole('group',{name:'Slang region'}).getByRole('button',{name:'Argentina'})).toHaveAttribute('aria-pressed','true');
 });
