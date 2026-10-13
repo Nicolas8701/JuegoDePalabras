@@ -1,0 +1,29 @@
+name: Cloudflare candidate CI
+on:
+  push:
+    branches:
+      - candidate/cloudflare-0.2.3
+  pull_request:
+    branches:
+      - main
+permissions:
+  contents: read
+jobs:
+  build-and-qa:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 11_PRODUCTION/web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Test API, rooms and Worker configuration
+        run: npm test
+      - name: Build React SPA
+        run: npm run build
+      - name: Package Cloudflare Worker without deploying
+        run: npx wrangler deploy --dry-run --outdir .wrangler/qa
